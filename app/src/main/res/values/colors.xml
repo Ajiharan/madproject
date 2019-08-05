@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#BF007A</color>
+    <color name="colorPrimaryDark">#BF007A</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorAdmin">#b3b3b3</color>
+    <color name="color_add_product">#8c8c8c</color>
+    <color name="colorProfile">#f2f2f2</color>
+    <color name="deactivate_button">#e60000</color>
+</resources>

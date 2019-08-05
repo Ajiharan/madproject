@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    tools:context=".User_settings_Activity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_settings"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+          <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+              <TextView
+                  android:id="@+id/close_settings_button"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="@string/close"
+                  android:textSize="20sp"
+                  android:textColor="@android:color/white"
+                  android:textStyle="bold"
+                  android:layout_alignParentStart="true"
+                  />
+              <TextView
+                  android:id="@+id/update_settings_button"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginRight="10dp"
+                  android:text="@string/update"
+                  android:textSize="20sp"
+                  android:textColor="@android:color/white"
+                  android:textStyle="bold"
+                  android:layout_alignParentEnd="true"
+                  />
+          </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/settings_profile_image"
+        android:layout_width="150dp"
+        android:src="@drawable/profile"
+        android:layout_below="@+id/app_bar_settings"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="180dp" />
+
+    <TextView
+        android:id="@+id/profile_image_change_btn"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="120dp"
+        android:layout_height="wrap_content"
+        android:text="@string/change_profile"
+        android:layout_below="@+id/settings_profile_image"
+
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:layout_alignParentStart="true"
+        />
+
+<com.google.android.material.textfield.TextInputLayout
+android:id="@+id/settings_layer1"
+    android:textColorHint="@color/colorPrimaryDark"
+android:layout_below="@+id/profile_image_change_btn"
+android:layout_width="match_parent"
+android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/settings_mail_id"
+        android:layout_width="match_parent"
+        android:inputType="textEmailAddress"
+        android:text="IT18098488@my.sliit.lk"
+        android:textColor="@color/colorPrimaryDark"
+        android:hint="Mail Id"
+        android:padding="10dp"
+        android:textColorHint="@color/colorPrimaryDark"
+        android:layout_height="wrap_content" />
+</com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="25dp"
+        android:id="@+id/settings_layer2"
+
+        android:textColorHint="@color/colorPrimaryDark"
+        android:layout_below="@+id/settings_layer1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:padding="10dp"
+            android:id="@+id/settings_name"
+            android:layout_width="match_parent"
+            android:text="IT18098488"
+            android:textColor="@color/colorPrimary"
+            android:hint="Full Name"
+
+            android:textColorHint="@color/colorPrimaryDark"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="25dp"
+        android:id="@+id/settings_layer3"
+
+        android:textColorHint="@color/colorPrimaryDark"
+        android:layout_below="@+id/settings_layer2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/settings_password"
+            android:layout_width="match_parent"
+
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:hint="Password"
+            android:text="IT18098488"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/delete_account"
+        android:layout_below="@+id/settings_layer3"
+        android:background="@drawable/deactivate_input"
+        android:textSize="20dp"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="40dp"
+        android:textStyle="bold"
+        android:text="deactivate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

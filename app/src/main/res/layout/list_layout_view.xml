@@ -1,0 +1,973 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@android:color/white"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:background="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+          <ImageView
+              android:layout_width="match_parent"
+              android:layout_height="190dp"
+              android:scaleType="centerCrop"
+              android:src="@drawable/cam1"
+              />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="28sp"
+                android:layout_marginTop="120dp"
+                android:text="Newly Arrived Products"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="160dp"
+                android:text="400 Products"
+                />
+        </RelativeLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Popular Products"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_height="wrap_content" />
+<LinearLayout
+
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginBottom="10dp"
+    >
+    <HorizontalScrollView
+        android:background="@android:color/white"
+        android:layout_width="wrap_content"
+        android:paddingBottom="10dp"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:background="@android:color/white"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:background="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="110dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@android:color/white"
+                    android:layout_marginBottom="10dp"
+                    android:elevation="6dp"
+                    card_view:cardCornerRadius="6dp"
+                    android:layout_height="150dp">
+
+                    <LinearLayout
+
+                        android:background="@android:color/white"
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/user_product_detail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="90dp"
+                            android:src="@drawable/mylap2"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@android:color/black"
+                            android:text="EDS DSLR"
+                            android:textSize="14sp"
+
+                            />
+                        <View
+                            android:layout_width="match_parent"
+                            android:background="#d9d9d9"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:layout_height="1dp"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="wrap_content">
+                            <ImageButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="18dp"
+                                android:background="#fff"
+                                android:layout_weight="1"
+                                android:src="@drawable/button_favourite"
+                                />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="2"
+                                android:text="RS.30000/="
+                                android:textAlignment="center"
+                                android:textColor="@android:color/black"
+                                android:textSize="10sp"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="110dp"
+                    android:background="@android:color/white"
+                    android:layout_marginBottom="10dp"
+                    android:elevation="6dp"
+                    card_view:cardCornerRadius="6dp"
+                    android:layout_height="150dp">
+
+                    <LinearLayout
+                        android:background="@android:color/white"
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="90dp"
+                            android:src="@drawable/mylap2"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@android:color/black"
+                            android:text="EDS DSLR"
+                            android:textSize="14sp"
+
+                            />
+                        <View
+                            android:layout_width="match_parent"
+                            android:background="#d9d9d9"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:layout_height="1dp"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="wrap_content">
+                            <ImageButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="18dp"
+                                android:background="#fff"
+                                android:layout_weight="1"
+                                android:src="@drawable/button_favourite"
+                                />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="2"
+                                android:text="RS.30000/="
+                                android:textAlignment="center"
+                                android:textColor="@android:color/black"
+                                android:textSize="10sp"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="110dp"
+                    android:background="@android:color/white"
+                    android:layout_marginBottom="10dp"
+                    android:elevation="6dp"
+                    card_view:cardCornerRadius="6dp"
+                    android:layout_height="150dp">
+
+                    <LinearLayout
+                        android:background="@android:color/white"
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="90dp"
+                            android:src="@drawable/mylap2"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@android:color/black"
+                            android:text="EDS DSLR"
+                            android:textSize="14sp"
+
+                            />
+                        <View
+                            android:layout_width="match_parent"
+                            android:background="#d9d9d9"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:layout_height="1dp"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="wrap_content">
+                            <ImageButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="18dp"
+                                android:background="#fff"
+                                android:layout_weight="1"
+                                android:src="@drawable/button_favourite"
+                                />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="2"
+                                android:text="RS.30000/="
+                                android:textAlignment="center"
+                                android:textColor="@android:color/black"
+                                android:textSize="10sp"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="110dp"
+                    android:background="@android:color/white"
+                    android:layout_marginBottom="10dp"
+                    android:elevation="6dp"
+                    card_view:cardCornerRadius="6dp"
+                    android:layout_height="150dp">
+
+                    <LinearLayout
+                        android:background="@android:color/white"
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="90dp"
+                            android:src="@drawable/mylap2"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@android:color/black"
+                            android:text="EDS DSLR"
+                            android:textSize="14sp"
+
+                            />
+                        <View
+                            android:layout_width="match_parent"
+                            android:background="#d9d9d9"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:layout_height="1dp"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="wrap_content">
+                            <ImageButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="18dp"
+                                android:background="#fff"
+                                android:layout_weight="1"
+                                android:src="@drawable/button_favourite"
+                                />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="2"
+                                android:text="RS.30000/="
+                                android:textAlignment="center"
+                                android:textColor="@android:color/black"
+                                android:textSize="10sp"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="110dp"
+                    android:background="@android:color/white"
+                    android:layout_marginBottom="10dp"
+                    android:elevation="6dp"
+                    card_view:cardCornerRadius="6dp"
+                    android:layout_height="150dp">
+
+                    <LinearLayout
+                        android:background="@android:color/white"
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="90dp"
+                            android:src="@drawable/mylap2"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@android:color/black"
+                            android:text="EDS DSLR"
+                            android:textSize="14sp"
+
+                            />
+                        <View
+                            android:layout_width="match_parent"
+                            android:background="#d9d9d9"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:layout_height="1dp"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="wrap_content">
+                            <ImageButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="18dp"
+                                android:background="#fff"
+                                android:layout_weight="1"
+                                android:src="@drawable/button_favourite"
+                                />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="2"
+                                android:text="RS.30000/="
+                                android:textAlignment="center"
+                                android:textColor="@android:color/black"
+                                android:textSize="10sp"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="110dp"
+                    android:background="@android:color/white"
+                    android:layout_marginBottom="10dp"
+                    android:elevation="6dp"
+                    card_view:cardCornerRadius="6dp"
+                    android:layout_height="150dp">
+
+                    <LinearLayout
+                        android:background="@android:color/white"
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="90dp"
+                            android:src="@drawable/mylap2"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@android:color/black"
+                            android:text="EDS DSLR"
+                            android:textSize="14sp"
+
+                            />
+                        <View
+                            android:layout_width="match_parent"
+                            android:background="#d9d9d9"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:layout_height="1dp"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="wrap_content">
+                            <ImageButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="18dp"
+                                android:background="#fff"
+                                android:layout_weight="1"
+                                android:src="@drawable/button_favourite"
+                                />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="2"
+                                android:text="RS.30000/="
+                                android:textAlignment="center"
+                                android:textColor="@android:color/black"
+                                android:textSize="10sp"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </HorizontalScrollView>
+
+
+
+</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Recent Products"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+
+            android:background="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            >
+            <HorizontalScrollView
+                android:background="@android:color/white"
+                android:layout_width="wrap_content"
+                android:paddingBottom="10dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:background="@android:color/white"
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@android:color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <androidx.cardview.widget.CardView
+                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                            android:layout_width="110dp"
+                            android:background="@android:color/white"
+                            android:layout_marginBottom="10dp"
+                            android:elevation="6dp"
+                            card_view:cardCornerRadius="6dp"
+                            android:layout_height="150dp">
+
+                            <LinearLayout
+                                android:background="@android:color/white"
+                                android:layout_width="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="90dp"
+                                    android:src="@drawable/mylap2"
+                                    />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@android:color/black"
+                                    android:text="EDS DSLR"
+                                    android:textSize="14sp"
+
+                                    />
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:background="#d9d9d9"
+                                    android:layout_marginTop="3dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:layout_height="1dp"/>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:orientation="horizontal"
+                                    android:layout_height="wrap_content">
+                                    <ImageButton
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="18dp"
+                                        android:background="#fff"
+                                        android:layout_weight="1"
+                                        android:src="@drawable/button_favourite"
+                                        />
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_weight="2"
+                                        android:text="RS.30000/="
+                                        android:textAlignment="center"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="10sp"
+                                        android:layout_height="wrap_content" />
+
+                                </LinearLayout>
+
+
+
+
+                            </LinearLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@android:color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <androidx.cardview.widget.CardView
+                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                            android:layout_width="110dp"
+                            android:background="@android:color/white"
+                            android:layout_marginBottom="10dp"
+                            android:elevation="6dp"
+                            card_view:cardCornerRadius="6dp"
+                            android:layout_height="150dp">
+
+                            <LinearLayout
+                                android:background="@android:color/white"
+                                android:layout_width="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="90dp"
+                                    android:src="@drawable/mylap2"
+                                    />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@android:color/black"
+                                    android:text="EDS DSLR"
+                                    android:textSize="14sp"
+
+                                    />
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:background="#d9d9d9"
+                                    android:layout_marginTop="3dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:layout_height="1dp"/>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:orientation="horizontal"
+                                    android:layout_height="wrap_content">
+                                    <ImageButton
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="18dp"
+                                        android:background="#fff"
+                                        android:layout_weight="1"
+                                        android:src="@drawable/button_favourite"
+                                        />
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_weight="2"
+                                        android:text="RS.30000/="
+                                        android:textAlignment="center"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="10sp"
+                                        android:layout_height="wrap_content" />
+
+                                </LinearLayout>
+
+
+
+
+                            </LinearLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@android:color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <androidx.cardview.widget.CardView
+                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                            android:layout_width="110dp"
+                            android:background="@android:color/white"
+                            android:layout_marginBottom="10dp"
+                            android:elevation="6dp"
+                            card_view:cardCornerRadius="6dp"
+                            android:layout_height="150dp">
+
+                            <LinearLayout
+                                android:background="@android:color/white"
+                                android:layout_width="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="90dp"
+                                    android:src="@drawable/mylap2"
+                                    />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@android:color/black"
+                                    android:text="EDS DSLR"
+                                    android:textSize="14sp"
+
+                                    />
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:background="#d9d9d9"
+                                    android:layout_marginTop="3dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:layout_height="1dp"/>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:orientation="horizontal"
+                                    android:layout_height="wrap_content">
+                                    <ImageButton
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="18dp"
+                                        android:background="#fff"
+                                        android:layout_weight="1"
+                                        android:src="@drawable/button_favourite"
+                                        />
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_weight="2"
+                                        android:text="RS.30000/="
+                                        android:textAlignment="center"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="10sp"
+                                        android:layout_height="wrap_content" />
+
+                                </LinearLayout>
+
+
+
+
+                            </LinearLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@android:color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <androidx.cardview.widget.CardView
+                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                            android:layout_width="110dp"
+                            android:background="@android:color/white"
+                            android:layout_marginBottom="10dp"
+                            android:elevation="6dp"
+                            card_view:cardCornerRadius="6dp"
+                            android:layout_height="150dp">
+
+                            <LinearLayout
+                                android:background="@android:color/white"
+                                android:layout_width="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="90dp"
+                                    android:src="@drawable/mylap2"
+                                    />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@android:color/black"
+                                    android:text="EDS DSLR"
+                                    android:textSize="14sp"
+
+                                    />
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:background="#d9d9d9"
+                                    android:layout_marginTop="3dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:layout_height="1dp"/>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:orientation="horizontal"
+                                    android:layout_height="wrap_content">
+                                    <ImageButton
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="18dp"
+                                        android:background="#fff"
+                                        android:layout_weight="1"
+                                        android:src="@drawable/button_favourite"
+                                        />
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_weight="2"
+                                        android:text="RS.30000/="
+                                        android:textAlignment="center"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="10sp"
+                                        android:layout_height="wrap_content" />
+
+                                </LinearLayout>
+
+
+
+
+                            </LinearLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@android:color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <androidx.cardview.widget.CardView
+                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                            android:layout_width="110dp"
+                            android:background="@android:color/white"
+                            android:layout_marginBottom="10dp"
+                            android:elevation="6dp"
+                            card_view:cardCornerRadius="6dp"
+                            android:layout_height="150dp">
+
+                            <LinearLayout
+                                android:background="@android:color/white"
+                                android:layout_width="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="90dp"
+                                    android:src="@drawable/mylap2"
+                                    />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@android:color/black"
+                                    android:text="EDS DSLR"
+                                    android:textSize="14sp"
+
+                                    />
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:background="#d9d9d9"
+                                    android:layout_marginTop="3dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:layout_height="1dp"/>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:orientation="horizontal"
+                                    android:layout_height="wrap_content">
+                                    <ImageButton
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="18dp"
+                                        android:background="#fff"
+                                        android:layout_weight="1"
+                                        android:src="@drawable/button_favourite"
+                                        />
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_weight="2"
+                                        android:text="RS.30000/="
+                                        android:textAlignment="center"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="10sp"
+                                        android:layout_height="wrap_content" />
+
+                                </LinearLayout>
+
+
+
+
+                            </LinearLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@android:color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <androidx.cardview.widget.CardView
+                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                            android:layout_width="110dp"
+                            android:background="@android:color/white"
+                            android:layout_marginBottom="10dp"
+                            android:elevation="6dp"
+                            card_view:cardCornerRadius="6dp"
+                            android:layout_height="150dp">
+
+                            <LinearLayout
+                                android:background="@android:color/white"
+                                android:layout_width="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="90dp"
+                                    android:src="@drawable/mylap2"
+                                    />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@android:color/black"
+                                    android:text="EDS DSLR"
+                                    android:textSize="14sp"
+
+                                    />
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:background="#d9d9d9"
+                                    android:layout_marginTop="3dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:layout_height="1dp"/>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:orientation="horizontal"
+                                    android:layout_height="wrap_content">
+                                    <ImageButton
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="18dp"
+                                        android:background="#fff"
+                                        android:layout_weight="1"
+                                        android:src="@drawable/button_favourite"
+                                        />
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_weight="2"
+                                        android:text="RS.30000/="
+                                        android:textAlignment="center"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="10sp"
+                                        android:layout_height="wrap_content" />
+
+                                </LinearLayout>
+
+
+
+
+                            </LinearLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </HorizontalScrollView>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

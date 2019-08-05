@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.shopcenter">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Admin_notification_Activity"></activity>
+        <activity android:name=".User_cart_Activity" />
+        <activity android:name=".User_payment_Activity" />
+        <activity android:name=".User_search_products" />
+        <activity android:name=".Admin_add_new_category" />
+        <activity android:name=".User_conform_order" />
+        <activity
+            android:name=".AdminHomeActivity"
+            android:label="@string/title_activity_admin_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ProductDetailActivity" />
+        <activity android:name=".User_settings_Activity" />
+        <activity
+            android:name=".AppHomeActivity"
+            android:label="@string/title_activity_app_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Admin_edit_products" />
+        <activity android:name=".Admin_add_products" />
+        <activity android:name=".AdminProductCategoryActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
