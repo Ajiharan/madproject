@@ -102,7 +102,7 @@ public class RegisterActivity extends AppCompatActivity {
             boolean isDataInserted = db.Customer_insert_data(name, email, password);
             if (isDataInserted) {
 
-                Toast.makeText(RegisterActivity.this, "Congraulations Your Account has been Created", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Congraulation Your Account has been Created", Toast.LENGTH_SHORT).show();
                 Thread mThread = new Thread() {
                     @Override
                     public void run() {
