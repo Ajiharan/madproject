@@ -139,7 +139,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else{
 
-
+           // Toast.makeText(RegisterActivity.this, "Sorry!!  Mail id is Already in use.", Toast.LENGTH_SHORT).show();
             Thread mThread = new Thread() {
                 @Override
                 public void run() {
