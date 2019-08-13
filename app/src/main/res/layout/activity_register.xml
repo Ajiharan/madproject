@@ -28,7 +28,7 @@
         android:layout_marginRight="15dp"
         android:singleLine="true"
         android:layout_marginLeft="15dp"
-        android:hint="Your Name"
+        android:hint="@string/your_names"
 
         android:textColor="@android:color/black"
         android:textColorHint="@color/colorPrimaryDark"
@@ -61,7 +61,7 @@
         android:singleLine="true"
         android:inputType="textPassword"
         android:layout_marginLeft="15dp"
-        android:hint="Your Password"
+        android:hint="@string/your_passworda"
         android:layout_marginTop="10dp"
         android:textColor="@android:color/black"
         android:textColorHint="@color/colorPrimaryDark"
@@ -82,7 +82,7 @@
         android:layout_marginTop="10dp"
         android:textAllCaps="false"
         android:textSize="18sp"
-        android:text="Create an Account"
+        android:text="@string/create_an_account"
         android:textColor="@android:color/white"
         />
 
@@ -93,7 +93,7 @@
         android:gravity="center"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="italic"
-        android:text="Already Have an Account?Login"
+        android:text="@string/already_have_an_account_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

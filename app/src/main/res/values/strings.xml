@@ -50,4 +50,8 @@
     <string name="sell_products">Sell Products</string>
     <string name="seller_registration">Seller Registration</string>
     <string name="register">Register</string>
+    <string name="your_names">Your Name</string>
+    <string name="your_passworda">Your Password</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="already_have_an_account_login">Already Have an Account?Login</string>
 </resources>
