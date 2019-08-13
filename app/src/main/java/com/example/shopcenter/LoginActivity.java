@@ -48,8 +48,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(admin_chk.isChecked()){
-                    Intent intent=new Intent(LoginActivity.this,AdminHomeActivity.class);
-                    startActivity(intent);
+                    Check_admin_login(user_mailid.getText().toString(),user_password.getText().toString());
+
                 }
                 else{
                     Check_user_login(user_mailid.getText().toString(),user_password.getText().toString());
@@ -59,7 +59,69 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+    public void Check_admin_login(String mailid,String password){
+        if(mailid.isEmpty() || password.isEmpty()){
+            Toast.makeText(LoginActivity.this,"Some fields are empty",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            loadingBar.setTitle("Login Account");
+            loadingBar.setMessage("Please wait.....");
+            loadingBar.setCanceledOnTouchOutside(false);
+            loadingBar.show();
+            Cursor cu=db.Customer_mail_check(mailid);
+            String admin_mailid="";
+            String admin_password="";
+            boolean IsLogin=false;
+            while(cu.moveToNext()){
+                admin_mailid=cu.getString(2);
+                admin_password=cu.getString(3);
 
+                    break;
+            }
+
+            if(admin_mailid.equals(mailid) && admin_password.equals(password)){
+                IsLogin=true;
+            }
+
+            if(IsLogin){
+                Thread mThread = new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(3000);
+
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        loadingBar.dismiss();
+                    }
+                };
+                mThread.start();
+                Toast.makeText(LoginActivity.this,"Admin Sucessfully login...",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(LoginActivity.this,AdminHomeActivity.class);
+                startActivity(intent);
+            }
+            else{
+                Thread mThread = new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(3000);
+
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        loadingBar.dismiss();
+                    }
+                };
+                Toast.makeText(LoginActivity.this,"Incorrect email_id or password",Toast.LENGTH_SHORT).show();
+                mThread.start();
+
+
+            }
+        }
+
+    }
     public void Check_user_login(String mailid,String password){
 
         if(mailid.isEmpty() || password.isEmpty()){
@@ -72,8 +134,10 @@ public class LoginActivity extends AppCompatActivity {
             loadingBar.show();
             Cursor cu=db.Customer_mail_check(mailid);
             boolean IsLogin=false;
+
             while(cu.moveToNext()){
                 if(mailid.equals(cu.getString(2)) && password.equals(cu.getString(3))){
+
                     IsLogin=true;
                     break;
                 }

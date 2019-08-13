@@ -99,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         if(IsMailAvailable){
 
-            boolean isDataInserted = db.Customer_insert_data(name, email, password);
+            boolean isDataInserted = db.Customer_insert_data(name,email,password);
             if (isDataInserted) {
 
                 Toast.makeText(RegisterActivity.this, "Congraulation Your Account has been Created", Toast.LENGTH_SHORT).show();
