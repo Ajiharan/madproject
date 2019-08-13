@@ -109,6 +109,10 @@ public class AppHomeActivity extends AppCompatActivity
             Intent intent=new Intent(AppHomeActivity.this,User_settings_Activity.class);
             startActivity(intent);
         }
+        else if(id==R.id.nav_seller_btn){
+            Intent intent=new Intent(AppHomeActivity.this,SellerRegisterActivity.class);
+            startActivity(intent);
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

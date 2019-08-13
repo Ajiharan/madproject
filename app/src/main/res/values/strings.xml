@@ -47,4 +47,7 @@
     <string name="phones_ad">Phones</string>
     <string name="television_ad">Television</string>
     <string name="head_phones_ad">Head Phones</string>
+    <string name="sell_products">Sell Products</string>
+    <string name="seller_registration">Seller Registration</string>
+    <string name="register">Register</string>
 </resources>
