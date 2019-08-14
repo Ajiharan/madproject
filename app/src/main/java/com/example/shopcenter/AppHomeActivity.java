@@ -3,6 +3,7 @@ package com.example.shopcenter;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.shopcenter.Prevelent.Prevelent;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -22,6 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import io.paperdb.Paper;
 
@@ -29,6 +31,8 @@ public class AppHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private ImageView product_image_btn;
    private FloatingActionButton fab_btn;
+    private String UserName;
+    private TextView user_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +40,8 @@ public class AppHomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_app_home);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        Intent intent=getIntent();
+        UserName=intent.getStringExtra(Prevelent.INTENT_USER_NAME);
         setSupportActionBar(toolbar);
         product_image_btn=(ImageView)findViewById(R.id.user_product_detail);
         product_image_btn.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +66,9 @@ public class AppHomeActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        View headerView=navigationView.getHeaderView(0);
+        user_name=headerView.findViewById(R.id.user_profile_name);
+        user_name.setText(UserName);
     }
 
     @Override

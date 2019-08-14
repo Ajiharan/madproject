@@ -31,6 +31,7 @@ public class AdminHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
         private   ImageView admin_edit_current_product;
         private String AdminName;
+        private String AdminId;
         private TextView admin_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class AdminHomeActivity extends AppCompatActivity
         Intent intent=getIntent();
 
         AdminName=intent.getStringExtra(Prevelent.INTENT_USER_NAME);
-
+        AdminId=intent.getStringExtra(Prevelent.INTENT_USER_ID);
         admin_edit_current_product=(ImageView)findViewById(R.id.admin_edit_product_btn);
         admin_edit_current_product.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,9 +120,13 @@ public class AdminHomeActivity extends AppCompatActivity
             Intent intent=new Intent(AdminHomeActivity.this,LoginActivity.class);
             startActivity(intent);
 
-        } /*else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.admin_nav_Userhome) {
 
-        } else if (id == R.id.nav_tools) {
+            Intent intent=new Intent(AdminHomeActivity.this,AppHomeActivity.class);
+            intent.putExtra(Prevelent.INTENT_USER_NAME,AdminName);
+            startActivity(intent);
+
+        } /*else if (id == R.id.nav_tools) {
 
         } else if (id == R.id.nav_share) {
 
