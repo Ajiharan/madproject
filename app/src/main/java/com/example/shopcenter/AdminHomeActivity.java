@@ -3,6 +3,7 @@ package com.example.shopcenter;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.shopcenter.Prevelent.Prevelent;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -22,15 +23,24 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import io.paperdb.Paper;
 
 public class AdminHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    ImageView admin_edit_current_product;
+        private   ImageView admin_edit_current_product;
+        private String AdminName;
+        private TextView admin_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        Intent intent=getIntent();
+
+        AdminName=intent.getStringExtra(Prevelent.INTENT_USER_NAME);
+
         admin_edit_current_product=(ImageView)findViewById(R.id.admin_edit_product_btn);
         admin_edit_current_product.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +65,11 @@ public class AdminHomeActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        View headerView=navigationView.getHeaderView(0);
+       admin_name=headerView.findViewById(R.id.admin_profile_name);
+        admin_name.setText(AdminName);
+
     }
 
     @Override
@@ -99,9 +114,12 @@ public class AdminHomeActivity extends AppCompatActivity
             Intent intent=new Intent(AdminHomeActivity.this,AdminProductCategoryActivity.class);
             startActivity(intent);
 
-        } /*else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.admin_nav_logout) {
+            Paper.book().destroy();
+            Intent intent=new Intent(AdminHomeActivity.this,LoginActivity.class);
+            startActivity(intent);
 
-        } else if (id == R.id.nav_slideshow) {
+        } /*else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_tools) {
 

@@ -15,12 +15,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shopcenter.Database.DBHelper;
+import com.example.shopcenter.Prevelent.Prevelent;
+
+import io.paperdb.Paper;
 
 public class LoginActivity extends AppCompatActivity {
     private  TextView create_account_txt;
     private ProgressDialog loadingBar;
     private DBHelper db;
-    private  CheckBox admin_chk;
+    private  CheckBox admin_chk,reminder_chk;
     private  Button login_btn;
     private EditText user_mailid,user_password;
     @Override
@@ -30,11 +33,12 @@ public class LoginActivity extends AppCompatActivity {
         db=new DBHelper(this);
         create_account_txt=(TextView) findViewById(R.id.login_create_link);
         admin_chk=(CheckBox)findViewById(R.id.admin_panel_chk);
+        reminder_chk=findViewById(R.id.remember_me_chkb);
         login_btn=(Button)findViewById(R.id.login_btn);
         loadingBar=new ProgressDialog(this);
         user_mailid=findViewById(R.id.login_mail_id_txt);
         user_password=findViewById(R.id.login_password_input);
-
+        Paper.init(this);
         create_account_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if(admin_chk.isChecked()){
                     Check_admin_login(user_mailid.getText().toString(),user_password.getText().toString());
 
@@ -64,23 +69,35 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this,"Some fields are empty",Toast.LENGTH_SHORT).show();
         }
         else{
+
             loadingBar.setTitle("Login Account");
             loadingBar.setMessage("Please wait.....");
             loadingBar.setCanceledOnTouchOutside(false);
             loadingBar.show();
             Cursor cu=db.Customer_mail_check(mailid);
-            String admin_mailid="";
-            String admin_password="";
+            String admin_mailid=null;
+            String admin_password=null;
+            String admin_name=null;
+            String user_id=null;
             boolean IsLogin=false;
-            while(cu.moveToNext()){
-                admin_mailid=cu.getString(2);
-                admin_password=cu.getString(3);
 
-                    break;
+          if(cu.moveToFirst()){
+              user_id=cu.getString(0);
+              admin_name=cu.getString(1);
+              admin_mailid=cu.getString(2);
+              admin_password=cu.getString(3);
             }
+
+
+
 
             if(admin_mailid.equals(mailid) && admin_password.equals(password)){
                 IsLogin=true;
+                if(reminder_chk.isChecked()){
+                    Paper.book().write(Prevelent.USER_MAIL_ID,mailid);
+                    Paper.book().write(Prevelent.USER_PASSWORD,password);
+                    //Paper.book().write(Prevelent.USER_TYPE,"admin");
+                }
             }
 
             if(IsLogin){
@@ -97,8 +114,10 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 };
                 mThread.start();
-                Toast.makeText(LoginActivity.this,"Admin Sucessfully login...",Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this,"Welcome "+admin_name+"...",Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(LoginActivity.this,AdminHomeActivity.class);
+                intent.putExtra(Prevelent.INTENT_USER_ID,user_id);
+                intent.putExtra(Prevelent.INTENT_USER_NAME,admin_name);
                 startActivity(intent);
             }
             else{
@@ -134,10 +153,17 @@ public class LoginActivity extends AppCompatActivity {
             loadingBar.show();
             Cursor cu=db.Customer_mail_check(mailid);
             boolean IsLogin=false;
-
+            String user_name=null;
+            String user_id=null;
             while(cu.moveToNext()){
                 if(mailid.equals(cu.getString(2)) && password.equals(cu.getString(3))){
-
+                    user_name=cu.getString(1);
+                    user_id=cu.getString(0);
+                    if(reminder_chk.isChecked()){
+                        Paper.book().write(Prevelent.USER_MAIL_ID,mailid);
+                        Paper.book().write(Prevelent.USER_PASSWORD,password);
+                       // Paper.book().write(Prevelent.USER_TYPE,"user");
+                    }
                     IsLogin=true;
                     break;
                 }
@@ -157,8 +183,10 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 };
                 mThread.start();
-                Toast.makeText(LoginActivity.this,"Sucessfully login...",Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this,"Welcome "+user_name+"....",Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(LoginActivity.this,AppHomeActivity.class);
+                intent.putExtra(Prevelent.INTENT_USER_ID,user_id);
+                intent.putExtra(Prevelent.INTENT_USER_NAME,user_name);
                 startActivity(intent);
             }
             else{

@@ -23,6 +23,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.widget.ImageView;
 
+import io.paperdb.Paper;
+
 public class AppHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private ImageView product_image_btn;
@@ -111,6 +113,11 @@ public class AppHomeActivity extends AppCompatActivity
         }
         else if(id==R.id.nav_seller_btn){
             Intent intent=new Intent(AppHomeActivity.this,SellerRegisterActivity.class);
+            startActivity(intent);
+        }
+        else if(id==R.id.nav_logout){
+            Paper.book().destroy();
+            Intent intent=new Intent(AppHomeActivity.this,LoginActivity.class);
             startActivity(intent);
         }
 
