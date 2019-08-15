@@ -8,10 +8,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import io.paperdb.Paper;
+
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME="OnlineShop.db";
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, 2);
+        super(context, DATABASE_NAME, null, 3);
     }
 
     @Override
@@ -31,16 +33,25 @@ public class DBHelper extends SQLiteOpenHelper {
                 CustomerMaster.Profile.COLUMN_FOREIGNKEY_CUS_ID+") REFERENCES "+ CustomerMaster.Customers.TABLE_NAME+"("+
                 CustomerMaster.Customers.COLUMN_NAME_ID+") ON DELETE CASCADE ON UPDATE CASCADE)";
 
+        String ADMIN_CATEGORY_DETAILS_ENTRIES="CREATE TABLE "+ CustomerMaster.ProductCategory.TABLE_NAME+"("+
+                CustomerMaster.ProductCategory.COLUMN_NAME_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                CustomerMaster.ProductCategory.COLUMN_NAME_IMAGE+" LONGBLOB,"+
+                CustomerMaster.ProductCategory.COLIMN_NAME_CATEGORY_NAME+" TEXT)";
+
         sqLiteDatabase.execSQL(CUSTOMER_CREATE_ENTRIES);
         sqLiteDatabase.execSQL(CUSTOMER_PROFILE_CREATES_ENTRIES);
+        sqLiteDatabase.execSQL(ADMIN_CATEGORY_DETAILS_ENTRIES);
 
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.Customers.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.Profile.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.ProductCategory.TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
 

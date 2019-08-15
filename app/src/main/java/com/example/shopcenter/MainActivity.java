@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Paper.init(this);
+     /*initialize when new DB version Entered*/   // Paper.book().destroy();
         db=new DBHelper(this);
         register_button=findViewById(R.id.main_join_now_btn);
         login_button=findViewById(R.id.main_login_btn);
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                   user_name = cu.getString(1);
                   Retrivemail_id = cu.getString(2);
                   user_password = cu.getString(3);
+                  break;
               }
           }
           if(cu.moveToFirst()){

@@ -37,14 +37,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class User_settings_Activity extends AppCompatActivity {
     private static final int REQUEST_CODE_GALLERY=2;
 
+    boolean ExceptionFound=false;
     FloatingActionButton get_image_gallery;
     private CircleImageView current_user_image;
     private TextView change_profile;
-    private byte[] photo;
+    private byte[] photo=null;
     private EditText user_mail,user_name,user_password;
     DBHelper db;
-    private  Uri Imageuri;
-    private Bitmap bp;
+
+    private Bitmap bp=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,26 +153,32 @@ public class User_settings_Activity extends AppCompatActivity {
         return null;
     }
     private void getValues(){
-
-        photo = profileImage(bp);
-    }
-    //Convert bitmap to bytes
-    //@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
-    private byte[] profileImage(Bitmap b){
-
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        b.compress(Bitmap.CompressFormat.PNG, 0, bos);
-        return bos.toByteArray();
-
-    }
-
-   /* private byte[] ImageViewTobyte(ImageView myImg){
-        Bitmap bitmap=((BitmapDrawable)myImg.getDrawable()).getBitmap();
+         /*
         ByteArrayOutputStream stream=new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
-        byte[] byteArray=stream.toByteArray();
-        return byteArray;
-    }*/
+
+    */
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        try{
+
+            bp.compress(Bitmap.CompressFormat.PNG, 100, bos);
+            ExceptionFound=false;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            ExceptionFound=true;
+        }
+        finally {
+            photo =  bos.toByteArray();
+        }
+
+
+
+
+    }
+
+
+
 
     public void retrive_profile_image(){
         Bitmap bitmapss=db.getImage(Prevelent.currentOnlineUser.getId());
@@ -223,7 +230,7 @@ public class User_settings_Activity extends AppCompatActivity {
     public void Add_user_profilr_image(){
 
         getValues();
-        if(photo == null){
+        if(ExceptionFound){
             Toast.makeText(User_settings_Activity.this,"Please select an Image",Toast.LENGTH_SHORT).show();
         }
         else {
@@ -235,7 +242,8 @@ public class User_settings_Activity extends AppCompatActivity {
 
                     if (isAdd) {
                         Toast.makeText(User_settings_Activity.this, "Profile Image Added", Toast.LENGTH_SHORT).show();
-                        //retrive_profile_image();
+                        Intent intent=new Intent(User_settings_Activity.this,AppHomeActivity.class);
+                        startActivity(intent);
                     } else {
                         Toast.makeText(User_settings_Activity.this, "Error!! cannnot add profile", Toast.LENGTH_SHORT).show();
                     }

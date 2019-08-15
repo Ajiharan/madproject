@@ -3,6 +3,7 @@ package com.example.shopcenter;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.shopcenter.Database.DBHelper;
 import com.example.shopcenter.Prevelent.Prevelent;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -25,14 +26,17 @@ import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
 
 public class AppHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private ImageView product_image_btn;
-   private FloatingActionButton fab_btn;
+    private FloatingActionButton fab_btn;
     private String UserName;
+    private CircleImageView user_profile_img;
     private TextView user_name;
+    private DBHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +48,7 @@ public class AppHomeActivity extends AppCompatActivity
         UserName=intent.getStringExtra(Prevelent.INTENT_USER_NAME);
         setSupportActionBar(toolbar);
         product_image_btn=(ImageView)findViewById(R.id.user_product_detail);
+       db=new DBHelper(this);
         //.init(this);
         product_image_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +75,13 @@ public class AppHomeActivity extends AppCompatActivity
         View headerView=navigationView.getHeaderView(0);
         user_name=headerView.findViewById(R.id.user_profile_name);
         user_name.setText(Prevelent.currentOnlineUser.getName());
+        user_profile_img=headerView.findViewById(R.id.user_profile_images);
+        if(db.getImage(Prevelent.currentOnlineUser.getId()) !=null){
+            user_profile_img.setImageBitmap(db.getImage(Prevelent.currentOnlineUser.getId()));
+        }
+
+
+
     }
 
     @Override
