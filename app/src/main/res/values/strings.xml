@@ -54,4 +54,5 @@
     <string name="your_passworda">Your Password</string>
     <string name="create_an_account">Create an Account</string>
     <string name="already_have_an_account_login">Already Have an Account?Login</string>
+    <string name="edit">Edit</string>
 </resources>

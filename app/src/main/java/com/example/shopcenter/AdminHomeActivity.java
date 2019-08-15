@@ -1,8 +1,10 @@
 package com.example.shopcenter;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
+import com.example.shopcenter.Database.DBHelper;
 import com.example.shopcenter.Prevelent.Prevelent;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -25,13 +27,16 @@ import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
 
 public class AdminHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
         private   ImageView admin_edit_current_product;
-        private String AdminName;
-        private String AdminId;
+        private CircleImageView admin_profile;
+        private DBHelper db;
+       // private String AdminName;
+        //private String AdminId;
         private TextView admin_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +44,12 @@ public class AdminHomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_admin_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         Intent intent=getIntent();
-
-        AdminName=intent.getStringExtra(Prevelent.INTENT_USER_NAME);
-        AdminId=intent.getStringExtra(Prevelent.INTENT_USER_ID);
+        db=new DBHelper(this);
+       // AdminName=intent.getStringExtra(Prevelent.INTENT_USER_NAME);
+        //AdminId=intent.getStringExtra(Prevelent.INTENT_USER_ID);
         admin_edit_current_product=(ImageView)findViewById(R.id.admin_edit_product_btn);
+
+
         admin_edit_current_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,8 +76,19 @@ public class AdminHomeActivity extends AppCompatActivity
 
         View headerView=navigationView.getHeaderView(0);
        admin_name=headerView.findViewById(R.id.admin_profile_name);
-        admin_name.setText(AdminName);
+        admin_name.setText(Prevelent.currentOnlineUser.getName());
+        admin_profile=headerView.findViewById(R.id.admin_profile_image);
 
+        set_profile();
+
+    }
+    private void set_profile(){
+        Bitmap bitmap=db.getImage(Prevelent.currentOnlineUser.getId());
+
+        if(bitmap != null){
+            System.out.println("Bitss :"+bitmap);
+            admin_profile.setImageBitmap(bitmap);
+        }
     }
 
     @Override
@@ -123,7 +141,7 @@ public class AdminHomeActivity extends AppCompatActivity
         } else if (id == R.id.admin_nav_Userhome) {
 
             Intent intent=new Intent(AdminHomeActivity.this,AppHomeActivity.class);
-            intent.putExtra(Prevelent.INTENT_USER_NAME,AdminName);
+            //intent.putExtra(Prevelent.INTENT_USER_NAME,AdminName);
             startActivity(intent);
 
         } /*else if (id == R.id.nav_tools) {

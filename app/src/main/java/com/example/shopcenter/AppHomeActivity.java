@@ -44,6 +44,7 @@ public class AppHomeActivity extends AppCompatActivity
         UserName=intent.getStringExtra(Prevelent.INTENT_USER_NAME);
         setSupportActionBar(toolbar);
         product_image_btn=(ImageView)findViewById(R.id.user_product_detail);
+        //.init(this);
         product_image_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,7 +69,7 @@ public class AppHomeActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View headerView=navigationView.getHeaderView(0);
         user_name=headerView.findViewById(R.id.user_profile_name);
-        user_name.setText(UserName);
+        user_name.setText(Prevelent.currentOnlineUser.getName());
     }
 
     @Override

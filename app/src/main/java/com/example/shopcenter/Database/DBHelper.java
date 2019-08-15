@@ -5,13 +5,19 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME="OnlineShop.db";
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 2);
     }
 
+    @Override
+    public void onConfigure(SQLiteDatabase db){
+        db.setForeignKeyConstraintsEnabled(true);
+    }
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String CUSTOMER_CREATE_ENTRIES="CREATE TABLE "+CustomerMaster.Customers.TABLE_NAME+"("+
@@ -19,13 +25,22 @@ public class DBHelper extends SQLiteOpenHelper {
                 CustomerMaster.Customers.COLUMN_NAME_NAME+" TEXT,"+CustomerMaster.Customers.COLUMN_NAME_EMAIL+
                 " TEXT,"+CustomerMaster.Customers.COLUMN_NAME_PASSWORD +" TEXT)";
 
+        String CUSTOMER_PROFILE_CREATES_ENTRIES="CREATE TABLE "+CustomerMaster.Profile.TABLE_NAME+"("+
+                CustomerMaster.Profile.COLUMN_NAME_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                CustomerMaster.Profile.COLUMN_NAME_IMAGE+" BLOB,"+ CustomerMaster.Profile.COLUMN_FOREIGNKEY_CUS_ID+" INTEGER,CONSTRAINT fk_cus FOREIGN KEY ("+
+                CustomerMaster.Profile.COLUMN_FOREIGNKEY_CUS_ID+") REFERENCES "+ CustomerMaster.Customers.TABLE_NAME+"("+
+                CustomerMaster.Customers.COLUMN_NAME_ID+") ON DELETE CASCADE ON UPDATE CASCADE)";
+
         sqLiteDatabase.execSQL(CUSTOMER_CREATE_ENTRIES);
+        sqLiteDatabase.execSQL(CUSTOMER_PROFILE_CREATES_ENTRIES);
+
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.Customers.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.Profile.TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
 
@@ -38,12 +53,29 @@ public class DBHelper extends SQLiteOpenHelper {
 
         long rowId=db.insert(CustomerMaster.Customers.TABLE_NAME,null,values);
 
+
         if(rowId  == -1){
             return false;
         }
         else{
             return true;
         }
+    }
+
+    public boolean Customer_Profile_insert(String cus_foreign_id,byte[] image){
+        SQLiteDatabase db=getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put(CustomerMaster.Profile.COLUMN_NAME_IMAGE,image);
+        values.put(CustomerMaster.Profile.COLUMN_FOREIGNKEY_CUS_ID,cus_foreign_id);
+        long rowId=db.insert(CustomerMaster.Profile.TABLE_NAME,null,values);
+        System.out.println("Rows:"+rowId);
+        if(rowId  == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
+
     }
 
     public Cursor  Customer_mail_check(String emailid){
@@ -54,5 +86,27 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor=db.query(CustomerMaster.Customers.TABLE_NAME,projection, null,null,null,null,null);
         return  cursor;
 
+    }
+
+    public Bitmap getImage(String user_id){
+        SQLiteDatabase db=getWritableDatabase();
+        Bitmap bitmap=null;
+       // System.out.println("Bits :"+bitmap);
+        //String orderby= CustomerMaster.Profile.COLUMN_NAME_ID+" DESC";
+        String sql="SELECT * FROM "+ CustomerMaster.Profile.TABLE_NAME+" WHERE "+ CustomerMaster.Profile.COLUMN_FOREIGNKEY_CUS_ID +"=?";
+       Cursor cu=db.rawQuery(sql,new String[]{user_id});
+      // System.out.println("Cus :"+user_id);
+        byte[] image=null;
+        int t=-1;
+        while(cu.moveToNext()){
+           image=cu.getBlob(1);
+            t++;
+            bitmap= BitmapFactory.decodeByteArray(image,0,image.length);
+
+           // System.out.println("Bit :"+user_id);
+
+        }
+        System.out.println("rrow :"+t);
+        return bitmap;
     }
 }

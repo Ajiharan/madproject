@@ -33,7 +33,7 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_marginRight="10dp"
-                  android:text="@string/update"
+                  android:text="@string/edit"
                   android:textSize="20sp"
                   android:textColor="@android:color/white"
                   android:textStyle="bold"
@@ -53,21 +53,37 @@
         android:layout_centerHorizontal="true"
         android:layout_height="180dp" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/user_profile_chane_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/app_bar_settings"
+
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="@dimen/fab_margin"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="139dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginBottom="@dimen/fab_margin"
+        app:srcCompat="@drawable/user_profile_camera" />
+
+
     <TextView
         android:id="@+id/profile_image_change_btn"
         android:layout_marginTop="10dp"
-
+        android:gravity="center"
+        android:foregroundGravity="center"
         android:layout_width="wrap_content"
         android:layout_marginLeft="120dp"
         android:layout_height="wrap_content"
-        android:text="@string/change_profile"
+        android:text="+Add Profile"
         android:layout_below="@+id/settings_profile_image"
 
         android:layout_centerHorizontal="true"
         android:textSize="20sp"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
-        android:layout_alignParentStart="true"
+
         />
 
 <com.google.android.material.textfield.TextInputLayout
@@ -80,7 +96,7 @@ android:layout_height="wrap_content">
         android:id="@+id/settings_mail_id"
         android:layout_width="match_parent"
         android:inputType="textEmailAddress"
-        android:text="IT18098488@my.sliit.lk"
+
         android:textColor="@color/colorPrimaryDark"
         android:hint="Mail Id"
         android:padding="10dp"
@@ -99,7 +115,7 @@ android:layout_height="wrap_content">
             android:padding="10dp"
             android:id="@+id/settings_name"
             android:layout_width="match_parent"
-            android:text="IT18098488"
+
             android:textColor="@color/colorPrimary"
             android:hint="Full Name"
 
@@ -121,7 +137,7 @@ android:layout_height="wrap_content">
             android:inputType="textPassword"
             android:padding="10dp"
             android:hint="Password"
-            android:text="IT18098488"
+
             android:textColor="@color/colorPrimaryDark"
             android:textColorHint="@color/colorPrimaryDark"
             android:layout_height="wrap_content" />

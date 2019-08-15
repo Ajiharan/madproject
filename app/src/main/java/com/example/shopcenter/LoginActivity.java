@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.shopcenter.Database.DBHelper;
 import com.example.shopcenter.Prevelent.Prevelent;
+import com.example.shopcenter.model.User;
 
 import io.paperdb.Paper;
 
@@ -33,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         db=new DBHelper(this);
         create_account_txt=(TextView) findViewById(R.id.login_create_link);
         admin_chk=(CheckBox)findViewById(R.id.admin_panel_chk);
+        Prevelent.currentOnlineUser=new User();
         reminder_chk=findViewById(R.id.remember_me_chkb);
         login_btn=(Button)findViewById(R.id.login_btn);
         loadingBar=new ProgressDialog(this);
@@ -86,6 +88,10 @@ public class LoginActivity extends AppCompatActivity {
               admin_name=cu.getString(1);
               admin_mailid=cu.getString(2);
               admin_password=cu.getString(3);
+              Prevelent.currentOnlineUser.setId(user_id);
+              Prevelent.currentOnlineUser.setName(admin_name);
+              Prevelent.currentOnlineUser.setMail( admin_mailid);
+              Prevelent.currentOnlineUser.setPassword(admin_password);
             }
 
 
@@ -155,10 +161,20 @@ public class LoginActivity extends AppCompatActivity {
             boolean IsLogin=false;
             String user_name=null;
             String user_id=null;
+            String user_mail=null;
+            String user_password=null;
             while(cu.moveToNext()){
                 if(mailid.equals(cu.getString(2)) && password.equals(cu.getString(3))){
                     user_name=cu.getString(1);
                     user_id=cu.getString(0);
+                    user_mail=cu.getString(2);
+                    user_password=cu.getString(3);
+
+                    Prevelent.currentOnlineUser.setId(user_id);
+                    Prevelent.currentOnlineUser.setName(user_name);
+                    Prevelent.currentOnlineUser.setMail(user_mail);
+                    Prevelent.currentOnlineUser.setPassword(user_password);
+
                     if(reminder_chk.isChecked()){
                         Paper.book().write(Prevelent.USER_MAIL_ID,mailid);
                         Paper.book().write(Prevelent.USER_PASSWORD,password);

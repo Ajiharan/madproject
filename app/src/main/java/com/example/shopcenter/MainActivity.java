@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.shopcenter.Database.DBHelper;
 import com.example.shopcenter.Prevelent.Prevelent;
+import com.example.shopcenter.model.User;
 
 import io.paperdb.Paper;
 
@@ -26,8 +27,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Paper.init(this);
         db=new DBHelper(this);
-        register_button=(Button)findViewById(R.id.main_join_now_btn);
-        login_button=(Button)findViewById(R.id.main_login_btn);
+        register_button=findViewById(R.id.main_join_now_btn);
+        login_button=findViewById(R.id.main_login_btn);
+        Prevelent.currentOnlineUser=new User();
         //loadingBar=new ProgressDialog(this);
         User_Rememberme();
         register_button.setOnClickListener(new View.OnClickListener() {
@@ -66,21 +68,29 @@ public class MainActivity extends AppCompatActivity {
 
         Cursor cu=db.Customer_mail_check(mailid);
         String Retrivemail_id="";
+        String admin_mail_id=null;
         String user_name=null;
         String user_id=null;
-          if( cu.moveToFirst()){
-              user_id=cu.getString(0);
-              user_name=cu.getString(1);
-              Retrivemail_id=cu.getString(2);
+        String user_password=null;
+          while( cu.moveToNext()){
+              if(mailid.equals(cu.getString(2))) {
+                  user_id = cu.getString(0);
+                  user_name = cu.getString(1);
+                  Retrivemail_id = cu.getString(2);
+                  user_password = cu.getString(3);
+              }
+          }
+          if(cu.moveToFirst()){
+              admin_mail_id=cu.getString(2);
           }
 
 
+          Prevelent.currentOnlineUser.setId(user_id);
+          Prevelent.currentOnlineUser.setName(user_name);
+          Prevelent.currentOnlineUser.setMail( Retrivemail_id);
+          Prevelent.currentOnlineUser.setPassword(user_password);
 
-
-
-
-
-        if(mailid.equals(Retrivemail_id)) {
+        if(mailid.equals(admin_mail_id)) {
 
             Toast.makeText(MainActivity.this," You are Already  login "+user_name+"...",Toast.LENGTH_SHORT).show();
 

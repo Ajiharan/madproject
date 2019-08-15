@@ -8,12 +8,15 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".AppHomeActivity"
     tools:showIn="@layout/app_bar_app_home">
+
     <androidx.recyclerview.widget.RecyclerView
 
         android:id="@+id/recycler_menu"
-        android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:scrollbars="vertical">
 
 
     </androidx.recyclerview.widget.RecyclerView>
