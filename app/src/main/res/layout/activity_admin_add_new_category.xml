@@ -5,10 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Admin_add_new_category">
+    <RelativeLayout
+        android:id="@+id/admin_category_relative_layout_top"
+        android:layout_width="match_parent"
+        android:background="@android:color/white"
+        android:layout_height="40dp">
+        <Button
+            android:id="@+id/admin_category_back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:background="@color/colorAccent"
+
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="back"
+            android:textColor="@android:color/white"
+            />
+    </RelativeLayout>
     <ImageView
+        android:layout_below="@+id/admin_category_relative_layout_top"
         android:id="@+id/admin_select_category_image"
-        android:layout_width="350dp"
-        android:layout_height="250dp"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
         android:contentDescription="@string/add_an_items"
         android:layout_centerHorizontal="true"
         android:scaleType="centerCrop"

@@ -130,7 +130,7 @@ public class AdminHomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.admin_nav_categories) {
-            Intent intent=new Intent(AdminHomeActivity.this,AdminProductCategoryActivity.class);
+            Intent intent=new Intent(AdminHomeActivity.this,Admin_add_new_category.class);
             startActivity(intent);
 
         } else if (id == R.id.admin_nav_logout) {

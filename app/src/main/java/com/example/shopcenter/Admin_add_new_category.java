@@ -38,7 +38,7 @@ public class Admin_add_new_category extends AppCompatActivity {
     private byte[] photo=null;
     private ImageView admin_category_image;
     private EditText  admin_category_name;
-    private Button add_new_category;
+    private Button add_new_category,admin_category_back_button;
     private DBHelper db;
     private RecyclerView recyclerView;
     CategoryItemsAdapter itemsAdapter;
@@ -48,9 +48,9 @@ public class Admin_add_new_category extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_add_new_category);
+
         admin_items=new ArrayList<>();
         recyclerView=findViewById(R.id.category_recycler_view);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         admin_category_image=findViewById(R.id.admin_select_category_image);
 
@@ -63,6 +63,14 @@ public class Admin_add_new_category extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Add_user_profilr_image();
+            }
+        });
+        admin_category_back_button=findViewById(R.id.admin_category_back_btn);
+        admin_category_back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Admin_add_new_category.this,AdminHomeActivity.class);
+                startActivity(intent);
             }
         });
         admin_category_image.setOnClickListener(new View.OnClickListener() {

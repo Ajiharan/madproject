@@ -33,7 +33,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Admin_edit_products" />
         <activity android:name=".Admin_add_products" />
-        <activity android:name=".AdminProductCategoryActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity">
