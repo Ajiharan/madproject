@@ -8,6 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.example.shopcenter.model.CategoryItems;
+
+import java.util.ArrayList;
+
 import io.paperdb.Paper;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -79,7 +83,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(CustomerMaster.Profile.COLUMN_NAME_IMAGE,image);
         values.put(CustomerMaster.Profile.COLUMN_FOREIGNKEY_CUS_ID,cus_foreign_id);
         long rowId=db.insert(CustomerMaster.Profile.TABLE_NAME,null,values);
-        System.out.println("Rows:"+rowId);
+        //System.out.println("Rows:"+rowId);
         if(rowId  == -1){
             return false;
         }
@@ -87,6 +91,43 @@ public class DBHelper extends SQLiteOpenHelper {
             return true;
         }
 
+    }
+
+    public ArrayList Retrive_Product_Category_Details(){
+        ArrayList<CategoryItems> list=new ArrayList<>();
+        SQLiteDatabase db=getWritableDatabase();
+
+        String sql="SELECT * FROM "+ CustomerMaster.ProductCategory.TABLE_NAME;
+
+        Cursor cu=db.rawQuery(sql,null);
+        byte[] image;
+        while(cu.moveToNext()){
+            image=cu.getBlob(1);
+            String name=cu.getString(2);
+            Bitmap bitmap=null;
+
+            bitmap= BitmapFactory.decodeByteArray(image,0,image.length);
+            CategoryItems items=new CategoryItems(name,bitmap);
+            list.add(items);
+        }
+        cu.close();
+
+        return list;
+
+    }
+
+    public boolean Admin_update_Category_Details(byte[] image,String name){
+        SQLiteDatabase db=getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put(CustomerMaster.ProductCategory.COLUMN_NAME_IMAGE,image);
+        values.put(CustomerMaster.ProductCategory.COLIMN_NAME_CATEGORY_NAME,name);
+        long rowId=db.insert(CustomerMaster.ProductCategory.TABLE_NAME,null,values);
+        if(rowId  == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     public Cursor  Customer_mail_check(String emailid){

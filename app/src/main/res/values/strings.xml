@@ -55,4 +55,6 @@
     <string name="create_an_account">Create an Account</string>
     <string name="already_have_an_account_login">Already Have an Account?Login</string>
     <string name="edit">Edit</string>
+    <string name="edit_categories">Edit Categories</string>
+    <string name="add_an_items">Add an Items</string>
 </resources>
