@@ -72,9 +72,9 @@ public class DBHelper extends SQLiteOpenHelper {
         if(rowId  == -1){
             return false;
         }
-        else{
+
             return true;
-        }
+
     }
 
     public boolean Customer_Profile_insert(String cus_foreign_id,byte[] image){
@@ -87,9 +87,9 @@ public class DBHelper extends SQLiteOpenHelper {
         if(rowId  == -1){
             return false;
         }
-        else{
+
             return true;
-        }
+
 
     }
 
@@ -125,9 +125,9 @@ public class DBHelper extends SQLiteOpenHelper {
         if(rowId  == -1){
             return false;
         }
-        else{
+
             return true;
-        }
+
     }
 
     public Cursor  Customer_mail_check(String emailid){
