@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import dmax.dialog.SpotsDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -67,7 +68,7 @@ public class Admin_add_new_category extends AppCompatActivity {
         add_new_category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Add_user_profilr_image();
+                Add_admin_Category_Details();
             }
         });
         admin_category_back_button=findViewById(R.id.admin_category_back_btn);
@@ -98,7 +99,7 @@ public class Admin_add_new_category extends AppCompatActivity {
          if(admin_items.size() == 0){
              admin_category_edit_heading.setText("Oops! Items are not Available");
              AlertDialog.Builder builder=new AlertDialog.Builder(this);
-             builder.setTitle("Alert").setMessage("Currently You not have any Items Category\nPlease Add it").show();
+             builder.setTitle("Alert").setMessage("Currently You not have any Items Category Please Add Some One..").show();
          }
          else {
              itemsAdapter.setOnItemClickListener(new  CategoryItemsAdapter.ClickListener() {
@@ -200,7 +201,7 @@ public class Admin_add_new_category extends AppCompatActivity {
 
 
     }
-    public void Add_user_profilr_image(){
+    private void Add_admin_Category_Details(){
 
         getValues();
         if(ExceptionFound){
@@ -216,19 +217,32 @@ public class Admin_add_new_category extends AppCompatActivity {
                 builder.setTitle("Add New Profile").setMessage("Are you sure to add new category!").setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        boolean isNameAvailable=true;
+                        dialog.show();
+                            Cursor cu=db.Admin_product_name_check();
+                            while(cu.moveToNext()){
+                                if(cu.getString(2).toString().equals(admin_category_name.getText().toString())){
+                                    isNameAvailable=false;
+                                    break;
+                                }
+                            }
+                        if(isNameAvailable) {
+                            boolean isAdd = db.Admin_add_Category_Details(photo, admin_category_name.getText().toString());
 
-                    dialog.show();
+                            if (isAdd) {
+                                Toast.makeText(Admin_add_new_category.this, "New Product Category Added", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(Admin_add_new_category.this, Admin_add_new_category.class);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(Admin_add_new_category.this, "Error!! Failed to Add..", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        }
+                        else{
+                            Toast.makeText(Admin_add_new_category.this, "Sorry Name Already Exists..", Toast.LENGTH_SHORT).show();
 
-
-                   boolean isAdd = db.Admin_update_Category_Details(photo,admin_category_name.getText().toString());
-
-                    if (isAdd) {
-                        Toast.makeText(Admin_add_new_category.this, "New Product Category Added", Toast.LENGTH_SHORT).show();
-                        Intent intent=new Intent(Admin_add_new_category.this,Admin_add_new_category.class);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(Admin_add_new_category.this, "Error!! cannnot add profile", Toast.LENGTH_SHORT).show();
-                    }
+                        }
+                        dialog.dismiss();
                     }
                 }).setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override

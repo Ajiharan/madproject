@@ -67,6 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
+            android:id="@+id/Admin_update_current_category"
             android:layout_marginLeft="90dp"
             android:background="@drawable/admin_input_design"
             android:text="@string/update1"

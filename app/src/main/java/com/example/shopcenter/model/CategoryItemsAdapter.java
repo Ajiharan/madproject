@@ -57,7 +57,7 @@ public class CategoryItemsAdapter extends RecyclerView.Adapter<CategoryItemsAdap
             categoryImage=itemView.findViewById(R.id.admin_category_delete_product_btn);
             categoryImageName=itemView.findViewById(R.id.admins_edit_products);
             mybutton=itemView.findViewById(R.id.admin_edit_category_details );
-            itemView.setOnClickListener(this);
+            mybutton.setOnClickListener(this);
              itemView.setOnLongClickListener(this);
         }
 

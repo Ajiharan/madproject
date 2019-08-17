@@ -95,7 +95,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public ArrayList Retrive_Product_Category_Details(){
         ArrayList<CategoryItems> list=new ArrayList<>();
-        SQLiteDatabase db=getWritableDatabase();
+        SQLiteDatabase db=getReadableDatabase();
 
         String sql="SELECT * FROM "+ CustomerMaster.ProductCategory.TABLE_NAME;
 
@@ -120,7 +120,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean Admin_delete_category(String id){
 
             try{
-                SQLiteDatabase db=getWritableDatabase();
+                SQLiteDatabase db=getReadableDatabase();
                 String selection=CustomerMaster.ProductCategory.COLUMN_NAME_ID + " = ?";
                 String selectionArgs[]={id};
                 db.delete(CustomerMaster.ProductCategory.TABLE_NAME,selection,selectionArgs);
@@ -130,14 +130,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 e.printStackTrace();
                 return false;
             }
-
-
-
-
-
-
     }
-    public boolean Admin_update_Category_Details(byte[] image,String name){
+    public boolean Admin_add_Category_Details(byte[] image,String name){
         SQLiteDatabase db=getWritableDatabase();
         ContentValues values=new ContentValues();
         values.put(CustomerMaster.ProductCategory.COLUMN_NAME_IMAGE,image);
@@ -151,6 +145,24 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    public boolean Admin_update_category_Info(String id,String name,byte[]image){
+        SQLiteDatabase db=getReadableDatabase();
+        ContentValues values=new ContentValues();
+        values.put(CustomerMaster.ProductCategory.COLUMN_NAME_IMAGE,image);
+        values.put(CustomerMaster.ProductCategory.COLIMN_NAME_CATEGORY_NAME,name);
+        String selection= CustomerMaster.ProductCategory.COLUMN_NAME_ID +" = ?";
+        String selectionArgs[]={id};
+        int count=db.update(CustomerMaster.ProductCategory.TABLE_NAME,values,selection,selectionArgs);
+
+        if(count > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+
     public Cursor  Customer_mail_check(String emailid){
          SQLiteDatabase db=getReadableDatabase();
          String projection[]={CustomerMaster.Customers.COLUMN_NAME_ID, CustomerMaster.Customers.COLUMN_NAME_NAME, CustomerMaster.Customers.COLUMN_NAME_EMAIL,
@@ -161,8 +173,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    public Cursor Admin_product_name_check(){
+        SQLiteDatabase db=getReadableDatabase();
+        String projection[]={CustomerMaster.ProductCategory.COLUMN_NAME_ID, CustomerMaster.ProductCategory.COLUMN_NAME_IMAGE, CustomerMaster.ProductCategory.COLIMN_NAME_CATEGORY_NAME};
+
+        Cursor cu=db.query(CustomerMaster.ProductCategory.TABLE_NAME,projection,null,null,null,null,null);
+        return cu;
+    }
+
     public Bitmap getImage(String user_id){
-        SQLiteDatabase db=getWritableDatabase();
+        SQLiteDatabase db=getReadableDatabase();
         Bitmap bitmap=null;
        // System.out.println("Bits :"+bitmap);
         //String orderby= CustomerMaster.Profile.COLUMN_NAME_ID+" DESC";
