@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".User_cart_Activity">
+
+    <RelativeLayout
+        android:id="@+id/User_relative_layout1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+
+        android:background="@color/colorPrimaryDark"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:text="Total Price"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            />
+
+
+
+
+    </RelativeLayout>
+
+   <!-- <androidx.recyclerview.widget.RecyclerView
+
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    </androidx.recyclerview.widget.RecyclerView>-->
+
+    <RelativeLayout
+        android:id="@+id/User_cart_list"
+
+        android:layout_below="@+id/User_relative_layout1"
+        android:layout_above="@+id/User_cart_next_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/user_cart_list_layouts"/>
+    </RelativeLayout>
+    <Button
+        android:id="@+id/User_cart_next_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:textColor="@android:color/white"
+        android:background="@color/colorPrimaryDark"
+        android:layout_marginBottom="20dp"
+        android:text="Place Order"
+        android:textSize="18dp"
+        />
+
+</RelativeLayout>
