@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shopcenter.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
 public class CategoryItemsAdapter extends RecyclerView.Adapter<CategoryItemsAdapter.CategoryItemsViewAdapter> {
     private Context contexts;
     private ArrayList<CategoryItems> myitems;
-
+    private static ClickListener clickListener;
     public CategoryItemsAdapter(Context contexts, ArrayList<CategoryItems> myitems) {
         this.contexts = contexts;
         this.myitems = myitems;
@@ -45,16 +46,39 @@ public class CategoryItemsAdapter extends RecyclerView.Adapter<CategoryItemsAdap
         return  myitems.size();
     }
 
-    class CategoryItemsViewAdapter extends RecyclerView.ViewHolder{
+    class CategoryItemsViewAdapter extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
         ImageView categoryImage;
         TextView categoryImageName;
+        FloatingActionButton mybutton;
 
         public CategoryItemsViewAdapter(@NonNull View itemView) {
             super(itemView);
 
             categoryImage=itemView.findViewById(R.id.admin_category_delete_product_btn);
             categoryImageName=itemView.findViewById(R.id.admins_edit_products);
+            mybutton=itemView.findViewById(R.id.admin_edit_category_details );
+            itemView.setOnClickListener(this);
+             itemView.setOnLongClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+           clickListener.onItemClick(getAdapterPosition(), view);
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            clickListener.onItemLongClick(getAdapterPosition(), view);
+            return false;
+
+        }
+    }
+    public void setOnItemClickListener(ClickListener clickListener) {
+        CategoryItemsAdapter.clickListener=clickListener;
+    }
+    public interface ClickListener {
+        void onItemClick(int position, View v);
+        void onItemLongClick(int position, View v);
     }
 
 }

@@ -102,12 +102,14 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cu=db.rawQuery(sql,null);
         byte[] image;
         while(cu.moveToNext()){
+            String id=cu.getString(0);
             image=cu.getBlob(1);
             String name=cu.getString(2);
             Bitmap bitmap=null;
 
             bitmap= BitmapFactory.decodeByteArray(image,0,image.length);
             CategoryItems items=new CategoryItems(name,bitmap);
+            items.setId(id);
             list.add(items);
         }
         cu.close();
@@ -115,7 +117,26 @@ public class DBHelper extends SQLiteOpenHelper {
         return list;
 
     }
+    public boolean Admin_delete_category(String id){
 
+            try{
+                SQLiteDatabase db=getWritableDatabase();
+                String selection=CustomerMaster.ProductCategory.COLUMN_NAME_ID + " = ?";
+                String selectionArgs[]={id};
+                db.delete(CustomerMaster.ProductCategory.TABLE_NAME,selection,selectionArgs);
+                return true;
+            }
+            catch (Exception e){
+                e.printStackTrace();
+                return false;
+            }
+
+
+
+
+
+
+    }
     public boolean Admin_update_Category_Details(byte[] image,String name){
         SQLiteDatabase db=getWritableDatabase();
         ContentValues values=new ContentValues();

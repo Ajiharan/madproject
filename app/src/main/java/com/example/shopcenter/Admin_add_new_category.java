@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.media.RatingCompat;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,11 +25,14 @@ import com.example.shopcenter.Database.DBHelper;
 import com.example.shopcenter.Prevelent.Prevelent;
 import com.example.shopcenter.model.CategoryItems;
 import com.example.shopcenter.model.CategoryItemsAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import dmax.dialog.SpotsDialog;
+
+import static com.example.shopcenter.Prevelent.Prevelent.Currentcategories;
 
 public class Admin_add_new_category extends AppCompatActivity {
 
@@ -40,6 +44,7 @@ public class Admin_add_new_category extends AppCompatActivity {
     private EditText  admin_category_name;
     private Button add_new_category,admin_category_back_button;
     private DBHelper db;
+    private TextView admin_category_edit_heading;
     private RecyclerView recyclerView;
     CategoryItemsAdapter itemsAdapter;
     ArrayList<CategoryItems> admin_items;
@@ -48,7 +53,7 @@ public class Admin_add_new_category extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_add_new_category);
-
+        admin_category_edit_heading=findViewById(R.id.category_edit_heading);
         admin_items=new ArrayList<>();
         recyclerView=findViewById(R.id.category_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -88,6 +93,30 @@ public class Admin_add_new_category extends AppCompatActivity {
 
          itemsAdapter=new CategoryItemsAdapter(this,admin_items);
          recyclerView.setAdapter(itemsAdapter);
+
+
+         if(admin_items.size() == 0){
+             admin_category_edit_heading.setText("Oops! Items are not Available");
+             AlertDialog.Builder builder=new AlertDialog.Builder(this);
+             builder.setTitle("Alert").setMessage("Currently You not have any Items Category\nPlease Add it").show();
+         }
+         else {
+             itemsAdapter.setOnItemClickListener(new  CategoryItemsAdapter.ClickListener() {
+                 @Override
+                 public void onItemClick(int position, View v) {
+
+                     Prevelent.Currentcategories=admin_items.get(position);
+
+                   Intent intent=new Intent(Admin_add_new_category.this,Admin_edit_categories.class);
+                   startActivity(intent);
+                 }
+
+                 @Override
+                 public void onItemLongClick(int position, View v) {
+                     Toast.makeText(Admin_add_new_category.this,"Long Click :"+position,Toast.LENGTH_SHORT).show();
+                 }
+             });
+         }
 
     }
 

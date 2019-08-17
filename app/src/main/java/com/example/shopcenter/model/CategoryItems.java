@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 public class CategoryItems {
     private String name;
     private Bitmap bitmap;
+    private String id;
 
     public CategoryItems(String name, Bitmap bitmap) {
         this.name = name;
@@ -21,6 +22,13 @@ public class CategoryItems {
 
     public Bitmap getBitmap() {
         return bitmap;
+    }
+
+    public void setId(String id){
+        this.id=id;
+    }
+    public  String getId(){
+        return this.id;
     }
 
     public void setBitmap(Bitmap bitmap) {
