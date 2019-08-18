@@ -30,6 +30,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
 import dmax.dialog.SpotsDialog;
 
@@ -47,8 +48,8 @@ public class Admin_add_new_category extends AppCompatActivity {
     private DBHelper db;
     private TextView admin_category_edit_heading;
     private RecyclerView recyclerView;
-    CategoryItemsAdapter itemsAdapter;
-    ArrayList<CategoryItems> admin_items;
+    private CategoryItemsAdapter itemsAdapter;
+    private  ArrayList<CategoryItems> admin_items;
     private Bitmap bp=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,13 +109,22 @@ public class Admin_add_new_category extends AppCompatActivity {
 
                      Prevelent.Currentcategories=admin_items.get(position);
 
-                   Intent intent=new Intent(Admin_add_new_category.this,Admin_edit_categories.class);
-                   startActivity(intent);
+
+                         Intent intent=new Intent(Admin_add_new_category.this,Admin_edit_categories.class);
+                         startActivity(intent);
+
+
                  }
+
+
 
                  @Override
                  public void onItemLongClick(int position, View v) {
-                     Toast.makeText(Admin_add_new_category.this,"Long Click :"+position,Toast.LENGTH_SHORT).show();
+                     Prevelent.Currentcategories=admin_items.get(position);
+                     Intent intent=new Intent(Admin_add_new_category.this,Admin_add_products.class);
+                     startActivity(intent);
+
+
                  }
              });
          }
@@ -214,7 +224,7 @@ public class Admin_add_new_category extends AppCompatActivity {
             else {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Add New Profile").setMessage("Are you sure to add new category!").setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                builder.setTitle("Add New Product Category").setMessage("Are you sure to add new category!").setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         boolean isNameAvailable=true;

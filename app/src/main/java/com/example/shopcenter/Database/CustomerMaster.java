@@ -26,4 +26,15 @@ public final class CustomerMaster {
         public static final String COLUMN_NAME_IMAGE="image";
         public static final String  COLIMN_NAME_CATEGORY_NAME="category";
     }
+
+    public static class ProductItems implements BaseColumns{
+        public static final String TABLE_NAME="products";
+        public static final String COLUMN_NAME_ID="id";
+        public static final String COLUMN_NAME_PRODUCT_NAME="name";
+        public static final String COLUMN_NAME_COUNT="count";
+        public static final String  COLUMN_NAME_PRICE="price";
+        public static final String COLUMN_NAME_DESCRIPTION="description";
+        public static final String COLUMN_NAME_PRODUCTIMAGE="image";
+        public static final String COLUMN_NAME_FOREIGNKEY="cid";
+    }
 }

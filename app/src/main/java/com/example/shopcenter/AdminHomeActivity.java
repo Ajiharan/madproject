@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import com.example.shopcenter.Database.DBHelper;
 import com.example.shopcenter.Prevelent.Prevelent;
+import com.example.shopcenter.model.Products;
+import com.example.shopcenter.model.ProductsAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -22,10 +24,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
@@ -37,7 +43,11 @@ public class AdminHomeActivity extends AppCompatActivity
         private DBHelper db;
        // private String AdminName;
         //private String AdminId;
+       private RecyclerView recyclerView;
+       private ProductsAdapter itemAdapter;
         private TextView admin_name;
+        private ArrayList<Products> productLists;
+    private Bitmap bp=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,18 +55,12 @@ public class AdminHomeActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         Intent intent=getIntent();
         db=new DBHelper(this);
+        productLists=new ArrayList<>();
+        recyclerView=findViewById(R.id.Admin_recycler_view2);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
        // AdminName=intent.getStringExtra(Prevelent.INTENT_USER_NAME);
         //AdminId=intent.getStringExtra(Prevelent.INTENT_USER_ID);
-        admin_edit_current_product=(ImageView)findViewById(R.id.admin_edit_product_btn);
 
-
-        admin_edit_current_product.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(AdminHomeActivity.this,Admin_edit_products.class);
-                startActivity(intent);
-            }
-        });
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab1);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +84,15 @@ public class AdminHomeActivity extends AppCompatActivity
         admin_profile=headerView.findViewById(R.id.admin_profile_image);
 
         set_profile();
+
+        retrive_Admin_Products_Details();
+
+    }
+
+    private void retrive_Admin_Products_Details(){
+        productLists=db.Retrive_admin_product_details();
+        itemAdapter =new ProductsAdapter(this,productLists);
+        recyclerView.setAdapter(itemAdapter);
 
     }
     private void set_profile(){

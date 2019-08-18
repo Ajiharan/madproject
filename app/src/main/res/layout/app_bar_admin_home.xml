@@ -22,6 +22,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_admin_home" />
+
     <include layout="@layout/admin_list_layout" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

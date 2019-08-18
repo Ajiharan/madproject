@@ -57,13 +57,17 @@ public class CategoryItemsAdapter extends RecyclerView.Adapter<CategoryItemsAdap
             categoryImage=itemView.findViewById(R.id.admin_category_delete_product_btn);
             categoryImageName=itemView.findViewById(R.id.admins_edit_products);
             mybutton=itemView.findViewById(R.id.admin_edit_category_details );
+
             mybutton.setOnClickListener(this);
-             itemView.setOnLongClickListener(this);
+             categoryImage.setOnLongClickListener(this);
+
+
         }
 
         @Override
         public void onClick(View view) {
            clickListener.onItemClick(getAdapterPosition(), view);
+
         }
 
         @Override
@@ -78,6 +82,7 @@ public class CategoryItemsAdapter extends RecyclerView.Adapter<CategoryItemsAdap
     }
     public interface ClickListener {
         void onItemClick(int position, View v);
+
         void onItemLongClick(int position, View v);
     }
 
