@@ -26,4 +26,6 @@ public final class CustomerMaster {
         public static final String COLUMN_NAME_IMAGE="image";
         public static final String  COLIMN_NAME_CATEGORY_NAME="category";
     }
+
+    //todo 
 }
