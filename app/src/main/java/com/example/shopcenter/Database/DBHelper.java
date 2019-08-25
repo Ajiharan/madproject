@@ -42,9 +42,23 @@ public class DBHelper extends SQLiteOpenHelper {
                 CustomerMaster.ProductCategory.COLUMN_NAME_IMAGE+" LONGBLOB,"+
                 CustomerMaster.ProductCategory.COLIMN_NAME_CATEGORY_NAME+" TEXT)";
 
+        String SELER_PRODUCT_ENTRIES="CREATE TABLE "+ CustomerMaster.SellerProduct.TABLE_NAME+"("+
+                CustomerMaster.SellerProduct.COLUMN_NAME_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                CustomerMaster.SellerProduct.COLUMN_NAME_IMAGE+" LONGBLOB,"+
+                CustomerMaster.SellerProduct.COLIMN_NAME_CATEGORY_NAME+" TEXT)";
+
+        String SELLER_CREATE_ENTRIES="CREATE TABLE "+CustomerMaster.Seller.TABLE_NAME+"("+
+                CustomerMaster.Seller.COLUMN_NAME_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                CustomerMaster.Seller.COLUMN_NAME_NAME+" TEXT,"+
+                CustomerMaster.Seller.COLUMN_NAME_EMAIL+" TEXT,"+
+                CustomerMaster.Seller.COLUMN_NAME_PASSWORD +" TEXT)";
+
+
         sqLiteDatabase.execSQL(CUSTOMER_CREATE_ENTRIES);
         sqLiteDatabase.execSQL(CUSTOMER_PROFILE_CREATES_ENTRIES);
         sqLiteDatabase.execSQL(ADMIN_CATEGORY_DETAILS_ENTRIES);
+        sqLiteDatabase.execSQL(SELER_PRODUCT_ENTRIES);
+        sqLiteDatabase.execSQL(SELLER_CREATE_ENTRIES);
 
 
     }
@@ -56,6 +70,7 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.Customers.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.Profile.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.ProductCategory.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.SellerProduct.TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
 

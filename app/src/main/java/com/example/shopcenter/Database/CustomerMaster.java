@@ -27,5 +27,19 @@ public final class CustomerMaster {
         public static final String  COLIMN_NAME_CATEGORY_NAME="category";
     }
 
-    //todo 
+    public static class SellerProduct implements BaseColumns{
+        public static final String TABLE_NAME="seler_product";
+        public static final String COLUMN_NAME_ID="id";
+        public static final String COLUMN_NAME_IMAGE="seler_product_image";
+        public static final String  COLIMN_NAME_CATEGORY_NAME="category";
+    }
+
+    public static class Seller implements BaseColumns {
+        public static final String TABLE_NAME="customer";
+        public static final String  COLUMN_NAME_ID="id";
+        public static final String COLUMN_NAME_NAME="name";
+        public static final String COLUMN_NAME_PASSWORD="password";
+        public static final String COLUMN_NAME_EMAIL="email_id";
+    }
+
 }

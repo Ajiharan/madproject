@@ -57,4 +57,5 @@
     <string name="edit">Edit</string>
     <string name="edit_categories">Edit Categories</string>
     <string name="add_an_items">Add an Items</string>
+    <string name="title_activity_seller_home">SellerHomeActivity</string>
 </resources>

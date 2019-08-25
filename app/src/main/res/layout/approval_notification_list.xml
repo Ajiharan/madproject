@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/admin_input_design"
+        android:layout_below="@+id/seller_notification_relative_layout1"
+        android:layout_height="140dp">
+
+        <TextView
+            android:id="@+id/approved_product_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:text="Product Name" />
+
+        <TextView
+            android:id="@+id/approved_product_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:text="Product Category" />
+
+        <TextView
+            android:id="@+id/approved_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:text="Date" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/approval_status"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="Approved" />
+
+            <Button
+                android:id="@+id/notification_delete"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Delete"
+                android:background="@drawable/admin_input_design"
+                android:textColor="@android:color/black" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
