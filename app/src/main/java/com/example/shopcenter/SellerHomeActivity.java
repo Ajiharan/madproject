@@ -107,7 +107,7 @@ public class SellerHomeActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if(id == R.id.action_add_product){
-            Intent intent=new Intent(SellerHomeActivity.this,Seller_edit_product.class);
+            Intent intent=new Intent(SellerHomeActivity.this,Seller_produt_Add_Activity.class);
             startActivity(intent);
         }
 
