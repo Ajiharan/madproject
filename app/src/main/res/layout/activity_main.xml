@@ -16,6 +16,7 @@
         android:layout_marginLeft="104dp"
         android:layout_marginTop="140dp"
 
+
         android:foregroundGravity="center"
         android:src="@drawable/applogo" />
     <TextView
@@ -39,7 +40,7 @@
         android:id="@+id/main_join_now_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       android:layout_above="@+id/main_login_btn"
+        android:layout_above="@+id/main_login_btn"
         android:layout_marginLeft="15dp"
         android:outlineSpotShadowColor="@color/colorPrimary"
         android:layout_marginRight="15dp"
