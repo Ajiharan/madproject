@@ -57,9 +57,8 @@
     <string name="edit">Edit</string>
     <string name="edit_categories">Edit Categories</string>
     <string name="add_an_items">Add an Items</string>
-    <string name="product_count">Product Count</string>
-    <string name="product_name">Product Name</string>
-    <string name="product_description">Product Description</string>
-    <string name="product_price">Product Price</string>
-
+    <string name="product_count">products_cnt</string>
+    <string name="product_name">product_names</string>
+    <string name="product_description">product_des</string>
+    <string name="product_price">product_pri</string>
 </resources>
