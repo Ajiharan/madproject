@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
     <solid
-        android:color="@color/deactivate_button"
+        android:color="@color/colorAccent"
         ></solid>
 
     <corners

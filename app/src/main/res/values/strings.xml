@@ -42,7 +42,7 @@
     <string name="recent_products">Recent Products</string>
     <string name="delete_categories">Delete Categories</string>
     <string name="update1">Update</string>
-    <string name="delete1">Delete</string>
+    <string name="delete2">Delete</string>
     <string name="laptops_ad">Laptops</string>
     <string name="phones_ad">Phones</string>
     <string name="television_ad">Television</string>
@@ -61,4 +61,13 @@
     <string name="product_name">product_names</string>
     <string name="product_description">product_des</string>
     <string name="product_price">product_pri</string>
+    <string name="userhome1">UserHome</string>
+    <string name="delete1">Delete</string>
+    <string name="deactivate1">Deactivate</string>
+    <string name="name1">Name</string>
+    <string name="email_id1">Email_id</string>
+    <string name="password1">Password</string>
+    <string name="customer_details1">Customer Details</string>
+    <string name="view11">View</string>
+    <string name="backs1">back</string>
 </resources>

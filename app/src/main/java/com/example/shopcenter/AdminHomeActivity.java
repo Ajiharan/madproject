@@ -175,9 +175,11 @@ public class AdminHomeActivity extends AppCompatActivity
             //intent.putExtra(Prevelent.INTENT_USER_NAME,AdminName);
             startActivity(intent);
 
-        } /*else if (id == R.id.nav_tools) {
+        } else if (id == R.id.admin_nav_customerDetails) {
+            Intent intent=new Intent(AdminHomeActivity.this,Admin_view_customer.class);
+            startActivity(intent);
 
-        } else if (id == R.id.nav_share) {
+        }/* else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 

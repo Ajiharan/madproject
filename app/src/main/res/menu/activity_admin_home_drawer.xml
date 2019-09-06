@@ -14,8 +14,12 @@
             android:id="@+id/admin_nav_Userhome"
             android:icon="@drawable/category"
             android:iconTint="@android:color/white"
-            android:title="Preview UserHome" />
-
+            android:title="@string/userhome1" />
+        <item
+            android:id="@+id/admin_nav_customerDetails"
+            android:icon="@drawable/category"
+            android:iconTint="@android:color/white"
+            android:title="Customers" />
 
         <item
             android:id="@+id/admin_nav_logout"

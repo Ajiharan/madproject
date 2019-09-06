@@ -51,6 +51,7 @@ public class Admin_edit_products extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_edit_products);
         admin_product_image=findViewById(R.id.edit_product_image);
+        admin_product_back_button=findViewById(R.id.admin_edit_product_back_btn);
         admin_product_name=findViewById(R.id.edit_product_name);
         admin_product_des=findViewById(R.id.edit_product_description);
         admin_product_price=findViewById(R.id.edit_product_price);
@@ -62,6 +63,14 @@ public class Admin_edit_products extends AppCompatActivity {
             public void onClick(View view) {
                 //Toast.makeText(Admin_edit_products.this,"Product!",Toast.LENGTH_SHORT).show();
                 Update_Admin_product_Details();
+            }
+        });
+
+        admin_product_back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Admin_edit_products.this,AdminHomeActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -236,7 +245,7 @@ public class Admin_edit_products extends AppCompatActivity {
                             dialog.show();
                             Cursor cu = db.Admin_Item_name_check();
                             while (cu.moveToNext()) {
-                                if (cu.getString(2).toString().equals(admin_product_name.getText().toString())) {
+                                if (cu.getString(1).toString().equals(admin_product_name.getText().toString())) {
                                     if (!cu.getString(0).toString().equals(Prevelent.current_admin_products.getProduct_id())) {
                                         isNameAvailable = false;
                                         break;

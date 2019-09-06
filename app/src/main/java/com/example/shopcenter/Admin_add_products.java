@@ -179,7 +179,7 @@ public class Admin_add_products extends AppCompatActivity {
                         dialog.show();
                         Cursor cu=db.Admin_Item_name_check();
                         while(cu.moveToNext()){
-                            if(cu.getString(2).toString().equals(product_Name.getText().toString())){
+                            if(cu.getString(1).toString().equals(product_Name.getText().toString())){
                                 isNameAvailable=false;
                                 break;
                             }

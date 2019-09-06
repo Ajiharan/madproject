@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="35dp"
+            android:textColor="@color/colorAccent"
+            android:id="@+id/customer_name_view"
+            android:textSize="20sp"
+            android:textStyle="italic|bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/name1" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/customer_profile_views"
+            android:layout_width="121dp"
+            android:layout_height="102dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/profile" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <Button
+
+                    android:id="@+id/customer_delete_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="40dp"
+                    android:background="@drawable/deactivate_input"
+                    android:text="@string/delete1"
+                    android:textAllCaps="false"
+
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:id="@+id/customer_view_button"
+                    android:textColor="@android:color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/deactivate_input"
+                    android:text="@string/view11"
+                    android:textAllCaps="false" />
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

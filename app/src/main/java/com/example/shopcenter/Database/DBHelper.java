@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 
 import com.example.shopcenter.model.CategoryItems;
 import com.example.shopcenter.model.Products;
+import com.example.shopcenter.model.User;
 
 import java.util.ArrayList;
 
@@ -142,6 +143,45 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return list;
 
+    }
+
+    public  ArrayList Retrive_customer_allDetails(){
+        ArrayList<User> list=new ArrayList<>();
+        SQLiteDatabase db=getReadableDatabase();
+
+        String sql="SELECT * FROM "+CustomerMaster.Customers.TABLE_NAME;
+        Cursor cu=db.rawQuery(sql,null);
+        int i =0;
+        while (cu.moveToNext()){
+            if(i != 0) {
+                String id = cu.getString(0);
+                String name = cu.getString(1);
+                String email = cu.getString(2);
+                String password = cu.getString(3);
+
+                String sql1 = "SELECT * FROM " + CustomerMaster.Profile.TABLE_NAME + " WHERE " + CustomerMaster.Profile.COLUMN_FOREIGNKEY_CUS_ID + " = "
+                        + id;
+                SQLiteDatabase db1 = getReadableDatabase();
+                Cursor cu1 = db1.rawQuery(sql1, null);
+                byte[] image;
+                Bitmap bitmap = null;
+                while (cu1.moveToNext()) {
+                    image = cu1.getBlob(1);
+                    bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+                }
+                cu1.close();
+                User user = new User();
+                user.setId(id);
+                user.setName(name);
+                user.setMail(email);
+                user.setPassword(password);
+                user.setBitmap(bitmap);
+                list.add(user);
+            }
+            i++;
+        }
+        cu.close();
+        return list;
     }
     public ArrayList Retrive_Product_Category_Details(){
         ArrayList<CategoryItems> list=new ArrayList<>();
