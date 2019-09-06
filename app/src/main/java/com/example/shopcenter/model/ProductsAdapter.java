@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductViewAdapter> {
     private Context contexts;
     private ArrayList<Products> myitems;
-    private static CategoryItemsAdapter.ClickListener clickListener;
+    private static ClickListener clickListener;
 
     public ProductsAdapter(Context contexts, ArrayList<Products> myitems) {
         this.contexts = contexts;
@@ -50,7 +50,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         return  myitems.size();
     }
 
-    class ProductViewAdapter extends RecyclerView.ViewHolder{
+    class ProductViewAdapter extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
         ImageView ProductImage;
         TextView ProductName;
         TextView ProductDesc;
@@ -62,6 +62,29 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             ProductImage=itemView.findViewById(R.id.admin_view_product_Images);
             ProductName=itemView.findViewById(R.id.admin_view_product_names);
             ProductDesc=itemView.findViewById(R.id.admin_products_description);
+
+            ProductImage.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            clickListener.onItemClick(getAdapterPosition(), view);
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            clickListener.onItemLongClick(getAdapterPosition(), view);
+            return false;
+
         }
     }
+    public void setOnItemClickListener(ClickListener clickListener) {
+        ProductsAdapter.clickListener=clickListener;
+    }
+    public interface ClickListener {
+        void onItemClick(int position, View v);
+
+        void onItemLongClick(int position, View v);
+    }
+
 }

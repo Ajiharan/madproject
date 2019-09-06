@@ -193,7 +193,7 @@ public class Admin_edit_categories extends AppCompatActivity {
             else {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Add New Profile").setMessage("Are you sure to add new category!").setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                builder.setTitle("Add New Category Image").setMessage("Are you sure to add new category!").setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         boolean isNameAvailable=true;

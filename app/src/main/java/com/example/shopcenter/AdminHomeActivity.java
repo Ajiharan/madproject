@@ -11,6 +11,7 @@ import com.example.shopcenter.model.ProductsAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.core.view.GravityCompat;
@@ -30,6 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -47,6 +49,7 @@ public class AdminHomeActivity extends AppCompatActivity
        private ProductsAdapter itemAdapter;
         private TextView admin_name;
         private ArrayList<Products> productLists;
+        private ImageView admin_view_product_image;
     private Bitmap bp=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class AdminHomeActivity extends AppCompatActivity
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
        // AdminName=intent.getStringExtra(Prevelent.INTENT_USER_NAME);
         //AdminId=intent.getStringExtra(Prevelent.INTENT_USER_ID);
+
 
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab1);
@@ -93,6 +97,20 @@ public class AdminHomeActivity extends AppCompatActivity
         productLists=db.Retrive_admin_product_details();
         itemAdapter =new ProductsAdapter(this,productLists);
         recyclerView.setAdapter(itemAdapter);
+
+        itemAdapter.setOnItemClickListener(new ProductsAdapter.ClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Prevelent.current_admin_products=productLists.get(position);
+              Intent intent=new Intent(AdminHomeActivity.this,Admin_edit_products.class);
+              startActivity(intent);
+            }
+
+            @Override
+            public void onItemLongClick(int position, View v) {
+                //Toast.makeText(AdminHomeActivity.this,"Check long pressed",Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
     private void set_profile(){

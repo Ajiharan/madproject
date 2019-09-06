@@ -6,7 +6,41 @@
     android:layout_height="match_parent"
 
     tools:context=".Admin_edit_products">
+
+    <RelativeLayout
+        android:id="@+id/admin_change_product_relative_layout_top"
+        android:layout_width="match_parent"
+        android:background="@android:color/white"
+        android:layout_height="40dp">
+        <Button
+            android:id="@+id/admin_edit_product_back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:background="@color/colorAccent"
+
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="back"
+            android:textColor="@android:color/white"
+            />
+
+        <TextView
+
+            android:id="@+id/admin_edit_product_name"
+            android:layout_width="322dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+
+            android:textColor="@color/colorAccent"
+            android:textSize="18dp"
+            android:textStyle="bold"
+
+            />
+    </RelativeLayout>
     <ImageView
+        android:layout_below="@+id/admin_change_product_relative_layout_top"
         android:id="@+id/edit_product_image"
         android:layout_width="match_parent"
         android:layout_height="250dp"
@@ -22,7 +56,7 @@
         android:layout_below="@+id/edit_product_image"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/product_name"
+            android:id="@+id/edit_product_name"
 
             android:textColorHint="@color/colorPrimaryDark"
             android:padding="10dp"
@@ -42,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/product_description"
+            android:id="@+id/edit_product_description"
 
             android:textColorHint="@color/colorPrimaryDark"
             android:padding="10dp"
@@ -63,7 +97,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/product_price"
+            android:id="@+id/edit_product_price"
 
             android:textColorHint="@color/colorPrimaryDark"
             android:padding="10dp"
@@ -71,9 +105,31 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="55dp"
 
-            android:inputType="textMultiLine"
+                android:inputType="number"
             android:layout_width="match_parent"
             android:hint="Product Price"
+            android:textColor="@color/colorPrimaryDark"
+
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edit_layer4"
+        android:layout_below="@+id/edit_layer3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/edit_product_count"
+
+            android:textColorHint="@color/colorPrimaryDark"
+            android:padding="10dp"
+            android:layout_marginRight="55dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="55dp"
+
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:hint="Product Count"
             android:textColor="@color/colorPrimaryDark"
 
             android:layout_height="wrap_content" />
@@ -83,15 +139,15 @@
 
 
 
-
-   <LinearLayout
-       android:layout_marginTop="50dp"
+    <LinearLayout
+       android:layout_marginTop="70dp"
        android:id="@+id/edit_linear1"
        android:layout_below="@+id/edit_layer3"
        android:orientation="horizontal"
        android:layout_width="match_parent"
        android:layout_height="wrap_content">
        <Button
+           android:id="@+id/admin_update_current_product"
            android:layout_marginLeft="90dp"
            android:background="@drawable/admin_input_design"
            android:text="@string/update1"
@@ -99,6 +155,7 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content" />
        <Button
+           android:id="@+id/admin_edit_product_delete"
            android:gravity="center"
            android:background="@drawable/admin_input_design"
            android:textColor="@color/colorAccent"

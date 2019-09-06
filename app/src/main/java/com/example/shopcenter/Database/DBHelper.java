@@ -3,6 +3,7 @@ package com.example.shopcenter.Database;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
@@ -166,6 +167,20 @@ public class DBHelper extends SQLiteOpenHelper {
         return list;
 
     }
+    public boolean Admin_delete_current_product(String id){
+        try{
+            SQLiteDatabase db=getReadableDatabase();
+            String selection=CustomerMaster.ProductItems.COLUMN_NAME_ID + " = ?";
+            String selectionArgs[]={id};
+            db.delete(CustomerMaster.ProductItems.TABLE_NAME,selection,selectionArgs);
+            return true;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public boolean Admin_delete_category(String id){
 
         try{
@@ -223,10 +238,32 @@ public class DBHelper extends SQLiteOpenHelper {
         if(count > 0){
             return true;
         }
-        else{
+        return false;
+
+    }
+
+    public boolean Admin_update_product_info(String id,String name,String des,String price,byte[]image,String count){
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(CustomerMaster.ProductItems.COLUMN_NAME_PRODUCT_NAME, name);
+            values.put(CustomerMaster.ProductItems.COLUMN_NAME_COUNT, count);
+            values.put(CustomerMaster.ProductItems.COLUMN_NAME_DESCRIPTION, des);
+            values.put(CustomerMaster.ProductItems.COLUMN_NAME_PRICE, price);
+            values.put(CustomerMaster.ProductItems.COLUMN_NAME_PRODUCTIMAGE, image);
+            String selection = CustomerMaster.ProductItems.COLUMN_NAME_ID + " = ?";
+            String selectionArgs[] = {id};
+
+            int counts = db.update(CustomerMaster.ProductItems.TABLE_NAME, values, selection, selectionArgs);
+            if (counts > 0) {
+                return true;
+            }
             return false;
         }
-
+        catch (SQLException ex){
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     public Cursor  Customer_mail_check(String emailid){
