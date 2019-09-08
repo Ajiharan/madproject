@@ -61,6 +61,13 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(ADMIN_CATEGORY_DETAILS_ENTRIES);
         sqLiteDatabase.execSQL(ADMIN_PRODUCT_DETAILS_ENTRIES);
 
+        String PAYMENT_DETAILS="CREATE TABLE "+ CustomerMaster.PaymentDetails.TABLE_NAME +"("+
+                CustomerMaster.PaymentDetails.COLUMN_NAME + " TEXT,"+
+                CustomerMaster.PaymentDetails.COLUMN_mail + " TEXT PRIMARY KEY AUTOINCREMENT,"+
+                CustomerMaster.PaymentDetails.COLUMN_Zip + " TEXT,"+
+                CustomerMaster.PaymentDetails.COLUMN_card + " TEXT,"+
+                CustomerMaster.PaymentDetails.COLUMN_city + " TEXT,"+
+                CustomerMaster.PaymentDetails.COLUMN_mail +")";
 
     }
 

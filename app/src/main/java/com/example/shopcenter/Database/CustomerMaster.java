@@ -36,5 +36,13 @@ public final class CustomerMaster {
         public static final String COLUMN_NAME_PRODUCTIMAGE="image";
         public static final String COLUMN_NAME_FOREIGNKEY="cid";
     }
+    public static class PaymentDetails implements BaseColumns{
+        public static final String TABLE_NAME="payment";
+        public static final String COLUMN_NAME="name";
+        public static final String COLUMN_mail="mail";
+        public static final String COLUMN_Zip="Zip";
+        public static final String COLUMN_card="card";
+        public static final String COLUMN_city="city";
 
+    }
 }
