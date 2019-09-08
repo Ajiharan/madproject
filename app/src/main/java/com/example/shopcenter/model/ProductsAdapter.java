@@ -41,7 +41,10 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         Products product=myitems.get(position);
         holder.ProductImage.setImageBitmap(product.getBitmap());
         holder.ProductName.setText(product.getProduct_name());
-        holder.ProductDesc.setText("Description\n"+product.getProduct_desc()+"\nPrice:"+product.getProduct_price()+"\nCount:"+product.getCount());
+        holder.productPrice.setText("$"+product.getProduct_price());
+        holder.ProductCount.setText(product.getCount());
+        holder.availableProductCount.setText(product.getCount());
+
 
     }
 
@@ -53,7 +56,10 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     class ProductViewAdapter extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
         ImageView ProductImage;
         TextView ProductName;
-        TextView ProductDesc;
+        TextView ProductCount;
+        TextView productPrice;
+        TextView availableProductCount;
+
 
 
         public ProductViewAdapter(@NonNull View itemView) {
@@ -61,8 +67,9 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
             ProductImage=itemView.findViewById(R.id.admin_view_product_Images);
             ProductName=itemView.findViewById(R.id.admin_view_product_names);
-            ProductDesc=itemView.findViewById(R.id.admin_products_description);
-
+            productPrice=itemView.findViewById(R.id.admin_current_product_price);
+            ProductCount=itemView.findViewById(R.id.admin_current_product_count);
+            availableProductCount=itemView.findViewById(R.id.admin_avilable_product_count);
             ProductImage.setOnClickListener(this);
         }
 
@@ -78,6 +85,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
         }
     }
+
     public void setOnItemClickListener(ClickListener clickListener) {
         ProductsAdapter.clickListener=clickListener;
     }

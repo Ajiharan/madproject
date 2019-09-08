@@ -5,6 +5,10 @@ import android.os.Bundle;
 
 import com.example.shopcenter.Database.DBHelper;
 import com.example.shopcenter.Prevelent.Prevelent;
+import com.example.shopcenter.model.Products;
+
+import com.example.shopcenter.model.ProductsAdapter;
+import com.example.shopcenter.model.UserProductsAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -21,22 +25,30 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
 
 public class AppHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private ImageView product_image_btn;
+
     private FloatingActionButton fab_btn;
     private String UserName;
     private CircleImageView user_profile_img;
     private TextView user_name;
     private DBHelper db;
+    private RecyclerView recyclerView;
+    private UserProductsAdapter itemAdapter;
+    private TextView admin_name;
+    private ArrayList<Products> productLists;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,16 +59,13 @@ public class AppHomeActivity extends AppCompatActivity
         Intent intent=getIntent();
         UserName=intent.getStringExtra(Prevelent.INTENT_USER_NAME);
         setSupportActionBar(toolbar);
-        product_image_btn=(ImageView)findViewById(R.id.user_product_detail);
-       db=new DBHelper(this);
+
+        db=new DBHelper(this);
+        productLists=new ArrayList<>();
+        recyclerView=findViewById(R.id.user_recycler_view1);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         //.init(this);
-        product_image_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(AppHomeActivity.this,ProductDetailActivity.class);
-                startActivity(intent);
-            }
-        });
+
        fab_btn =(FloatingActionButton) findViewById(R.id.fab);
         fab_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,10 +89,17 @@ public class AppHomeActivity extends AppCompatActivity
             user_profile_img.setImageBitmap(db.getImage(Prevelent.currentOnlineUser.getId()));
         }
 
+        retrive_Admin_Products_Details();
+
+    }
+    private void retrive_Admin_Products_Details(){
+        productLists=db.Retrive_admin_product_details();
+        itemAdapter =new UserProductsAdapter(this,productLists);
+        recyclerView.setAdapter(itemAdapter);
+
 
 
     }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -140,6 +156,9 @@ public class AppHomeActivity extends AppCompatActivity
         else if(id==R.id.nav_logout){
             Paper.book().destroy();
             Intent intent=new Intent(AppHomeActivity.this,LoginActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_admin_home) {
+            Intent intent=new Intent(AppHomeActivity.this,AdminHomeActivity.class);
             startActivity(intent);
         }
 

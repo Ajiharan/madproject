@@ -49,12 +49,34 @@
     </androidx.cardview.widget.CardView>
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:text="@string/popular_products"
-        android:textSize="20sp"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bolditalic"
+            android:text="@string/products1"
+            android:textColor="#FF9800"
+            android:textSize="24sp"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:fontFamily="@font/roboto_bolditalic"
+            android:text="@string/lists11"
+            android:textColor="#FF9800"
+            android:textSize="20sp"
+
+            />
+
+
+    </LinearLayout>
 <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/Admin_recycler_view2"
     android:layout_width="match_parent"

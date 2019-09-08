@@ -70,4 +70,14 @@
     <string name="customer_details1">Customer Details</string>
     <string name="view11">View</string>
     <string name="backs1">back</string>
+    <string name="admin_page1">Admin Page</string>
+    <string name="current">current</string>
+    <string name="available">Available</string>
+    <string name="_0likes">0Likes</string>
+    <string name="_0_comments">0 Comments</string>
+    <string name="price_ad">Price</string>
+    <string name="_0_likes">0 likes</string>
+    <string name="products1">Products</string>
+    <string name="lists11">lists</string>
+    <string name="view_details1">View Details</string>
 </resources>

@@ -60,7 +60,7 @@ public class AdminHomeActivity extends AppCompatActivity
         db=new DBHelper(this);
         productLists=new ArrayList<>();
         recyclerView=findViewById(R.id.Admin_recycler_view2);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
        // AdminName=intent.getStringExtra(Prevelent.INTENT_USER_NAME);
         //AdminId=intent.getStringExtra(Prevelent.INTENT_USER_ID);
 
