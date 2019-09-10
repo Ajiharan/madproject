@@ -79,7 +79,7 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.Profile.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.ProductCategory.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.ProductItems.TABLE_NAME);
-        onCreate(sqLiteDatabase);
+            onCreate(sqLiteDatabase);
     }
 
     public boolean Customer_insert_data(String name,String emailid,String password){
@@ -122,6 +122,44 @@ public class DBHelper extends SQLiteOpenHelper {
         String sql="SELECT * FROM "+ CustomerMaster.ProductItems.TABLE_NAME;
 
         Cursor cu=db.rawQuery(sql,null);
+        byte[] image;
+        String name;
+        String count;
+        String price;
+        String desc;
+        String id;
+        String fid;
+
+        while(cu.moveToNext()){
+
+            id=cu.getString(0);
+            name=cu.getString(1);
+            count=cu.getString(2);
+            desc=cu.getString(3);
+            price=cu.getString(4);
+            image=cu.getBlob(5);
+            fid=cu.getString(6);
+            Bitmap bitmap=null;
+
+            bitmap= BitmapFactory.decodeByteArray(image,0,image.length);
+
+            Products products=new Products(id,name,bitmap,fid,count,desc,price);
+            list.add(products);
+
+        }
+
+        return list;
+
+    }
+    public ArrayList Retrive_admin_search_product_details(String pname){
+        ArrayList<Products> list=new ArrayList<>();
+        SQLiteDatabase db=getReadableDatabase();
+
+        String sql="SELECT * FROM "+ CustomerMaster.ProductItems.TABLE_NAME + " WHERE "+ CustomerMaster.ProductItems.COLUMN_NAME_PRODUCT_NAME
+                +" LIKE ?";
+        String []selectionArgs={"%"+pname + "%"};
+
+        Cursor cu=db.rawQuery(sql,selectionArgs);
         byte[] image;
         String name;
         String count;
@@ -214,13 +252,29 @@ public class DBHelper extends SQLiteOpenHelper {
         return list;
 
     }
+
+    public boolean admin_delete_current_customer(String id){
+
+            SQLiteDatabase db = getReadableDatabase();
+            String selection = CustomerMaster.Customers.COLUMN_NAME_ID + " = ?";
+            String selectionArgs[] = {id};
+           int rowsAffected= db.delete(CustomerMaster.Customers.TABLE_NAME,selection,selectionArgs);
+           if(rowsAffected > 0){
+               return true;
+           }
+            return false;
+
+    }
     public boolean Admin_delete_current_product(String id){
         try{
             SQLiteDatabase db=getReadableDatabase();
             String selection=CustomerMaster.ProductItems.COLUMN_NAME_ID + " = ?";
             String selectionArgs[]={id};
-            db.delete(CustomerMaster.ProductItems.TABLE_NAME,selection,selectionArgs);
-            return true;
+             int rowsAffected=db.delete(CustomerMaster.ProductItems.TABLE_NAME,selection,selectionArgs);
+             if(rowsAffected > 0) {
+                 return true;
+             }
+             return false;
         }
         catch (Exception e){
             e.printStackTrace();

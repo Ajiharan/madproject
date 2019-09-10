@@ -24,7 +24,7 @@
     <string name="update">Update</string>
     <string name="change_profile">Change Profile</string>
     <string name="carts">carts</string>
-    <string name="title_activity_admin_home">AdminHomeActivity</string>
+    <string name="title_activity_admin_home">Admin</string>
     <string name="current_categories">Current Categories</string>
     <string name="product_categories">Product Categories</string>
     <string name="available_categories">Available Categories</string>

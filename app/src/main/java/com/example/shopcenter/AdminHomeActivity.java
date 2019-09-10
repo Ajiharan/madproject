@@ -11,6 +11,8 @@ import com.example.shopcenter.model.ProductsAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -29,6 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,11 +46,13 @@ public class AdminHomeActivity extends AppCompatActivity
         private   ImageView admin_edit_current_product;
         private CircleImageView admin_profile;
         private DBHelper db;
+        private boolean isSearchAvailable=false;
        // private String AdminName;
         //private String AdminId;
        private RecyclerView recyclerView;
        private ProductsAdapter itemAdapter;
         private TextView admin_name;
+        private EditText admin_search_products;
         private ArrayList<Products> productLists;
         private ImageView admin_view_product_image;
     private Bitmap bp=null;
@@ -63,7 +68,25 @@ public class AdminHomeActivity extends AppCompatActivity
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
        // AdminName=intent.getStringExtra(Prevelent.INTENT_USER_NAME);
         //AdminId=intent.getStringExtra(Prevelent.INTENT_USER_ID);
+        admin_search_products=findViewById(R.id.admin_search_product_name);
 
+        admin_search_products.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                search_current_products();
+            }
+
+        });
 
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab1);
@@ -93,25 +116,52 @@ public class AdminHomeActivity extends AppCompatActivity
 
     }
 
+    private void search_current_products() {
+        productLists=db.Retrive_admin_search_product_details(admin_search_products.getText().toString());
+        if(productLists.size() != 0) {
+            isSearchAvailable=true;
+            itemAdapter = new ProductsAdapter(this, productLists);
+            recyclerView.setAdapter(itemAdapter);
+
+            itemAdapter.setOnItemClickListener(new ProductsAdapter.ClickListener() {
+                @Override
+                public void onItemClick(int position, View v) {
+                    Prevelent.current_admin_products = productLists.get(position);
+                    Intent intent = new Intent(AdminHomeActivity.this, Admin_edit_products.class);
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onItemLongClick(int position, View v) {
+                    //Toast.makeText(AdminHomeActivity.this,"Check long pressed",Toast.LENGTH_LONG).show();
+                }
+            });
+
+        }
+        else{
+            isSearchAvailable=false;
+        }
+    }
     private void retrive_Admin_Products_Details(){
-        productLists=db.Retrive_admin_product_details();
-        itemAdapter =new ProductsAdapter(this,productLists);
-        recyclerView.setAdapter(itemAdapter);
+        if(!isSearchAvailable) {
+            productLists = db.Retrive_admin_product_details();
+            itemAdapter = new ProductsAdapter(this, productLists);
+            recyclerView.setAdapter(itemAdapter);
 
-        itemAdapter.setOnItemClickListener(new ProductsAdapter.ClickListener() {
-            @Override
-            public void onItemClick(int position, View v) {
-                Prevelent.current_admin_products=productLists.get(position);
-              Intent intent=new Intent(AdminHomeActivity.this,Admin_edit_products.class);
-              startActivity(intent);
-            }
+            itemAdapter.setOnItemClickListener(new ProductsAdapter.ClickListener() {
+                @Override
+                public void onItemClick(int position, View v) {
+                    Prevelent.current_admin_products = productLists.get(position);
+                    Intent intent = new Intent(AdminHomeActivity.this, Admin_edit_products.class);
+                    startActivity(intent);
+                }
 
-            @Override
-            public void onItemLongClick(int position, View v) {
-                //Toast.makeText(AdminHomeActivity.this,"Check long pressed",Toast.LENGTH_LONG).show();
-            }
-        });
-
+                @Override
+                public void onItemLongClick(int position, View v) {
+                    //Toast.makeText(AdminHomeActivity.this,"Check long pressed",Toast.LENGTH_LONG).show();
+                }
+            });
+        }
     }
     private void set_profile(){
         Bitmap bitmap=db.getImage(Prevelent.currentOnlineUser.getId());

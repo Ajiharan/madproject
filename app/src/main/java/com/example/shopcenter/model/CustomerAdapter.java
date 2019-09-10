@@ -20,6 +20,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.CustomerViewAdapter> {
     private Context contexts;
     private ArrayList<User> myitems;
+    private static ClickListener clickListener;
 
     public CustomerAdapter(Context contexts, ArrayList<User> myitems) {
         this.contexts = contexts;
@@ -42,6 +43,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
         holder.cus_name.setText(user.getName());
 
 
+
     }
 
     @Override
@@ -49,7 +51,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
         return myitems.size();
     }
 
-    class CustomerViewAdapter extends RecyclerView.ViewHolder{
+    class CustomerViewAdapter extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
         private CircleImageView imageView;
         private TextView cus_name,cus_email,cus_pass;
 
@@ -59,6 +61,29 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
             imageView=itemView.findViewById(R.id.customer_profile_views);
             cus_name=itemView.findViewById(R.id.customer_name_view);
 
+            imageView.setOnClickListener(this);
+            imageView.setOnLongClickListener(this);
+
         }
+
+        @Override
+        public void onClick(View view) {
+            clickListener.onItemClick(getAdapterPosition(), view);
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            clickListener.onItemLongClick(getAdapterPosition(), view);
+            return false;
+
+        }
+    }
+    public void setOnItemClickListener(ClickListener clickListener) {
+        CustomerAdapter.clickListener=clickListener;
+    }
+    public interface ClickListener {
+        void onItemClick(int position, View v);
+
+        void onItemLongClick(int position, View v);
     }
 }
