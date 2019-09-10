@@ -80,4 +80,5 @@
     <string name="products1">Products</string>
     <string name="lists11">lists</string>
     <string name="view_details1">View Details</string>
+    <string name="search_product_name">Search Product Name</string>
 </resources>

@@ -186,7 +186,7 @@ public class Admin_add_products extends AppCompatActivity {
                         }
                         if(isNameAvailable) {
                             boolean isAdd = db.Admin_add_product_Details(product_Name.getText().toString(),product_desc.getText().toString(),
-                                    product_pri.getText().toString(),product_count.getText().toString(),photo, Prevelent.Currentcategories.getId());
+                                    product_pri.getText().toString(),product_count.getText().toString(),photo, Prevelent.Currentcategories.getId(),Prevelent.Currentcategories.getName());
 
                             if (isAdd) {
                                 Toast.makeText(Admin_add_products.this, "New Product  Added", Toast.LENGTH_LONG).show();

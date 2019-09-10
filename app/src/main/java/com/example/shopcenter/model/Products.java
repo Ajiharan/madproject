@@ -10,6 +10,7 @@ public class Products {
     private Bitmap bitmap;
     private String  count;
     private String product_foreign_key;
+   // private String product_cat;
 
     public Products(String product_id, String product_name, Bitmap bitmap, String product_foreign_key,String count,String product_desc,String product_price) {
         this.product_id = product_id;
@@ -20,7 +21,6 @@ public class Products {
         this.product_desc=product_desc;
         this.product_price=product_price;
     }
-
 
     public String getProduct_id() {
         return product_id;

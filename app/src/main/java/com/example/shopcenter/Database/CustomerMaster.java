@@ -35,6 +35,7 @@ public final class CustomerMaster {
         public static final String COLUMN_NAME_DESCRIPTION="description";
         public static final String COLUMN_NAME_PRODUCTIMAGE="image";
         public static final String COLUMN_NAME_FOREIGNKEY="cid";
+        public static final String COLUMN_NAME_CATEGORY_NAME="cname";
     }
     public static class PaymentDetails implements BaseColumns{
         public static final String TABLE_NAME="payment";

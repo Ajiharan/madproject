@@ -20,7 +20,7 @@ import io.paperdb.Paper;
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME="OnlineShop.db";
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, 3);
+        super(context, DATABASE_NAME, null, 4);
     }
 
     @Override
@@ -52,6 +52,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 CustomerMaster.ProductItems.COLUMN_NAME_DESCRIPTION +" TEXT,"+
                 CustomerMaster.ProductItems.COLUMN_NAME_PRICE + " TEXT,"+
                 CustomerMaster.ProductItems.COLUMN_NAME_PRODUCTIMAGE + " LONGBLOB,"+
+                CustomerMaster.ProductItems.COLUMN_NAME_CATEGORY_NAME +" TEXT," +
                 CustomerMaster.ProductItems.COLUMN_NAME_FOREIGNKEY+" INTEGER,CONSTRAINT fk_pro_cat FOREIGN KEY ("+
                 CustomerMaster.ProductItems.COLUMN_NAME_FOREIGNKEY + ") REFERENCES "+ CustomerMaster.ProductCategory.TABLE_NAME+"("+
                 CustomerMaster.ProductCategory.COLUMN_NAME_ID +") ON DELETE CASCADE ON UPDATE CASCADE)";
@@ -138,7 +139,7 @@ public class DBHelper extends SQLiteOpenHelper {
             desc=cu.getString(3);
             price=cu.getString(4);
             image=cu.getBlob(5);
-            fid=cu.getString(6);
+            fid=cu.getString(7);
             Bitmap bitmap=null;
 
             bitmap= BitmapFactory.decodeByteArray(image,0,image.length);
@@ -156,8 +157,8 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db=getReadableDatabase();
 
         String sql="SELECT * FROM "+ CustomerMaster.ProductItems.TABLE_NAME + " WHERE "+ CustomerMaster.ProductItems.COLUMN_NAME_PRODUCT_NAME
-                +" LIKE ?";
-        String []selectionArgs={"%"+pname + "%"};
+                +" LIKE ? OR " +CustomerMaster.ProductItems.COLUMN_NAME_CATEGORY_NAME + " LIKE ?" ;
+        String []selectionArgs={"%" + pname + "%","%" + pname +"%"};
 
         Cursor cu=db.rawQuery(sql,selectionArgs);
         byte[] image;
@@ -176,7 +177,7 @@ public class DBHelper extends SQLiteOpenHelper {
             desc=cu.getString(3);
             price=cu.getString(4);
             image=cu.getBlob(5);
-            fid=cu.getString(6);
+            fid=cu.getString(7);
             Bitmap bitmap=null;
 
             bitmap= BitmapFactory.decodeByteArray(image,0,image.length);
@@ -309,7 +310,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
 
     }
-    public boolean Admin_add_product_Details(String name,String desc,String price,String count,byte[] image,String fid){
+    public boolean Admin_add_product_Details(String name,String desc,String price,String count,byte[] image,String fid,String cname){
         SQLiteDatabase db=getWritableDatabase();
         ContentValues values=new ContentValues();
         values.put(CustomerMaster.ProductItems.COLUMN_NAME_PRODUCT_NAME,name);
@@ -317,7 +318,9 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(CustomerMaster.ProductItems.COLUMN_NAME_DESCRIPTION,desc);
         values.put(CustomerMaster.ProductItems.COLUMN_NAME_PRICE,price);
         values.put(CustomerMaster.ProductItems.COLUMN_NAME_PRODUCTIMAGE,image);
+        values.put(CustomerMaster.ProductItems.COLUMN_NAME_CATEGORY_NAME,cname);
         values.put(CustomerMaster.ProductItems.COLUMN_NAME_FOREIGNKEY,fid);
+
 
         long rowId=db.insert(CustomerMaster.ProductItems.TABLE_NAME,null,values);
 
