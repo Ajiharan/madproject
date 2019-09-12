@@ -20,13 +20,13 @@ import io.paperdb.Paper;
 public class MainActivity extends AppCompatActivity {
     DBHelper db;
     private Button register_button,login_button;
-   // private ProgressDialog loadingBar;
+    // private ProgressDialog loadingBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Paper.init(this);
-     /*initialize when new DB version Entered*/   // Paper.book().destroy();
+        /*initialize when new DB version Entered*/   // Paper.book().destroy();
         db=new DBHelper(this);
         register_button=findViewById(R.id.main_join_now_btn);
         login_button=findViewById(R.id.main_login_btn);
@@ -73,24 +73,25 @@ public class MainActivity extends AppCompatActivity {
         String user_name=null;
         String user_id=null;
         String user_password=null;
-          while( cu.moveToNext()){
-              if(mailid.equals(cu.getString(2))) {
-                  user_id = cu.getString(0);
-                  user_name = cu.getString(1);
-                  Retrivemail_id = cu.getString(2);
-                  user_password = cu.getString(3);
-                  break;
-              }
-          }
-          if(cu.moveToFirst()){
-              admin_mail_id=cu.getString(2);
-          }
+        while( cu.moveToNext()){
+            if(mailid.equals(cu.getString(2))) {
+                user_id = cu.getString(0);
+                user_name = cu.getString(1);
+                Retrivemail_id = cu.getString(2);
+                user_password = cu.getString(3);
+                break;
+            }
+        }
+        if(cu.moveToFirst()){
+            admin_mail_id=cu.getString(2);
+        }
 
 
-          Prevelent.currentOnlineUser.setId(user_id);
-          Prevelent.currentOnlineUser.setName(user_name);
-          Prevelent.currentOnlineUser.setMail( Retrivemail_id);
-          Prevelent.currentOnlineUser.setPassword(user_password);
+        Prevelent.currentOnlineUser.setId(user_id);
+        Prevelent.currentOnlineUser.setName(user_name);
+        Prevelent.currentOnlineUser.setMail( Retrivemail_id);
+        Prevelent.currentOnlineUser.setPassword(user_password);
+        Prevelent.currentUser=Prevelent.currentOnlineUser;
 
         if(mailid.equals(admin_mail_id)) {
 

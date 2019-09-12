@@ -9,10 +9,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.example.shopcenter.model.Cart;
 import com.example.shopcenter.model.CategoryItems;
 import com.example.shopcenter.model.Products;
 import com.example.shopcenter.model.User;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import io.paperdb.Paper;
@@ -20,7 +22,7 @@ import io.paperdb.Paper;
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME="OnlineShop.db";
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, 4);
+        super(context, DATABASE_NAME, null, 7);
     }
 
     @Override
@@ -57,10 +59,23 @@ public class DBHelper extends SQLiteOpenHelper {
                 CustomerMaster.ProductItems.COLUMN_NAME_FOREIGNKEY + ") REFERENCES "+ CustomerMaster.ProductCategory.TABLE_NAME+"("+
                 CustomerMaster.ProductCategory.COLUMN_NAME_ID +") ON DELETE CASCADE ON UPDATE CASCADE)";
 
-        sqLiteDatabase.execSQL(CUSTOMER_CREATE_ENTRIES);
-        sqLiteDatabase.execSQL(CUSTOMER_PROFILE_CREATES_ENTRIES);
-        sqLiteDatabase.execSQL(ADMIN_CATEGORY_DETAILS_ENTRIES);
-        sqLiteDatabase.execSQL(ADMIN_PRODUCT_DETAILS_ENTRIES);
+        String CUSTOMER_CART_CREATES_ENTRIES="CREATE TABLE "+CustomerMaster.UserCart.TABLE_NAME+"("+
+                CustomerMaster.UserCart.COLUMN_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                CustomerMaster.UserCart.COLUMN_NAME +" TEXT,"+
+                CustomerMaster.UserCart.COLUMN_COUNT +" TEXT,"+
+                CustomerMaster.UserCart.COLUMN_DES +" TEXT,"+
+                CustomerMaster.UserCart.COLUMN_PRICE +" TEXT,"+
+                CustomerMaster.UserCart.COLUMN_TOTAL +" TEXT,"+
+                CustomerMaster.UserCart.COLUMN_IMAGE +" LONGBLOB,"+
+                CustomerMaster.UserCart.COLUMN_FOREIGN1 + " INTEGER,"+
+                CustomerMaster.UserCart.COLUMN_FOREIGN + " INTEGER,"+
+                " FOREIGN KEY ("+
+                CustomerMaster.UserCart.COLUMN_FOREIGN1+") REFERENCES "+ CustomerMaster.ProductItems.TABLE_NAME+"("+
+                CustomerMaster.ProductItems.COLUMN_NAME_ID +") ON DELETE CASCADE ON UPDATE CASCADE, "+
+                "FOREIGN KEY ("+
+                CustomerMaster.UserCart.COLUMN_FOREIGN+") REFERENCES "+ CustomerMaster.Customers.TABLE_NAME+"("+
+                CustomerMaster.Customers.COLUMN_NAME_ID+") ON DELETE CASCADE ON UPDATE CASCADE)";
+
 
         String PAYMENT_DETAILS="CREATE TABLE "+ CustomerMaster.PaymentDetails.TABLE_NAME +"("+
                 CustomerMaster.PaymentDetails.COLUMN_NAME + " TEXT,"+
@@ -69,6 +84,14 @@ public class DBHelper extends SQLiteOpenHelper {
                 CustomerMaster.PaymentDetails.COLUMN_card + " TEXT,"+
                 CustomerMaster.PaymentDetails.COLUMN_city + " TEXT,"+
                 CustomerMaster.PaymentDetails.COLUMN_mail +")";
+
+        sqLiteDatabase.execSQL(CUSTOMER_CREATE_ENTRIES);
+        sqLiteDatabase.execSQL(CUSTOMER_PROFILE_CREATES_ENTRIES);
+        sqLiteDatabase.execSQL(ADMIN_CATEGORY_DETAILS_ENTRIES);
+        sqLiteDatabase.execSQL(ADMIN_PRODUCT_DETAILS_ENTRIES);
+        sqLiteDatabase.execSQL(CUSTOMER_CART_CREATES_ENTRIES);
+
+
 
     }
 
@@ -80,7 +103,33 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.Profile.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.ProductCategory.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.ProductItems.TABLE_NAME);
-            onCreate(sqLiteDatabase);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.UserCart.TABLE_NAME);
+        onCreate(sqLiteDatabase);
+    }
+
+    public boolean User_insert_cart_details(Cart cart){
+        SQLiteDatabase db=getWritableDatabase();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        cart.getBitmap().compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] photo = stream.toByteArray();
+
+
+        ContentValues values=new ContentValues();
+        values.put(CustomerMaster.UserCart.COLUMN_NAME,cart.getName());
+        values.put(CustomerMaster.UserCart.COLUMN_COUNT,cart.getCount());
+        values.put(CustomerMaster.UserCart.COLUMN_DES,cart.getDes());
+        values.put(CustomerMaster.UserCart.COLUMN_PRICE,cart.getPrice());
+        values.put(CustomerMaster.UserCart.COLUMN_TOTAL,cart.getTotal());
+        values.put(CustomerMaster.UserCart.COLUMN_IMAGE,photo);
+        values.put(CustomerMaster.UserCart.COLUMN_FOREIGN1,cart.getProduct_id());
+        values.put(CustomerMaster.UserCart.COLUMN_FOREIGN,cart.getFid());
+
+        long rowId=db.insert(CustomerMaster.UserCart.TABLE_NAME,null,values);
+        if(rowId  == -1){
+            return false;
+        }
+
+        return true;
     }
 
     public boolean Customer_insert_data(String name,String emailid,String password){
@@ -115,6 +164,46 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
 
 
+    }
+
+    public ArrayList<Cart> retrive_user_cart_details(String cuid){
+
+        ArrayList<Cart> list=new ArrayList<>();
+        SQLiteDatabase db=getReadableDatabase();
+
+        String sql="SELECT * FROM "+ CustomerMaster.UserCart.TABLE_NAME + " WHERE "+ CustomerMaster.UserCart.COLUMN_FOREIGN + "= ?";
+        String []selectionArgs={cuid};
+        Cursor cu=db.rawQuery(sql,selectionArgs);
+        byte[] image;
+        String name;
+        String count;
+        String price;
+        String desc;
+        String id;
+        String total;
+        String ppid;
+        String fcuid;
+        while(cu.moveToNext()){
+            id=cu.getString(0);
+            name=cu.getString(1);
+            count=cu.getString(2);
+            desc=cu.getString(3);
+            price=cu.getString(4);
+            total=cu.getString(5);
+            image=cu.getBlob(6);
+            ppid=cu.getString(7);
+            fcuid=cu.getString(8);
+            Bitmap bitmap=null;
+
+            bitmap= BitmapFactory.decodeByteArray(image,0,image.length);
+
+            Cart cart=new Cart(name,desc,price,total,fcuid,bitmap,count,ppid);
+            cart.setId(id);
+            list.add(cart);
+
+        }
+
+        return list;
     }
     public ArrayList Retrive_admin_product_details(){
         ArrayList<Products> list=new ArrayList<>();
@@ -158,7 +247,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String sql="SELECT * FROM "+ CustomerMaster.ProductItems.TABLE_NAME + " WHERE "+ CustomerMaster.ProductItems.COLUMN_NAME_PRODUCT_NAME
                 +" LIKE ? OR " +CustomerMaster.ProductItems.COLUMN_NAME_CATEGORY_NAME + " LIKE ?" ;
-        String []selectionArgs={"%" + pname + "%","%" + pname +"%"};
+        String []selectionArgs={"%" + pname + "%",pname +"%"};
 
         Cursor cu=db.rawQuery(sql,selectionArgs);
         byte[] image;
@@ -256,14 +345,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public boolean admin_delete_current_customer(String id){
 
-            SQLiteDatabase db = getReadableDatabase();
-            String selection = CustomerMaster.Customers.COLUMN_NAME_ID + " = ?";
-            String selectionArgs[] = {id};
-           int rowsAffected= db.delete(CustomerMaster.Customers.TABLE_NAME,selection,selectionArgs);
-           if(rowsAffected > 0){
-               return true;
-           }
-            return false;
+        SQLiteDatabase db = getReadableDatabase();
+        String selection = CustomerMaster.Customers.COLUMN_NAME_ID + " = ?";
+        String selectionArgs[] = {id};
+        int rowsAffected= db.delete(CustomerMaster.Customers.TABLE_NAME,selection,selectionArgs);
+        if(rowsAffected > 0){
+            return true;
+        }
+        return false;
 
     }
     public boolean Admin_delete_current_product(String id){
@@ -271,11 +360,11 @@ public class DBHelper extends SQLiteOpenHelper {
             SQLiteDatabase db=getReadableDatabase();
             String selection=CustomerMaster.ProductItems.COLUMN_NAME_ID + " = ?";
             String selectionArgs[]={id};
-             int rowsAffected=db.delete(CustomerMaster.ProductItems.TABLE_NAME,selection,selectionArgs);
-             if(rowsAffected > 0) {
-                 return true;
-             }
-             return false;
+            int rowsAffected=db.delete(CustomerMaster.ProductItems.TABLE_NAME,selection,selectionArgs);
+            if(rowsAffected > 0) {
+                return true;
+            }
+            return false;
         }
         catch (Exception e){
             e.printStackTrace();
@@ -296,6 +385,17 @@ public class DBHelper extends SQLiteOpenHelper {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public boolean user_delete_cart(String id){
+        SQLiteDatabase db=getReadableDatabase();
+        String selection=CustomerMaster.UserCart.COLUMN_ID + " = ?";
+        String selectionArgs[]={id};
+        int rowDeleted=db.delete(CustomerMaster.UserCart.TABLE_NAME,selection,selectionArgs);
+        if(rowDeleted > 0){
+            return true;
+        }
+        return false;
     }
     public boolean Admin_add_Category_Details(byte[] image,String name){
         SQLiteDatabase db=getWritableDatabase();
@@ -338,6 +438,13 @@ public class DBHelper extends SQLiteOpenHelper {
         String selection= CustomerMaster.ProductCategory.COLUMN_NAME_ID +" = ?";
         String selectionArgs[]={id};
         int count=db.update(CustomerMaster.ProductCategory.TABLE_NAME,values,selection,selectionArgs);
+
+        ContentValues values1 =new ContentValues();
+        values1.put(CustomerMaster.ProductItems.COLUMN_NAME_CATEGORY_NAME,name);
+        String selection1=CustomerMaster.ProductItems.COLUMN_NAME_FOREIGNKEY + " = ?";
+        String selectionArgs1[]={id};
+        int count1=db.update(CustomerMaster.ProductItems.TABLE_NAME,values1,selection1,selectionArgs1);
+
 
         if(count > 0){
             return true;

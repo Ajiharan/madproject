@@ -6,7 +6,7 @@
     android:background="@android:color/white"
     android:layout_height="match_parent"
     tools:context=".ProductDetailActivity">
-    <ImageButton
+    <ImageView
         android:id="@+id/product_detail_image"
         android:background="@android:color/white"
         android:layout_width="match_parent"
@@ -48,31 +48,33 @@
         android:layout_below="@+id/product_detail_des"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-<com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
-    android:layout_width="wrap_content"
-    android:layout_marginTop="20dp"
-    android:backgroundTint="@android:color/white"
+    <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+        android:id="@+id/user_cart_count"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@android:color/white"
         app:textSize="16sp"
-    android:layout_centerHorizontal="true"
-    app:initialNumber="1"
-    app:finalNumber="20"
+        android:layout_centerHorizontal="true"
+        app:initialNumber="1"
+        app:finalNumber="20"
 
 
-    android:layout_below="@+id/product_detail_price"
-    android:layout_height="wrap_content"></com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+        android:layout_below="@+id/product_detail_price"
+        android:layout_height="wrap_content"></com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
 
 
-<Button
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textSize="18dp"
-    android:textColor="@android:color/white"
-    android:text="Add to Cart"
+    <Button
+        android:id="@+id/btn_addtocart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:textColor="@android:color/white"
+        android:text="Add to Cart"
 
-    android:layout_marginBottom="20dp"
-    android:layout_marginRight="50dp"
-    android:layout_marginLeft="50dp"
-    android:layout_alignParentBottom="true"
-    android:background="@color/colorPrimaryDark"
-    />
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimaryDark"
+        />
 </RelativeLayout>

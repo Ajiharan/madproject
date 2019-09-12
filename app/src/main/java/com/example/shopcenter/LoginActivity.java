@@ -83,15 +83,17 @@ public class LoginActivity extends AppCompatActivity {
             String user_id=null;
             boolean IsLogin=false;
 
-          if(cu.moveToFirst()){
-              user_id=cu.getString(0);
-              admin_name=cu.getString(1);
-              admin_mailid=cu.getString(2);
-              admin_password=cu.getString(3);
-              Prevelent.currentOnlineUser.setId(user_id);
-              Prevelent.currentOnlineUser.setName(admin_name);
-              Prevelent.currentOnlineUser.setMail( admin_mailid);
-              Prevelent.currentOnlineUser.setPassword(admin_password);
+            if(cu.moveToFirst()){
+                user_id=cu.getString(0);
+                admin_name=cu.getString(1);
+                admin_mailid=cu.getString(2);
+                admin_password=cu.getString(3);
+                Prevelent.currentOnlineUser.setId(user_id);
+                Prevelent.currentOnlineUser.setName(admin_name);
+                Prevelent.currentOnlineUser.setMail( admin_mailid);
+                Prevelent.currentOnlineUser.setPassword(admin_password);
+                Prevelent.currentUser=Prevelent.currentOnlineUser;
+
             }
 
 
@@ -175,10 +177,14 @@ public class LoginActivity extends AppCompatActivity {
                     Prevelent.currentOnlineUser.setMail(user_mail);
                     Prevelent.currentOnlineUser.setPassword(user_password);
 
+                    Prevelent.currentUser=Prevelent.currentOnlineUser;
+
+
+
                     if(reminder_chk.isChecked()){
                         Paper.book().write(Prevelent.USER_MAIL_ID,mailid);
                         Paper.book().write(Prevelent.USER_PASSWORD,password);
-                       // Paper.book().write(Prevelent.USER_TYPE,"user");
+                        // Paper.book().write(Prevelent.USER_TYPE,"user");
                     }
                     IsLogin=true;
                     break;
