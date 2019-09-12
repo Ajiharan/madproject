@@ -66,12 +66,12 @@ public class AppHomeActivity extends AppCompatActivity
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         //.init(this);
 
-       fab_btn =(FloatingActionButton) findViewById(R.id.fab);
+        fab_btn =(FloatingActionButton) findViewById(R.id.fab);
         fab_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent intent=new Intent(AppHomeActivity.this,User_cart_Activity.class);
-               startActivity(intent);
+                Intent intent=new Intent(AppHomeActivity.this,User_cart_Activity.class);
+                startActivity(intent);
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
