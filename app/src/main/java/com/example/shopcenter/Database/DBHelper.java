@@ -180,7 +180,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db=getReadableDatabase();
 
         String sql="SELECT * FROM "+ CustomerMaster.UserCart.TABLE_NAME + " WHERE "+
-                CustomerMaster.UserCart.COLUMN_FOREIGN + "= ? OR "+ CustomerMaster.UserCart.COLUMN_DEFAULT_CHECK + "= ?";
+                CustomerMaster.UserCart.COLUMN_FOREIGN + "= ? AND "+ CustomerMaster.UserCart.COLUMN_DEFAULT_CHECK + "= ?";
         String []selectionArgs={cuid,num};
         Cursor cu=db.rawQuery(sql,selectionArgs);
         byte[] image;
