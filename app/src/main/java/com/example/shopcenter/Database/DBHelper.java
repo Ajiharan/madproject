@@ -25,7 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private String num="0";
     public static final String DATABASE_NAME="OnlineShop.db";
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, 8);
+        super(context, DATABASE_NAME, null, 9);
     }
 
     @Override
@@ -172,13 +172,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+
+
     public ArrayList<Cart> retrive_user_cart_details(String cuid){
 
         ArrayList<Cart> list=new ArrayList<>();
         SQLiteDatabase db=getReadableDatabase();
 
-        String sql="SELECT * FROM "+ CustomerMaster.UserCart.TABLE_NAME + " WHERE "+ CustomerMaster.UserCart.COLUMN_FOREIGN + "= ?";
-        String []selectionArgs={cuid};
+        String sql="SELECT * FROM "+ CustomerMaster.UserCart.TABLE_NAME + " WHERE "+
+                CustomerMaster.UserCart.COLUMN_FOREIGN + "= ? OR "+ CustomerMaster.UserCart.COLUMN_DEFAULT_CHECK + "= ?";
+        String []selectionArgs={cuid,num};
         Cursor cu=db.rawQuery(sql,selectionArgs);
         byte[] image;
         String name;
@@ -458,7 +461,20 @@ public class DBHelper extends SQLiteOpenHelper {
         return false;
 
     }
+    public boolean update_payment_details(String num){
 
+        SQLiteDatabase db=getReadableDatabase();
+        ContentValues values=new ContentValues();
+        values.put(CustomerMaster.UserCart.COLUMN_DEFAULT_CHECK,"1");
+        String selection=CustomerMaster.UserCart.COLUMN_FOREIGN + " = ?";
+        String selectionArgs[]={num};
+        int counts =db.update(CustomerMaster.UserCart.TABLE_NAME,values,selection,selectionArgs);
+        if (counts > 0) {
+            return true;
+        }
+        return false;
+
+    }
     public boolean Admin_update_product_info(String id,String name,String des,String price,byte[]image,String count){
         try {
             SQLiteDatabase db = getReadableDatabase();

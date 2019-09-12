@@ -132,13 +132,14 @@
 
         <Button
             android:layout_below="@+id/payment_input_layer5"
+            android:id="@+id/cus_make_payment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:textColor="@color/colorPrimaryDark"
-            android:text="Make Payment"
+            android:text="@string/make_payment"
             android:background="@drawable/input_design"
 
             />
