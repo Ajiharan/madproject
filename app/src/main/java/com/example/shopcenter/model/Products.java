@@ -10,6 +10,7 @@ public class Products {
     private Bitmap bitmap;
     private String  count;
     private String product_foreign_key;
+
    // private String product_cat;
 
     public Products(String product_id, String product_name, Bitmap bitmap, String product_foreign_key,String count,String product_desc,String product_price) {
@@ -78,4 +79,7 @@ public class Products {
     public String getProduct_price(){
         return product_price;
     }
+
+
+
 }

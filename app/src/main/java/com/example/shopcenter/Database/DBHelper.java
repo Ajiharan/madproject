@@ -19,10 +19,13 @@ import java.util.ArrayList;
 
 import io.paperdb.Paper;
 
+
 public class DBHelper extends SQLiteOpenHelper {
+
+    private String num="0";
     public static final String DATABASE_NAME="OnlineShop.db";
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, 7);
+        super(context, DATABASE_NAME, null, 8);
     }
 
     @Override
@@ -69,6 +72,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 CustomerMaster.UserCart.COLUMN_IMAGE +" LONGBLOB,"+
                 CustomerMaster.UserCart.COLUMN_FOREIGN1 + " INTEGER,"+
                 CustomerMaster.UserCart.COLUMN_FOREIGN + " INTEGER,"+
+                CustomerMaster.UserCart.COLUMN_DEFAULT_CHECK + " TEXT DEFAULT "+num+","+
                 " FOREIGN KEY ("+
                 CustomerMaster.UserCart.COLUMN_FOREIGN1+") REFERENCES "+ CustomerMaster.ProductItems.TABLE_NAME+"("+
                 CustomerMaster.ProductItems.COLUMN_NAME_ID +") ON DELETE CASCADE ON UPDATE CASCADE, "+
@@ -98,12 +102,14 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
-
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.Customers.TABLE_NAME);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.Profile.TABLE_NAME);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.ProductCategory.TABLE_NAME);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.ProductItems.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.UserCart.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.ProductItems.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.ProductCategory.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.Profile.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.Customers.TABLE_NAME);
+
+
+
             onCreate(sqLiteDatabase);
     }
 

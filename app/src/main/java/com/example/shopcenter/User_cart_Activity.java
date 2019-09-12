@@ -15,6 +15,7 @@ import com.example.shopcenter.Database.DBHelper;
 import com.example.shopcenter.Prevelent.Prevelent;
 import com.example.shopcenter.model.Cart;
 import com.example.shopcenter.model.cartAdapter;
+import com.example.shopcenter.model.payments;
 
 import java.util.ArrayList;
 
@@ -41,6 +42,13 @@ public class User_cart_Activity extends AppCompatActivity {
         user_placeOrder_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                payments cpay=new payments();
+
+                cpay.setTotal(view_total.getText().toString());
+
+                Prevelent.current_user_payments=cpay;
+
                 Intent intent=new Intent(User_cart_Activity.this,User_payment_Activity.class);
                 startActivity(intent);
             }

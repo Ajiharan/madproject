@@ -65,5 +65,6 @@ public final class CustomerMaster {
         public static final String COLUMN_IMAGE="image";
         public static final String COLUMN_FOREIGN="cid";
         public static final String COLUMN_FOREIGN1="pid";
+        public static final String COLUMN_DEFAULT_CHECK="order_check";
     }
 }

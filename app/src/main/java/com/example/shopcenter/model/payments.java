@@ -13,17 +13,17 @@ public class payments {
     private String order_id;
 
 
-    public payments( String total, String name, String email_id, String zipcode, String cardNo, String city, String cus_id, String order_id) {
-
-        this.total = total;
-        this.name = name;
-        this.email_id = email_id;
-        this.zipcode = zipcode;
-        this.cardNo = cardNo;
-        this.city = city;
-        this.cus_id = cus_id;
-        this.order_id = order_id;
-    }
+//    public payments( String total, String name, String email_id, String zipcode, String cardNo, String city, String cus_id, String order_id) {
+//
+//        this.total = total;
+//        this.name = name;
+//        this.email_id = email_id;
+//        this.zipcode = zipcode;
+//        this.cardNo = cardNo;
+//        this.city = city;
+//        this.cus_id = cus_id;
+//        this.order_id = order_id;
+//    }
 
     public String getId() {
         return id;
