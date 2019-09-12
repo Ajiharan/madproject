@@ -92,7 +92,9 @@ public class LoginActivity extends AppCompatActivity {
               Prevelent.currentOnlineUser.setName(admin_name);
               Prevelent.currentOnlineUser.setMail( admin_mailid);
               Prevelent.currentOnlineUser.setPassword(admin_password);
-            }
+              Prevelent.currentUser=Prevelent.currentOnlineUser;
+
+          }
 
 
 
@@ -174,6 +176,10 @@ public class LoginActivity extends AppCompatActivity {
                     Prevelent.currentOnlineUser.setName(user_name);
                     Prevelent.currentOnlineUser.setMail(user_mail);
                     Prevelent.currentOnlineUser.setPassword(user_password);
+
+                    Prevelent.currentUser=Prevelent.currentOnlineUser;
+
+
 
                     if(reminder_chk.isChecked()){
                         Paper.book().write(Prevelent.USER_MAIL_ID,mailid);

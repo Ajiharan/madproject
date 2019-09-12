@@ -6,7 +6,7 @@
     android:background="@android:color/white"
     android:layout_height="match_parent"
     tools:context=".ProductDetailActivity">
-    <ImageButton
+    <ImageView
         android:id="@+id/product_detail_image"
         android:background="@android:color/white"
         android:layout_width="match_parent"
@@ -49,6 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+    android:id="@+id/user_cart_count"
     android:layout_width="wrap_content"
     android:layout_marginTop="20dp"
     android:backgroundTint="@android:color/white"
@@ -63,6 +64,7 @@
 
 
 <Button
+    android:id="@+id/btn_addtocart"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textSize="18dp"

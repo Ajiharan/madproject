@@ -81,4 +81,5 @@
     <string name="lists11">lists</string>
     <string name="view_details1">View Details</string>
     <string name="search_product_name">Search Product Name</string>
+    <string name="payment_total">Payment Total</string>
 </resources>

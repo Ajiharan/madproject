@@ -5,6 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".User_payment_Activity">
+    <TextView
+        android:id="@+id/user_payment_total_view"
+        android:text="@string/payment_total"
+        android:textColor="@color/colorAccent"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 <TextView
     android:layout_marginTop="50dp"
     android:id="@+id/payment_heading"

@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
           Prevelent.currentOnlineUser.setName(user_name);
           Prevelent.currentOnlineUser.setMail( Retrivemail_id);
           Prevelent.currentOnlineUser.setPassword(user_password);
+          Prevelent.currentUser=Prevelent.currentOnlineUser;
 
         if(mailid.equals(admin_mail_id)) {
 

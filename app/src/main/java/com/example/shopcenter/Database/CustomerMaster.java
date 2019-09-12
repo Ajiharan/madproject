@@ -46,4 +46,24 @@ public final class CustomerMaster {
         public static final String COLUMN_city="city";
 
     }
+
+    public static class OrderClass implements  BaseColumns{
+        public static  final String TABLE_NAME="order";
+        public static final String  COLUMN_NAME_ID="id";
+        public static final String COLUMN_NAME_CUS_ID="cuid";
+        public static final String COLUMN_NAME_AMOUNT="amount";
+    }
+
+    public static class UserCart implements BaseColumns{
+        public static final String TABLE_NAME="cart";
+        public static final String COLUMN_ID="id";
+        public static final String COLUMN_NAME="name";
+        public static final String COLUMN_DES="des";
+        public static final String COLUMN_PRICE="price";
+        public static final String COLUMN_COUNT="count";
+        public static final String COLUMN_TOTAL="total";
+        public static final String COLUMN_IMAGE="image";
+        public static final String COLUMN_FOREIGN="cid";
+        public static final String COLUMN_FOREIGN1="pid";
+    }
 }

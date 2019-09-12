@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:background="@android:color/white"
     android:layout_height="match_parent">
 
@@ -9,36 +11,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-
-
-
     </androidx.cardview.widget.CardView>
     <RelativeLayout
         android:id="@+id/relative_search_layouts1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="@color/colorPrimaryDark">
+<com.google.android.material.textfield.TextInputLayout
+    android:layout_width="match_parent"
 
-        <EditText
-            android:layout_marginTop="10dp"
-            android:id="@+id/admin_search_product_name"
-            android:layout_width="match_parent"
-            android:padding="5dp"
-            android:textColor="@color/colorAccent"
-            android:hint="@string/search_product_name"
-            android:gravity="center"
-            android:background="@android:color/white"
-            android:textColorHint="@android:color/darker_gray"
-            android:textStyle="bold"
+    android:background="@android:color/white"
+    android:layout_height="wrap_content">
 
-            android:textSize="20dp"
-            android:layout_height="wrap_content"
+    <EditText
 
-            />
+        android:id="@+id/admin_search_product_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:cursorVisible="false"
+        android:hint="@string/search_product_name"
+        android:padding="5dp"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@android:color/darker_gray"
+
+        android:textSize="20dp"
+        android:textStyle="bold"
+
+        />
+
+</com.google.android.material.textfield.TextInputLayout>
 
 
     </RelativeLayout>

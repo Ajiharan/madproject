@@ -97,7 +97,19 @@ public class AppHomeActivity extends AppCompatActivity
         itemAdapter =new UserProductsAdapter(this,productLists);
         recyclerView.setAdapter(itemAdapter);
 
+        itemAdapter.setOnItemClickListener(new UserProductsAdapter.ClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Prevelent.current_user_products=productLists.get(position);
+                Intent intent=new Intent(AppHomeActivity.this,ProductDetailActivity.class);
+                startActivity(intent);
+            }
 
+            @Override
+            public void onItemLongClick(int position, View v) {
+
+            }
+        });
 
     }
     @Override

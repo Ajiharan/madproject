@@ -42,8 +42,7 @@
         android:id="@+id/select_product_image"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_centerHorizontal="true"
-        android:scaleType="centerCrop"
+
         android:layout_marginTop="10dp"
         android:src="@drawable/mylap2"
         />

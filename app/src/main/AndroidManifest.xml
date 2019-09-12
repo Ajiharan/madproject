@@ -10,16 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Admin_view_customer"></activity>
-        <activity android:name=".Admin_edit_categories" />
+        <activity android:name=".Admin_edit_categories" android:noHistory="true" />
         <activity android:name=".SellerRegisterActivity" />
         <activity android:name=".Admin_notification_Activity" />
-        <activity android:name=".User_cart_Activity" />
+        <activity android:name=".User_cart_Activity"
+            android:noHistory="true"
+            ></activity>
         <activity android:name=".User_payment_Activity" />
         <activity android:name=".User_search_products" />
         <activity android:name=".Admin_add_new_category" />
         <activity android:name=".User_conform_order" />
         <activity
             android:name=".AdminHomeActivity"
+            android:noHistory="true"
             android:label="@string/title_activity_admin_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ProductDetailActivity" />
@@ -28,8 +31,8 @@
             android:name=".AppHomeActivity"
             android:label="@string/title_activity_app_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Admin_edit_products" />
-        <activity android:name=".Admin_add_products" />
+        <activity android:name=".Admin_edit_products" android:noHistory="true" />
+        <activity android:name=".Admin_add_products"/>
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity">

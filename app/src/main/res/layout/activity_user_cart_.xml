@@ -14,6 +14,7 @@
         android:background="@color/colorPrimaryDark"
         >
         <TextView
+            android:id="@+id/total_amount_display"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
@@ -28,24 +29,18 @@
 
     </RelativeLayout>
 
-   <!-- <androidx.recyclerview.widget.RecyclerView
+   <androidx.recyclerview.widget.RecyclerView
 
-
+        android:id="@+id/user_cart_recycler_view"
         android:layout_width="match_parent"
+       android:layout_below="@+id/User_relative_layout1"
+       android:layout_above="@+id/User_cart_next_button"
         android:layout_height="match_parent">
 
 
-    </androidx.recyclerview.widget.RecyclerView>-->
+    </androidx.recyclerview.widget.RecyclerView>-
 
-    <RelativeLayout
-        android:id="@+id/User_cart_list"
 
-        android:layout_below="@+id/User_relative_layout1"
-        android:layout_above="@+id/User_cart_next_button"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <include layout="@layout/user_cart_list_layouts"/>
-    </RelativeLayout>
     <Button
         android:id="@+id/User_cart_next_button"
         android:layout_width="match_parent"

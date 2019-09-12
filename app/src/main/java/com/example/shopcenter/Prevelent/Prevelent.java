@@ -7,8 +7,10 @@ import com.example.shopcenter.model.User;
 public  class Prevelent {
 
     public static User currentOnlineUser;
+    public static User currentUser;
     public static CategoryItems Currentcategories;
     public static Products current_admin_products;
+    public static Products current_user_products;
 
     public static final String USER_MAIL_ID="usermail";
     public static final String USER_PASSWORD="userpassword";
