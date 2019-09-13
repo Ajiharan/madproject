@@ -42,13 +42,32 @@ public class User_payment_Activity extends AppCompatActivity {
     }
 
     private void insert_details() {
-        boolean isUpdated=db.update_payment_details(Prevelent.currentUser.getId());
-        if(isUpdated){
-            Intent intent=new Intent(User_payment_Activity.this,AppHomeActivity.class);
-            startActivity(intent);
+
+
+        if(cus_name.getText().toString().isEmpty()){
+
         }
-        else{
-            Toast.makeText(this,"Cannot update",Toast.LENGTH_SHORT).show();
+        else if(cus_email.getText().toString().isEmpty()){
+
+        }
+        else if(cus_zip.getText().toString().isEmpty()){
+
+        }
+        else if(cus_card.getText().toString().isEmpty())
+        {
+
+        }
+        else if(cus_city.getText().toString().isEmpty()){
+
+        }
+        else {
+            boolean isUpdated = db.update_payment_details(Prevelent.currentUser.getId());
+            if (isUpdated) {
+                Intent intent = new Intent(User_payment_Activity.this, AppHomeActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Cannot update", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

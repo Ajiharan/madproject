@@ -39,19 +39,22 @@ public final class CustomerMaster {
     }
     public static class PaymentDetails implements BaseColumns{
         public static final String TABLE_NAME="payment";
+        public static final String COLUMN_NAME_ID="p_id";
         public static final String COLUMN_NAME="name";
-        public static final String COLUMN_mail="mail";
-        public static final String COLUMN_Zip="Zip";
-        public static final String COLUMN_card="card";
-        public static final String COLUMN_city="city";
-
+        public static final String COLUMN_NAME_MAIL="mail";
+        public static final String COLUMN_NAME_ZIP="Zip";
+        public static final String COLUMN_NAME_CARD="card";
+        public static final String COLUMN_NAME_CITY="city";
+        public static final String COLUMN_NAME_CUS_ID="cus_id";
+        public static final String COLUMN_NAME_AMOUNT="amount";
     }
 
-    public static class OrderClass implements  BaseColumns{
-        public static  final String TABLE_NAME="order";
+    public static class Cus_Order implements  BaseColumns{
+        public static  final String TABLE_NAME="orders";
         public static final String  COLUMN_NAME_ID="id";
         public static final String COLUMN_NAME_CUS_ID="cuid";
         public static final String COLUMN_NAME_AMOUNT="amount";
+        public static final String COLUMN_NAME_DELIVERY="delevery";
     }
 
     public static class UserCart implements BaseColumns{

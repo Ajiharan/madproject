@@ -13,6 +13,7 @@ import com.example.shopcenter.model.Cart;
 import com.example.shopcenter.model.CategoryItems;
 import com.example.shopcenter.model.Products;
 import com.example.shopcenter.model.User;
+import com.example.shopcenter.model.payments;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -23,9 +24,10 @@ import io.paperdb.Paper;
 public class DBHelper extends SQLiteOpenHelper {
 
     private String num="0";
+    private String dname="Notdelivered";
     public static final String DATABASE_NAME="OnlineShop.db";
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, 9);
+        super(context, DATABASE_NAME, null, 4);
     }
 
     @Override
@@ -80,20 +82,38 @@ public class DBHelper extends SQLiteOpenHelper {
                 CustomerMaster.UserCart.COLUMN_FOREIGN+") REFERENCES "+ CustomerMaster.Customers.TABLE_NAME+"("+
                 CustomerMaster.Customers.COLUMN_NAME_ID+") ON DELETE CASCADE ON UPDATE CASCADE)";
 
+        String ORDER_DETAILS_ENTRIES="CREATE TABLE " + CustomerMaster.Cus_Order.TABLE_NAME +"("+
+                CustomerMaster.Cus_Order.COLUMN_NAME_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                CustomerMaster.Cus_Order.COLUMN_NAME_AMOUNT + " TEXT,"+
+                CustomerMaster.Cus_Order.COLUMN_NAME_CUS_ID + " INTEGER,"+
+                CustomerMaster.Cus_Order.COLUMN_NAME_DELIVERY+ " TEXT DEFAULT "+ num +","+
+                " FOREIGN KEY (" +
+                CustomerMaster.Cus_Order.COLUMN_NAME_CUS_ID+") REFERENCES "+CustomerMaster.Customers.TABLE_NAME+"("+
+                CustomerMaster.Customers.COLUMN_NAME_ID+") ON DELETE CASCADE ON UPDATE CASCADE)";
 
-//        String PAYMENT_DETAILS="CREATE TABLE "+ CustomerMaster.PaymentDetails.TABLE_NAME +"("+
-//                CustomerMaster.PaymentDetails.COLUMN_NAME + " TEXT,"+
-//                CustomerMaster.PaymentDetails.COLUMN_mail + " TEXT PRIMARY KEY AUTOINCREMENT,"+
-//                CustomerMaster.PaymentDetails.COLUMN_Zip + " TEXT,"+
-//                CustomerMaster.PaymentDetails.COLUMN_card + " TEXT,"+
-//                CustomerMaster.PaymentDetails.COLUMN_city + " TEXT,"+
-//                CustomerMaster.PaymentDetails.COLUMN_mail +")";
+
+        String PAYMENT_DETAILS_ENTRIES="CREATE TABLE "+ CustomerMaster.PaymentDetails.TABLE_NAME +"("+
+
+                CustomerMaster.PaymentDetails.COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                CustomerMaster.PaymentDetails.COLUMN_NAME+ " TEXT,"+
+                CustomerMaster.PaymentDetails.COLUMN_NAME_CARD + " TEXT,"+
+                CustomerMaster.PaymentDetails.COLUMN_NAME_CITY + " TEXT,"+
+                CustomerMaster.PaymentDetails.COLUMN_NAME_MAIL + " TEXT,"+
+                CustomerMaster.PaymentDetails.COLUMN_NAME_ZIP +  " TEXT,"+
+                CustomerMaster.PaymentDetails.COLUMN_NAME_AMOUNT+ " TEXT,"+
+                CustomerMaster.PaymentDetails.COLUMN_NAME_CUS_ID + " INTEGER,"+
+                " FOREIGN KEY ("+CustomerMaster.PaymentDetails.COLUMN_NAME_CUS_ID +") REFERENCES " + CustomerMaster.Customers.TABLE_NAME+
+                "("+CustomerMaster.Customers.COLUMN_NAME_ID+ ") ON DELETE CASCADE ON UPDATE CASCADE)";
+
+
 
         sqLiteDatabase.execSQL(CUSTOMER_CREATE_ENTRIES);
         sqLiteDatabase.execSQL(CUSTOMER_PROFILE_CREATES_ENTRIES);
         sqLiteDatabase.execSQL(ADMIN_CATEGORY_DETAILS_ENTRIES);
         sqLiteDatabase.execSQL(ADMIN_PRODUCT_DETAILS_ENTRIES);
         sqLiteDatabase.execSQL(CUSTOMER_CART_CREATES_ENTRIES);
+        sqLiteDatabase.execSQL(ORDER_DETAILS_ENTRIES);
+        sqLiteDatabase.execSQL(PAYMENT_DETAILS_ENTRIES);
 
 
 
@@ -101,14 +121,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+CustomerMaster.PaymentDetails.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+CustomerMaster.Cus_Order.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.UserCart.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.ProductItems.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.ProductCategory.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.Profile.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.Customers.TABLE_NAME);
 
-
+        Paper.book().destroy();
 
             onCreate(sqLiteDatabase);
     }
@@ -131,6 +152,26 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(CustomerMaster.UserCart.COLUMN_FOREIGN,cart.getFid());
 
         long rowId=db.insert(CustomerMaster.UserCart.TABLE_NAME,null,values);
+        if(rowId  == -1){
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean Customer_insert_payment_details(payments pay){
+        SQLiteDatabase db=getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put(CustomerMaster.PaymentDetails.COLUMN_NAME,pay.getName());
+        values.put(CustomerMaster.PaymentDetails.COLUMN_NAME_CARD,pay.getCardNo());
+        values.put(CustomerMaster.PaymentDetails.COLUMN_NAME_CITY,pay.getCity());
+        values.put(CustomerMaster.PaymentDetails.COLUMN_NAME_MAIL,pay.getEmail_id());
+        values.put(CustomerMaster.PaymentDetails.COLUMN_NAME_ZIP,pay.getZipcode());
+        values.put(CustomerMaster.PaymentDetails.COLUMN_NAME_AMOUNT,pay.getTotal());
+        values.put(CustomerMaster.PaymentDetails.COLUMN_NAME_CUS_ID,pay.getCus_id());
+        long rowId=db.insert(CustomerMaster.PaymentDetails.TABLE_NAME,null,values);
+
+
         if(rowId  == -1){
             return false;
         }

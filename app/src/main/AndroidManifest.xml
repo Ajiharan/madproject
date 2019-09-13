@@ -31,7 +31,7 @@
             android:name=".AppHomeActivity"
             android:label="@string/title_activity_app_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Admin_edit_products" android:noHistory="true" />
+        <activity android:name=".Admin_edit_products"/>
         <activity android:name=".Admin_add_products"/>
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
