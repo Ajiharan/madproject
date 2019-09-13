@@ -42,23 +42,23 @@ public class User_payment_Activity extends AppCompatActivity {
     }
 
     private void insert_details() {
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
 
         if(cus_name.getText().toString().isEmpty()){
             Toast.makeText(this,"Name is empty",Toast.LENGTH_SHORT).show();
         }
         else if(cus_email.getText().toString().isEmpty()){
-            Toast.makeText(this,"email_id is empty",Toast.LENGTH_SHORT).show();
+
         }
         else if(cus_zip.getText().toString().isEmpty()){
-            Toast.makeText(this,"Zip_no is empty",Toast.LENGTH_SHORT).show();
+
         }
         else if(cus_card.getText().toString().isEmpty())
         {
-            Toast.makeText(this,"card_no is empty",Toast.LENGTH_SHORT).show();
+
         }
         else if(cus_city.getText().toString().isEmpty()){
-            Toast.makeText(this,"city is empty",Toast.LENGTH_SHORT).show();
+
         }
         else {
             boolean isUpdated = db.update_payment_details(Prevelent.currentUser.getId());
