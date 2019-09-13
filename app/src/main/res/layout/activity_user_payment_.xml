@@ -74,7 +74,7 @@
         android:layout_height="wrap_content">
         <EditText
             android:id="@+id/payment_zipcode_id"
-
+            android:inputType="number"
             android:textColorHint="@color/colorPrimaryDark"
             android:padding="10dp"
             android:layout_marginRight="55dp"
