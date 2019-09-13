@@ -45,7 +45,7 @@ public class User_payment_Activity extends AppCompatActivity {
 
 
         if(cus_name.getText().toString().isEmpty()){
-            Toast.makeText(this,"Name is empty",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Namdse is empty",Toast.LENGTH_SHORT).show();
         }
         else if(cus_email.getText().toString().isEmpty()){
 
