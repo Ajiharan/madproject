@@ -83,4 +83,8 @@
     <string name="search_product_name">Search Product Name</string>
     <string name="payment_total">Payment Total</string>
     <string name="make_payment">Make Payment</string>
+    <string name="order_details1">Order Details</string>
+    <string name="delivered1">Delivered</string>
+    <string name="price11">Price</string>
+    <string name="order_id1">Order id</string>
 </resources>

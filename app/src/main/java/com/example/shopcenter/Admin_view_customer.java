@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -73,17 +74,22 @@ public class Admin_view_customer extends AppCompatActivity {
 
         listViews.setMenuCreator(creator);
 
+        listViews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> av, View view, int i, long l) {
+                Intent intent=new Intent(Admin_view_customer.this,Admin_view_customer_orders.class);
+                startActivity(intent);
+            }
+        });
+
         listViews.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 switch (index) {
                     case 0:
-
+                        Toast.makeText(Admin_view_customer.this,"Sucessfully deleted",Toast.LENGTH_SHORT).show();
                         delete_cur_customer(position);
                         dataArrayList.remove(position);
                         listAdapter.notifyDataSetChanged();
-                        Toast.makeText(Admin_view_customer.this,"Sucessfully deleted",Toast.LENGTH_SHORT).show();
-
                         break;
                     case 1:
                         break;
@@ -97,8 +103,9 @@ public class Admin_view_customer extends AppCompatActivity {
     }
 
     private void delete_cur_customer(int position){
-        Prevelent.currentOnlineUser=dataArrayList.get(position);
-        db.admin_delete_current_customer(Prevelent.currentOnlineUser.getId());
+        User user=new User();
+        user=dataArrayList.get(position);
+        db.admin_delete_current_customer(user.getId());
 
     }
 
@@ -115,7 +122,7 @@ public class Admin_view_customer extends AppCompatActivity {
             deleteItem.setWidth(150);
             deleteItem.setTitle("x");
             deleteItem.setTitleColor(Color.WHITE);
-            deleteItem.setTitleSize(25);
+            deleteItem.setTitleSize(15);
             // add to menu
             menu.addMenuItem(deleteItem);
         }

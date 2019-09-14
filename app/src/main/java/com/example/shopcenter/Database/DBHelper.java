@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.example.shopcenter.R;
 import com.example.shopcenter.model.Cart;
 import com.example.shopcenter.model.CategoryItems;
 import com.example.shopcenter.model.Products;
@@ -24,10 +25,16 @@ import io.paperdb.Paper;
 public class DBHelper extends SQLiteOpenHelper {
 
     private String num="0";
+    private Bitmap myLogo;
+    private  byte[] photo1;
     private String dname="Notdelivered";
     public static final String DATABASE_NAME="OnlineShop.db";
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, 4);
+        super(context, DATABASE_NAME, null, 9);
+        myLogo = BitmapFactory.decodeResource(context.getResources(), R.drawable.profile);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        myLogo.compress(Bitmap.CompressFormat.PNG, 100, stream);
+         photo1 = stream.toByteArray();
     }
 
     @Override
@@ -36,6 +43,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        Paper.book().destroy();
         String CUSTOMER_CREATE_ENTRIES="CREATE TABLE "+CustomerMaster.Customers.TABLE_NAME+"("+
                 CustomerMaster.Customers.COLUMN_NAME_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 CustomerMaster.Customers.COLUMN_NAME_NAME+" TEXT,"+CustomerMaster.Customers.COLUMN_NAME_EMAIL+
@@ -43,7 +51,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String CUSTOMER_PROFILE_CREATES_ENTRIES="CREATE TABLE "+CustomerMaster.Profile.TABLE_NAME+"("+
                 CustomerMaster.Profile.COLUMN_NAME_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                CustomerMaster.Profile.COLUMN_NAME_IMAGE+" BLOB,"+ CustomerMaster.Profile.COLUMN_FOREIGNKEY_CUS_ID+" INTEGER,CONSTRAINT fk_cus FOREIGN KEY ("+
+                CustomerMaster.Profile.COLUMN_NAME_IMAGE+" BLOB,"+
+                CustomerMaster.Profile.COLUMN_FOREIGNKEY_CUS_ID+" INTEGER,CONSTRAINT fk_cus FOREIGN KEY ("+
                 CustomerMaster.Profile.COLUMN_FOREIGNKEY_CUS_ID+") REFERENCES "+ CustomerMaster.Customers.TABLE_NAME+"("+
                 CustomerMaster.Customers.COLUMN_NAME_ID+") ON DELETE CASCADE ON UPDATE CASCADE)";
 
@@ -129,7 +138,7 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.Profile.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.Customers.TABLE_NAME);
 
-        Paper.book().destroy();
+
 
             onCreate(sqLiteDatabase);
     }

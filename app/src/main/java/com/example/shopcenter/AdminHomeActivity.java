@@ -68,6 +68,7 @@ public class AdminHomeActivity extends AppCompatActivity
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
        // AdminName=intent.getStringExtra(Prevelent.INTENT_USER_NAME);
         //AdminId=intent.getStringExtra(Prevelent.INTENT_USER_ID);
+        //Toast.makeText(this,Prevelent.currentUser.getId(),Toast.LENGTH_SHORT).show();
         admin_search_products=findViewById(R.id.admin_search_product_name);
 
         admin_search_products.addTextChangedListener(new TextWatcher() {
@@ -179,6 +180,11 @@ public class AdminHomeActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
     }
 

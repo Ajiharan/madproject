@@ -2,8 +2,6 @@ package com.example.shopcenter.model;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,26 +16,23 @@ import com.example.shopcenter.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class cuslistAdapter extends ArrayAdapter<User> {
+public class cus_order_lis_Adapter  extends ArrayAdapter<cus_orders> {
     Activity context;
-    List<User> items;
+    List<cus_orders> items;
 
-    public cuslistAdapter(@NonNull Activity context, ArrayList<User> dataArrayList) {
+    public cus_order_lis_Adapter(@NonNull Activity context, ArrayList<cus_orders> dataArrayList) {
         super(context, 0, dataArrayList);
         this.context=context;
         this.items=dataArrayList;
     }
-
     private class ViewHolder {
 
-        TextView  name;
-        ImageView image;
-
+        TextView id,total,type;
 
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        cuslistAdapter.ViewHolder holder = null;
+        cus_order_lis_Adapter.ViewHolder holder = null;
 
         if (convertView == null) {
 
@@ -45,32 +40,29 @@ public class cuslistAdapter extends ArrayAdapter<User> {
                     .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 
             convertView = inflater.inflate(
-                    R.layout.admin_customer_list, parent, false);
+                    R.layout.cus_order_views, parent, false);
 
-            holder = new cuslistAdapter.ViewHolder();
-            holder.name = (TextView) convertView.findViewById(R.id.customer_name_view);
+            holder = new cus_order_lis_Adapter.ViewHolder();
+            holder.id = (TextView) convertView.findViewById(R.id.User_list_product_order_id);
+            holder.total = (TextView) convertView.findViewById(R.id.User_payment_total);
+            holder.type = (TextView) convertView.findViewById(R.id.User_list_product_delivery);
 
-            holder.image = (ImageView) convertView.findViewById(R.id.customer_profile_views);
 
             convertView.setTag(holder);
 
         } else {
-            holder = (cuslistAdapter.ViewHolder) convertView.getTag();
+            holder = (cus_order_lis_Adapter.ViewHolder) convertView.getTag();
         }
 
-        User user = items.get(position);
+       cus_orders orders = items.get(position);
 
 
-        holder.name.setText(user.getName());
-
-
-
-        holder.image.setImageBitmap(user.getImage());
+       holder.id.setText(orders.getOrder_id());
+       holder.total.setText(orders.getTot());
+       holder.type.setText(orders.getCheck_order());
 
 
         return convertView;
 
     }
-
-
 }

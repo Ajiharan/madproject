@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Admin_view_customer_orders">
+    <RelativeLayout
+        android:id="@+id/admin_change_cus_relative_layoutss_top"
+        android:layout_width="match_parent"
+        android:background="@android:color/white"
+        android:layout_height="40dp">
+        <Button
+            android:id="@+id/admin_view_customer_order_back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:background="@color/colorAccent"
+
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="@string/backs1"
+            android:textColor="@android:color/white"
+            />
+
+        <TextView
+
+            android:id="@+id/admin_edit_cus_order_name"
+            android:layout_width="322dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:text="@string/order_details1"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold"
+
+            />
+    </RelativeLayout>
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/admin_view_customer_order_details1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.baoyz.swipemenulistview.SwipeMenuListView>
+</LinearLayout>

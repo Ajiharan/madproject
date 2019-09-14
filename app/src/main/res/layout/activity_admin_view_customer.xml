@@ -26,7 +26,7 @@
 
     <TextView
 
-        android:id="@+id/admin_edit_product_name"
+        android:id="@+id/admin_edit_cus_name"
         android:layout_width="322dp"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
@@ -38,10 +38,7 @@
 
         />
   </RelativeLayout>
-  <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/admin_view_customer_details"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"/>
+
   <com.baoyz.swipemenulistview.SwipeMenuListView
       android:id="@+id/admin_view_customer_details1"
       android:layout_width="match_parent"

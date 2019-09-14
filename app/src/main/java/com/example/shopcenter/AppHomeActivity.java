@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -148,8 +149,8 @@ public class AppHomeActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
 
+        int id = item.getItemId();
         if (id == R.id.nav_carts) {
 
         } else if (id == R.id.nav_search) {
@@ -170,8 +171,21 @@ public class AppHomeActivity extends AppCompatActivity
             Intent intent=new Intent(AppHomeActivity.this,LoginActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_admin_home) {
-            Intent intent=new Intent(AppHomeActivity.this,AdminHomeActivity.class);
-            startActivity(intent);
+
+            boolean isTrue=false;
+            if (Prevelent.currentOnlineUser.getId().equals("1")) {
+                isTrue=true;
+            }
+            else{
+                isTrue=false;
+            }
+            if(isTrue) {
+                Intent intent = new Intent(AppHomeActivity.this, AdminHomeActivity.class);
+                startActivity(intent);
+            }
+            else{
+                Toast.makeText(this,"You are not allowed",Toast.LENGTH_SHORT).show();
+            }
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
