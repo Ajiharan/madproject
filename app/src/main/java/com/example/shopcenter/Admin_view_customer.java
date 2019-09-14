@@ -7,35 +7,52 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.shopcenter.Database.DBHelper;
 import com.example.shopcenter.Prevelent.Prevelent;
 import com.example.shopcenter.model.CustomerAdapter;
 import com.example.shopcenter.model.User;
+import com.example.shopcenter.model.cuslistAdapter;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Admin_view_customer extends AppCompatActivity {
-   // private CircleImageView myimage;
+
     private DBHelper db;
-    private RecyclerView recyclerView;
-    private CustomerAdapter customerAdapter;
+
+
     private Button back_button;
-    private ArrayList<User> userlists;
+
+
+    private SwipeMenuListView listViews;
+    private ArrayList<User> dataArrayList;
+    private cuslistAdapter listAdapter;
+    private User datas;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_view_customer);
         db=new DBHelper(this);
-        userlists=new ArrayList<>();
-        recyclerView=findViewById(R.id.admin_view_customer_details);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+
+        listViews = (SwipeMenuListView) findViewById(R.id.admin_view_customer_details1);
+        dataArrayList = new ArrayList<>();
+
+
             back_button=findViewById(R.id.admin_view_customer_back_btn);
             back_button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -48,42 +65,59 @@ public class Admin_view_customer extends AppCompatActivity {
     }
 
     private void retrive_customer_details(){
-        userlists=db.Retrive_customer_allDetails();
-        customerAdapter=new CustomerAdapter(this,userlists);
-        recyclerView.setAdapter(customerAdapter);
 
-        customerAdapter.setOnItemClickListener(new CustomerAdapter.ClickListener() {
+
+        dataArrayList=db.Retrive_customer_allDetails();
+        listAdapter = new cuslistAdapter(this, dataArrayList);
+        listViews.setAdapter(listAdapter);
+
+        listViews.setMenuCreator(creator);
+
+        listViews.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
-            public void onItemClick(int position, View v) {
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                switch (index) {
+                    case 0:
 
-            }
+                        delete_cur_customer(position);
+                        dataArrayList.remove(position);
+                        listAdapter.notifyDataSetChanged();
+                        Toast.makeText(Admin_view_customer.this,"Sucessfully deleted",Toast.LENGTH_SHORT).show();
 
-            @Override
-            public void onItemLongClick(final int position, View v) {
-                Prevelent.currentOnlineUser=userlists.get(position);
-                AlertDialog.Builder builder=new AlertDialog.Builder(Admin_view_customer.this);
-                builder.setTitle("Delete Current Customer").setMessage("Are you sure want to delete current customer?").setPositiveButton("yes,delete", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        boolean isDeleted=db.admin_delete_current_customer(Prevelent.currentOnlineUser.getId());
-                        if(isDeleted){
-                            Toast.makeText(Admin_view_customer.this,"Sucessfully deleted",Toast.LENGTH_SHORT).show();
-                            Intent intent=new Intent(Admin_view_customer.this,Admin_view_customer.class);
-                            startActivity(intent);
-                        }
-                        else{
-                            Toast.makeText(Admin_view_customer.this,"Error cannot delete..",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }).setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(Admin_view_customer.this,"delete cancel",Toast.LENGTH_SHORT).show();
-                    }
-                }).setCancelable(false).show();
-
+                        break;
+                    case 1:
+                        break;
+                }
+                return false;
             }
         });
 
+
+
     }
+
+    private void delete_cur_customer(int position){
+        Prevelent.currentOnlineUser=dataArrayList.get(position);
+        db.admin_delete_current_customer(Prevelent.currentOnlineUser.getId());
+
+    }
+
+    SwipeMenuCreator creator = new SwipeMenuCreator() {
+
+        @Override
+        public void create(SwipeMenu menu) {
+            // create "delete" item
+            SwipeMenuItem deleteItem = new SwipeMenuItem(
+                    getApplicationContext());
+            // set item background
+            deleteItem.setBackground(new ColorDrawable(Color.parseColor("#F45557")));
+            // set item width
+            deleteItem.setWidth(150);
+            deleteItem.setTitle("x");
+            deleteItem.setTitleColor(Color.WHITE);
+            deleteItem.setTitleSize(25);
+            // add to menu
+            menu.addMenuItem(deleteItem);
+        }
+    };
 }

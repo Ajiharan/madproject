@@ -41,6 +41,12 @@
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/admin_view_customer_details"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"/>
+      android:layout_height="wrap_content"/>
+  <com.baoyz.swipemenulistview.SwipeMenuListView
+      android:id="@+id/admin_view_customer_details1"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+  </com.baoyz.swipemenulistview.SwipeMenuListView>
 
 </LinearLayout>
