@@ -48,7 +48,7 @@ public class User_payment_Activity extends AppCompatActivity {
             Toast.makeText(this,"Name is empty",Toast.LENGTH_SHORT).show();
         }
         else if(cus_email.getText().toString().isEmpty()){
-            Toast.makeText(this,"Mailid is empty",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Mailiad is empty",Toast.LENGTH_SHORT).show();
         }
         else if(cus_zip.getText().toString().isEmpty()){
 
