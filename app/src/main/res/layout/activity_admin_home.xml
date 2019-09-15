@@ -9,7 +9,7 @@
     tools:openDrawer="start">
 <TextView
     android:layout_width="wrap_content"
-    android:text="sdsddsdsd"
+    android:text="@string/name21"
     android:layout_height="wrap_content"/>
 
     <include

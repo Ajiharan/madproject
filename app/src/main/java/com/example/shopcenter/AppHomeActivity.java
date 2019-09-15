@@ -173,7 +173,7 @@ public class AppHomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_admin_home) {
 
             boolean isTrue=false;
-            if (Prevelent.currentOnlineUser.getId().equals("1")) {
+            if (Prevelent.currentUser .getId().equals("1")) {
                 isTrue=true;
             }
             else{

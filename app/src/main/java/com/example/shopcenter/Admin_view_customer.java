@@ -21,7 +21,7 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.shopcenter.Database.DBHelper;
 import com.example.shopcenter.Prevelent.Prevelent;
-import com.example.shopcenter.model.CustomerAdapter;
+import com.example.shopcenter.model.cus_orders;
 import com.example.shopcenter.model.User;
 import com.example.shopcenter.model.cuslistAdapter;
 
@@ -77,6 +77,10 @@ public class Admin_view_customer extends AppCompatActivity {
         listViews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> av, View view, int i, long l) {
                 Intent intent=new Intent(Admin_view_customer.this,Admin_view_customer_orders.class);
+
+                User curr_user=dataArrayList.get(i);
+                intent.putExtra("customer_id",curr_user.getId());
+                //Prevelent.currentUser=curr_user;
                 startActivity(intent);
             }
         });

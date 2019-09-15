@@ -7,7 +7,11 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.example.shopcenter.Prevelent.Prevelent;
 import com.example.shopcenter.model.cus_order_lis_Adapter;
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -25,6 +29,7 @@ public class Admin_view_customer_orders extends AppCompatActivity {
     private cus_order_lis_Adapter listAdapter;
     private cus_orders cu_orders;
     private DBHelper db;
+    private String cus_id1;
 
 
     private Button back_button;
@@ -32,11 +37,12 @@ public class Admin_view_customer_orders extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_view_customer_orders);
-
+        db=new DBHelper(this);
         listViews = findViewById(R.id.admin_view_customer_order_details1);
         dataArrayList= new ArrayList<>();
 
-
+        Intent intent=getIntent();
+        cus_id1=intent.getStringExtra("customer_id");
         back_button=findViewById(R.id.admin_view_customer_order_back_btn);
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,9 +51,28 @@ public class Admin_view_customer_orders extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        retrive_customer_order_details();
     }
 
-    SwipeMenuCreator creator = new SwipeMenuCreator() {
+    private void retrive_customer_order_details() {
+
+
+        dataArrayList = db.retrive_user_order_details(cus_id1);
+        Toast.makeText(this,String.valueOf(dataArrayList.size()),Toast.LENGTH_SHORT).show();
+
+        if(dataArrayList.size() > 0) {
+            listAdapter = new cus_order_lis_Adapter(this, dataArrayList);
+            listViews.setAdapter(listAdapter);
+        }
+
+//       // listViews.setMenuCreator(creator);
+
+
+
+    }
+
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
 
         @Override
         public void create(SwipeMenu menu) {

@@ -59,7 +59,13 @@ public class cus_order_lis_Adapter  extends ArrayAdapter<cus_orders> {
 
        holder.id.setText(orders.getOrder_id());
        holder.total.setText(orders.getTot());
-       holder.type.setText(orders.getCheck_order());
+       if((orders.getCheck_order().equals("0"))){
+           holder.type.setText("Not delivered");
+       }
+       else{
+           holder.type.setText("Delivered");
+       }
+
 
 
         return convertView;

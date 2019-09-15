@@ -15,6 +15,7 @@ import com.example.shopcenter.model.CategoryItems;
 import com.example.shopcenter.model.Products;
 import com.example.shopcenter.model.User;
 import com.example.shopcenter.model.payments;
+import com.example.shopcenter.model.cus_orders;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -167,6 +168,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return true;
     }
+    public boolean Customer_insert_order_details(String amount,String cus_id){
+        SQLiteDatabase db=getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put(CustomerMaster.Cus_Order.COLUMN_NAME_AMOUNT,amount);
+        values.put(CustomerMaster.Cus_Order.COLUMN_NAME_CUS_ID,cus_id);
+        long rowId=db.insert(CustomerMaster.Cus_Order.TABLE_NAME,null,values);
+
+
+        return rowId != -1;
+    }
 
     public boolean Customer_insert_payment_details(payments pay){
         SQLiteDatabase db=getWritableDatabase();
@@ -213,16 +224,47 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(CustomerMaster.Profile.COLUMN_FOREIGNKEY_CUS_ID,cus_foreign_id);
         long rowId=db.insert(CustomerMaster.Profile.TABLE_NAME,null,values);
         //System.out.println("Rows:"+rowId);
-        if(rowId  == -1){
-            return false;
-        }
-
-        return true;
+        return rowId != -1;
 
 
     }
 
+    public ArrayList<cus_orders>  retrive_user_order_details(String cuid){
+        ArrayList<cus_orders> list=new ArrayList<>();
+        SQLiteDatabase db=getReadableDatabase();
 
+        String sql="SELECT * FROM "+ CustomerMaster.Cus_Order.TABLE_NAME + " WHERE "+
+                CustomerMaster.Cus_Order.COLUMN_NAME_CUS_ID + " = ?";
+        String selectionArgs[]={cuid};
+
+        Cursor cu=db.rawQuery(sql,selectionArgs);
+
+
+
+        String price;
+        String del;
+        String id;
+
+
+        while(cu.moveToNext()){
+
+            id=cu.getString(0);
+
+            del=cu.getString(3);
+            price=cu.getString(1);
+
+
+            cus_orders cOrder=new cus_orders();
+            cOrder.setOrder_id(id);
+            cOrder.setTot(price);
+            cOrder.setCheck_order(del);
+
+            list.add(cOrder);
+
+        }
+
+        return list;
+    }
 
     public ArrayList<Cart> retrive_user_cart_details(String cuid){
 
@@ -296,6 +338,7 @@ public class DBHelper extends SQLiteOpenHelper {
             list.add(products);
 
         }
+        cu.close();
 
         return list;
 
@@ -334,6 +377,7 @@ public class DBHelper extends SQLiteOpenHelper {
             list.add(products);
 
         }
+        cu.close();
 
         return list;
 
@@ -511,7 +555,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return false;
 
     }
-    public boolean update_payment_details(String num){
+    public boolean update_carts_details(String num){
 
         SQLiteDatabase db=getReadableDatabase();
         ContentValues values=new ContentValues();
@@ -595,6 +639,7 @@ public class DBHelper extends SQLiteOpenHelper {
             // System.out.println("Bit :"+user_id);
 
         }
+        cu.close();
         System.out.println("rrow :"+t);
         return bitmap;
     }

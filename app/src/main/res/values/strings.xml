@@ -87,4 +87,10 @@
     <string name="delivered1">Delivered</string>
     <string name="price11">Price</string>
     <string name="order_id1">Order id</string>
+    <string name="back111">back</string>
+    <string name="product_name21">Product Name</string>
+    <string name="product_description21">Product Description</string>
+    <string name="productPrice21">Product Price</string>
+    <string name="product_count21">Product Count</string>
+    <string name="name21">Name</string>
 </resources>

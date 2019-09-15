@@ -16,12 +16,12 @@
             android:id="@+id/admin_edit_product_back_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:background="@color/colorAccent"
 
             android:gravity="center"
             android:textStyle="bold"
-            android:text="back"
+            android:text="@string/back111"
             android:textColor="@android:color/white"
             />
 
@@ -34,7 +34,7 @@
             android:gravity="center"
 
             android:textColor="@color/colorAccent"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textStyle="bold"
 
             />
@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
 
-        android:layout_marginTop="0dp"
+
         android:src="@drawable/mylap2"
         />
     <com.google.android.material.textfield.TextInputLayout
@@ -63,7 +63,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="55dp"
             android:layout_width="match_parent"
-            android:hint="Product Name"
+            android:hint="@string/product_name21"
             android:textColor="@color/colorPrimaryDark"
 
             android:layout_height="wrap_content" />
@@ -84,7 +84,7 @@
             android:layout_marginLeft="55dp"
             android:inputType="textMultiLine"
             android:layout_width="match_parent"
-            android:hint="Product Description"
+            android:hint="@string/product_description21"
             android:textColor="@color/colorPrimaryDark"
 
             android:layout_height="wrap_content" />
@@ -106,7 +106,7 @@
 
                 android:inputType="number"
             android:layout_width="match_parent"
-            android:hint="Product Price"
+            android:hint="@string/productPrice21"
             android:textColor="@color/colorPrimaryDark"
 
             android:layout_height="wrap_content" />
@@ -128,7 +128,7 @@
 
             android:inputType="number"
             android:layout_width="match_parent"
-            android:hint="Product Count"
+            android:hint="@string/product_count21"
             android:textColor="@color/colorPrimaryDark"
 
             android:layout_height="wrap_content" />
@@ -156,6 +156,7 @@
        <Button
            android:id="@+id/admin_edit_product_delete"
            android:gravity="center"
+
            android:background="@drawable/admin_input_design"
            android:textColor="@color/colorAccent"
            android:text="@string/delete1"

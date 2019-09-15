@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.shopcenter.Database.DBHelper;
 import com.example.shopcenter.Prevelent.Prevelent;
+import com.example.shopcenter.model.payments;
 
 public class User_payment_Activity extends AppCompatActivity {
     private TextView payment_view;
@@ -61,8 +62,11 @@ public class User_payment_Activity extends AppCompatActivity {
 
         }
         else {
-            boolean isUpdated = db.update_payment_details(Prevelent.currentUser.getId());
-            if (isUpdated) {
+            boolean isUpdated = db.update_carts_details(Prevelent.currentUser.getId());
+            payments mypay=new payments();
+
+          boolean isAdded=db.Customer_insert_order_details( payment_view.getText().toString(),Prevelent.currentUser.getId());
+            if (isUpdated && isAdded) {
                 Toast.makeText(this, "Paid Sucessfully", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(User_payment_Activity.this, AppHomeActivity.class);
                 startActivity(intent);
