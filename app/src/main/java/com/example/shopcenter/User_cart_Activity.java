@@ -42,15 +42,20 @@ public class User_cart_Activity extends AppCompatActivity {
         user_placeOrder_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                carttLists = db.retrive_user_cart_details(Prevelent.currentUser.getId());
+                if(carttLists.size() > 0) {
+                    payments cpay = new payments();
 
-                payments cpay=new payments();
+                    cpay.setTotal(view_total.getText().toString());
 
-                cpay.setTotal(view_total.getText().toString());
+                    Prevelent.current_user_payments = cpay;
 
-                Prevelent.current_user_payments=cpay;
-
-                Intent intent=new Intent(User_cart_Activity.this,User_payment_Activity.class);
-                startActivity(intent);
+                    Intent intent = new Intent(User_cart_Activity.this, User_payment_Activity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(User_cart_Activity.this,"Your current cart is empty",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

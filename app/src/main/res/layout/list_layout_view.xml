@@ -9,40 +9,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <LinearLayout
             android:background="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
             android:padding="8dp">
+            <ViewFlipper
+                android:id="@+id/img_banner"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"></ViewFlipper>
 
-          <ImageView
-              android:layout_width="match_parent"
-              android:layout_height="190dp"
-              android:scaleType="centerCrop"
-              android:src="@drawable/cam1"
-              />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:textSize="28sp"
-                android:layout_marginTop="120dp"
-                android:text="Newly Arrived Products"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:layout_marginTop="160dp"
-                android:text="400 Products"
-                />
-        </RelativeLayout>
+        </LinearLayout>
 
 
 

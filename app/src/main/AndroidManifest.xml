@@ -27,7 +27,7 @@
         <activity android:name=".User_settings_Activity" />
         <activity
             android:name=".AppHomeActivity"
-            android:label="@string/title_activity_app_home"
+            android:label="@string/shop_cen"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Admin_edit_products" />
         <activity android:name=".Admin_add_products" />

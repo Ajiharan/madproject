@@ -32,6 +32,7 @@ import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import java.util.ArrayList;
 
@@ -40,7 +41,7 @@ import io.paperdb.Paper;
 
 public class AppHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    private ViewFlipper imgBanner;
     private FloatingActionButton fab_btn;
     private String UserName;
     private CircleImageView user_profile_img;
@@ -60,6 +61,11 @@ public class AppHomeActivity extends AppCompatActivity
         Intent intent=getIntent();
         UserName=intent.getStringExtra(Prevelent.INTENT_USER_NAME);
         setSupportActionBar(toolbar);
+        imgBanner=findViewById(R.id.img_banner);
+        int sliders[]={R.drawable.mylap2,R.drawable.admin_camera1,R.drawable.admin_television1};
+        for(int slide:sliders){
+            bannerFlipper(slide);
+        }
 
         db=new DBHelper(this);
         productLists=new ArrayList<>();
@@ -93,6 +99,16 @@ public class AppHomeActivity extends AppCompatActivity
         retrive_Admin_Products_Details();
 
     }
+
+     private void bannerFlipper(int image){
+        ImageView imgView=new ImageView(this);
+        imgView.setImageResource(image);
+        imgBanner.addView(imgView);
+        imgBanner.setFlipInterval(6000);
+        imgBanner.setAutoStart(true);
+        imgBanner.setInAnimation(this,android.R.anim.fade_in);
+        imgBanner.setOutAnimation(this,android.R.anim.fade_out);
+     }
     private void retrive_Admin_Products_Details(){
         productLists=db.Retrive_admin_product_details();
         itemAdapter =new UserProductsAdapter(this,productLists);
