@@ -76,7 +76,7 @@ public class User_payment_Activity extends AppCompatActivity {
                 mypay.setZipcode(cus_zip.getText().toString());
                 mypay.setCardNo(cus_card.getText().toString());
                 mypay.setCity(cus_city.getText().toString());
-                mypay.setTotal(make_payment.getText().toString());
+                mypay.setTotal(payment_view.getText().toString());
 
                 boolean isPaid=db.Customer_insert_payment_details(mypay);
                 boolean isAdded = db.Customer_insert_order_details(payment_view.getText().toString(), Prevelent.currentUser.getId());

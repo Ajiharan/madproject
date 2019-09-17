@@ -66,7 +66,7 @@ public class NotificationAdapter extends ArrayAdapter<payments> {
 
         payments mypay = items.get(position);
         holder.name.setText(mypay.getName());
-        holder.Address.setText(mypay.getEmail_id());
+        holder.Address.setText(mypay.getCity());
         holder.cardNo.setText(mypay.getCardNo());
         holder.zip_code.setText(mypay.getZipcode());
         holder.email_id.setText(mypay.getEmail_id());

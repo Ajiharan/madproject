@@ -98,9 +98,10 @@ public class Admin_notification_Activity extends AppCompatActivity {
             // set item width
             deleteItem.setWidth(350);
 
-            deleteItem.setBackground(R.drawable.delete_icon2);
+
+            deleteItem.setIcon(R.drawable.delete_icon2);
             deleteItem.setTitleColor(Color.WHITE);
-            deleteItem.setTitleSize(10);
+            deleteItem.setTitleSize(20);
             // add to menu
             menu.addMenuItem(deleteItem);
         }
