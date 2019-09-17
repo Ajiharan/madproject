@@ -43,13 +43,14 @@ public class User_payment_Activity extends AppCompatActivity {
     }
 
     private void insert_details() {
-
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
         if(cus_name.getText().toString().isEmpty()){
             Toast.makeText(this,"Name is empty",Toast.LENGTH_SHORT).show();
         }
         else if(cus_email.getText().toString().isEmpty()){
             Toast.makeText(this,"Mail_id is empty",Toast.LENGTH_SHORT).show();
+
         }
         else if(cus_zip.getText().toString().isEmpty()){
             Toast.makeText(this,"Zip id is empty",Toast.LENGTH_SHORT).show();
@@ -62,16 +63,27 @@ public class User_payment_Activity extends AppCompatActivity {
             Toast.makeText(this," city is empty",Toast.LENGTH_SHORT).show();
         }
         else {
-            boolean isUpdated = db.update_carts_details(Prevelent.currentUser.getId());
-            payments mypay=new payments();
+            if(!cus_email.getText().toString().trim().matches(emailPattern)) {
+                Toast.makeText(this,"Invalid email_id",Toast.LENGTH_SHORT).show();
+            }
+            else {
+                boolean isUpdated = db.update_carts_details(Prevelent.currentUser.getId());
+                payments mypay = new payments();
+                mypay.setName(cus_name.getText().toString());
+                mypay.setEmail_id(cus_email.getText().toString());
+                mypay.setZipcode(cus_zip.getText().toString());
+                mypay.setCardNo(cus_card.getText().toString());
+                mypay.setCity(cus_city.getText().toString());
 
-          boolean isAdded=db.Customer_insert_order_details( payment_view.getText().toString(),Prevelent.currentUser.getId());
-            if (isUpdated && isAdded) {
-                Toast.makeText(this, "Paid Sucessfully", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(User_payment_Activity.this, AppHomeActivity.class);
-                startActivity(intent);
-            } else {
-                Toast.makeText(this, "Cannot update", Toast.LENGTH_SHORT).show();
+                boolean isPaid=db.Customer_insert_payment_details(mypay);
+                boolean isAdded = db.Customer_insert_order_details(payment_view.getText().toString(), Prevelent.currentUser.getId());
+                if (isUpdated && isAdded && isPaid) {
+                    Toast.makeText(this, "Paid Sucessfully", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(User_payment_Activity.this, AppHomeActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(this, "Cannot update", Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }
