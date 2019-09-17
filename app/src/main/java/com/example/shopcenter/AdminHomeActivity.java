@@ -54,7 +54,7 @@ public class AdminHomeActivity extends AppCompatActivity
         private TextView admin_name;
         private EditText admin_search_products;
         private ArrayList<Products> productLists;
-        private ImageView admin_view_product_image;
+        private ImageView admin_view_noti_icon;
     private Bitmap bp=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,14 +90,14 @@ public class AdminHomeActivity extends AppCompatActivity
         });
 
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab1);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               Intent intent=new Intent(AdminHomeActivity.this,Admin_notification_Activity.class);
-               startActivity(intent);
-            }
-        });
+//        FloatingActionButton fab = findViewById(R.id.fab1);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//               Intent intent=new Intent(AdminHomeActivity.this,Admin_notification_Activity.class);
+//               startActivity(intent);
+//            }
+//        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -110,6 +110,14 @@ public class AdminHomeActivity extends AppCompatActivity
        admin_name=headerView.findViewById(R.id.admin_profile_name);
         admin_name.setText(Prevelent.currentOnlineUser.getName());
         admin_profile=headerView.findViewById(R.id.admin_profile_image);
+        admin_view_noti_icon= findViewById(R.id.admin_notification_icons);
+        admin_view_noti_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(AdminHomeActivity.this,Admin_notification_Activity.class);
+                startActivity(intent);
+            }
+        });
 
         set_profile();
 

@@ -50,6 +50,7 @@ public class AppHomeActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private UserProductsAdapter itemAdapter;
     private TextView admin_name;
+    private ImageView admin_cart_view;
     private ArrayList<Products> productLists;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,7 @@ public class AppHomeActivity extends AppCompatActivity
         UserName=intent.getStringExtra(Prevelent.INTENT_USER_NAME);
         setSupportActionBar(toolbar);
         imgBanner=findViewById(R.id.img_banner);
-        int sliders[]={R.drawable.mylap2,R.drawable.admin_camera1,R.drawable.admin_television1};
+        int sliders[]={R.drawable.amin_home_5,R.drawable.admin_lap_2,R.drawable.cam1};
         for(int slide:sliders){
             bannerFlipper(slide);
         }
@@ -72,15 +73,22 @@ public class AppHomeActivity extends AppCompatActivity
         recyclerView=findViewById(R.id.user_recycler_view1);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         //.init(this);
-
-        fab_btn =(FloatingActionButton) findViewById(R.id.fab);
-        fab_btn.setOnClickListener(new View.OnClickListener() {
+        admin_cart_view=findViewById(R.id.admin_cart_icons);
+        admin_cart_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(AppHomeActivity.this,User_cart_Activity.class);
                 startActivity(intent);
             }
         });
+//        fab_btn =(FloatingActionButton) findViewById(R.id.fab);
+//        fab_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent=new Intent(AppHomeActivity.this,User_cart_Activity.class);
+//                startActivity(intent);
+//            }
+//        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

@@ -21,12 +21,13 @@
 
 
             <ImageView
+                android:id="@+id/admin_notification_icons"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@color/color_admin_customer_view"
-                android:textSize="25sp"
+                android:src="@drawable/admin_icon"
+                android:textSize="16sp"
                 android:textColor="@android:color/darker_gray"
-                android:layout_marginHorizontal="50dp"
+                android:layout_marginStart="170dp"
 
                 />
 
@@ -38,14 +39,6 @@
 
     <include layout="@layout/admin_list_layout" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab1"
-        android:layout_width="wrap_content"
 
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="#FF4081"
-        app:srcCompat="@drawable/admin_icon" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
