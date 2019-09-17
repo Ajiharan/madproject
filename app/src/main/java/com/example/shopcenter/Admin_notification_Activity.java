@@ -96,10 +96,11 @@ public class Admin_notification_Activity extends AppCompatActivity {
             // set item background
             deleteItem.setBackground(new ColorDrawable(Color.parseColor("#F45557")));
             // set item width
-            deleteItem.setWidth(150);
-            deleteItem.setBackground(R.drawable.user_admin_edit_icon);
+            deleteItem.setWidth(350);
+
+            deleteItem.setBackground(R.drawable.delete_icon2);
             deleteItem.setTitleColor(Color.WHITE);
-            deleteItem.setTitleSize(15);
+            deleteItem.setTitleSize(10);
             // add to menu
             menu.addMenuItem(deleteItem);
         }
