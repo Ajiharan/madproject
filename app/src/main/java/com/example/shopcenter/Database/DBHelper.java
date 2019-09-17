@@ -230,8 +230,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<payments> retrive_admin_notification_details(){
-        ArrayList<payments>  list=new ArrayList<>();
-        SQLiteDatabase db=getReadableDatabase();
+        ArrayList<payments>  list=new ArrayList<>();        SQLiteDatabase db=getReadableDatabase();
         String sql="SELECT * FROM "+CustomerMaster.PaymentDetails.TABLE_NAME;
         Cursor cursor=db.rawQuery(sql,null);
 
