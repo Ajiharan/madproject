@@ -20,6 +20,7 @@ public class User_payment_Activity extends AppCompatActivity {
     private DBHelper db;
     private Button make_payment;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,7 @@ public class User_payment_Activity extends AppCompatActivity {
                 insert_details();
             }
         });
+
     }
 
     private void insert_details() {
@@ -74,6 +76,7 @@ public class User_payment_Activity extends AppCompatActivity {
                 mypay.setZipcode(cus_zip.getText().toString());
                 mypay.setCardNo(cus_card.getText().toString());
                 mypay.setCity(cus_city.getText().toString());
+                mypay.setTotal(make_payment.getText().toString());
 
                 boolean isPaid=db.Customer_insert_payment_details(mypay);
                 boolean isAdded = db.Customer_insert_order_details(payment_view.getText().toString(), Prevelent.currentUser.getId());

@@ -1,96 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".Admin_notification_Activity">
 
 
     <RelativeLayout
-        android:id="@+id/admin_notification_relative_layout1"
+        android:id="@+id/admin_change_product_not_layoutss_top"
         android:layout_width="match_parent"
-        android:background="@color/colorPrimaryDark"
-
-        android:layout_height="50dp">
-
-        <TextView
-            android:layout_width="match_parent"
+        android:background="@android:color/white"
+        android:layout_height="40dp">
+        <Button
+            android:id="@+id/admin_view_notification_back_btn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:background="@color/colorAccent"
 
-            android:textColor="@android:color/white"
-            android:textSize="18dp"
-            android:textStyle="bold"
             android:gravity="center"
-            android:text="Payment Notification"
+            android:textStyle="bold"
+            android:text="@string/backs1"
+            android:textColor="@android:color/white"
             />
 
+        <TextView
 
+            android:id="@+id/admin_edit_cus_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:text="Notification"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold"
+
+            />
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_marginTop="15dp"
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/admin_admin_notification1"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:background="@drawable/admin_input_design"
-        android:layout_below="@+id/admin_notification_relative_layout1"
-        android:layout_height="140dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+    </com.baoyz.swipemenulistview.SwipeMenuListView>
 
-            android:textColor="@android:color/black"
-            android:textSize="18dp"
-            android:textStyle="bold"
 
-            android:text="Customer Name"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:textColor="@android:color/black"
-            android:textSize="18dp"
-            android:textStyle="bold"
-
-            android:text="Card No"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:textColor="@android:color/black"
-            android:textSize="18dp"
-            android:textStyle="bold"
-
-            android:text="Date"
-            />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="50dp">
-            <TextView
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"
-
-                android:text="Total Payment"
-                />
-
-            <Button
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Delete"
-                android:background="@drawable/admin_input_design"
-
-                android:textColor="@android:color/black" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

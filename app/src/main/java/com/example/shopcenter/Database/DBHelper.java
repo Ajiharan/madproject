@@ -229,6 +229,40 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    public ArrayList<payments> retrive_admin_notification_details(){
+        ArrayList<payments>  list=new ArrayList<>();
+        SQLiteDatabase db=getReadableDatabase();
+        String sql="SELECT * FROM "+CustomerMaster.PaymentDetails.TABLE_NAME;
+        Cursor cursor=db.rawQuery(sql,null);
+
+        String name;
+        String zip;
+        String email;
+        String card;
+        String address;
+        String amount;
+
+        while(cursor.moveToNext()){
+            name= cursor.getString(1);
+            card=cursor.getString(2);
+            address=cursor.getString(3);
+            email=cursor.getString(4);
+            zip=cursor.getString(5);
+            amount=cursor.getString(6);
+
+            payments pay1=new payments();
+            pay1.setName(name);
+            pay1.setCardNo(card);
+            pay1.setCity(address);
+            pay1.setEmail_id(email);
+            pay1.setZipcode(zip);
+            pay1.setTotal(amount);
+            list.add(pay1);
+
+        }
+        cursor.close();
+        return list;
+    }
     public ArrayList<cus_orders>  retrive_user_order_details(String cuid){
         ArrayList<cus_orders> list=new ArrayList<>();
         SQLiteDatabase db=getReadableDatabase();
@@ -262,7 +296,7 @@ public class DBHelper extends SQLiteOpenHelper {
             list.add(cOrder);
 
         }
-
+        cu.close();
         return list;
     }
 
