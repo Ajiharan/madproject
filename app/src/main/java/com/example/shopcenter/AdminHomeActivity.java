@@ -46,6 +46,7 @@ public class AdminHomeActivity extends AppCompatActivity
         private   ImageView admin_edit_current_product;
         private CircleImageView admin_profile;
         private DBHelper db;
+
         private boolean isSearchAvailable=false;
        // private String AdminName;
         //private String AdminId;
@@ -70,6 +71,7 @@ public class AdminHomeActivity extends AppCompatActivity
         //AdminId=intent.getStringExtra(Prevelent.INTENT_USER_ID);
         //Toast.makeText(this,Prevelent.currentUser.getId(),Toast.LENGTH_SHORT).show();
         admin_search_products=findViewById(R.id.admin_search_product_name);
+
 
         admin_search_products.addTextChangedListener(new TextWatcher() {
             @Override

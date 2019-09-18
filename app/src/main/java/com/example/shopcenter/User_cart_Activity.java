@@ -1,6 +1,8 @@
 package com.example.shopcenter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,6 +56,7 @@ public class User_cart_Activity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else{
+
                     Toast.makeText(User_cart_Activity.this,"Your current cart is empty",Toast.LENGTH_SHORT).show();
                 }
             }
@@ -61,13 +64,16 @@ public class User_cart_Activity extends AppCompatActivity {
 
         retrive_user_cart_Details();
     }
-//    @Override
-//    public void onBackPressed() {
-//        /*Intent a = new Intent(Intent.ACTION_MAIN);
-//        a.addCategory(Intent.CATEGORY_HOME);
-//        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        startActivity(a);*/
-//    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(),AppHomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
     private void retrive_user_cart_Details() {
        carttLists = db.retrive_user_cart_details(Prevelent.currentUser.getId());
         itemAdapter = new cartAdapter(this, carttLists);
@@ -84,6 +90,8 @@ public class User_cart_Activity extends AppCompatActivity {
             public void onItemClick(int position, View v) {
                 boolean isDeleted=db.user_delete_cart(carttLists.get(position).getId());
                 if(isDeleted){
+                   String nid= db.retrive_cus_notification_id_count_number(Prevelent.currentUser.getId());
+                   db.Delete_admin_one_notification_counts(Prevelent.currentUser.getId(),nid);
                     Toast.makeText(User_cart_Activity.this,"item removed",Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(User_cart_Activity.this,User_cart_Activity.class);
                     startActivity(intent);

@@ -81,6 +81,7 @@ public class User_payment_Activity extends AppCompatActivity {
                 boolean isPaid=db.Customer_insert_payment_details(mypay);
                 boolean isAdded = db.Customer_insert_order_details(payment_view.getText().toString(), Prevelent.currentUser.getId());
                 if (isUpdated && isAdded && isPaid) {
+                    boolean isDeleted= db.Delete_admin_notification_counts(Prevelent.currentUser.getId());
                     Toast.makeText(this, "Paid Sucessfully", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(User_payment_Activity.this, AppHomeActivity.class);
                     startActivity(intent);

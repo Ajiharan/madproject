@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.example.shopcenter.Database.DBHelper;
 import com.example.shopcenter.Prevelent.Prevelent;
+import com.example.shopcenter.model.Cart;
 import com.example.shopcenter.model.Products;
 
 import com.example.shopcenter.model.ProductsAdapter;
@@ -47,11 +48,13 @@ public class AppHomeActivity extends AppCompatActivity
     private CircleImageView user_profile_img;
     private TextView user_name;
     private DBHelper db;
+    private TextView cart_number;
     private RecyclerView recyclerView;
     private UserProductsAdapter itemAdapter;
     private TextView admin_name;
     private ImageView admin_cart_view;
     private ArrayList<Products> productLists;
+    private ArrayList<Cart> carttLists;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,8 +70,10 @@ public class AppHomeActivity extends AppCompatActivity
         for(int slide:sliders){
             bannerFlipper(slide);
         }
-
+        carttLists=new ArrayList<>();
         db=new DBHelper(this);
+
+
         productLists=new ArrayList<>();
         recyclerView=findViewById(R.id.user_recycler_view1);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
@@ -105,10 +110,27 @@ public class AppHomeActivity extends AppCompatActivity
         }
 
         retrive_Admin_Products_Details();
+        check_notification();
 
     }
 
-     private void bannerFlipper(int image){
+    private void check_notification() {
+        carttLists = db.retrive_user_cart_details(Prevelent.currentUser.getId());
+        if(carttLists.size()==0){
+            boolean isDeleted= db.Delete_admin_notification_counts(Prevelent.currentUser.getId());
+        }
+
+        String not_count=db.retrive_cus_noti_count_number(Prevelent.currentUser.getId());
+
+        cart_number=findViewById(R.id.cart_count_notification);
+        cart_number.setText(not_count);
+        if(cart_number.getText().toString().equals("0")){
+            cart_number.setVisibility(View.GONE);
+        }
+
+    }
+
+    private void bannerFlipper(int image){
         ImageView imgView=new ImageView(this);
         imgView.setImageResource(image);
         imgBanner.addView(imgView);

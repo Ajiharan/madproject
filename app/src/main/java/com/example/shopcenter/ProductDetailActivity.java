@@ -49,11 +49,13 @@ public class ProductDetailActivity extends AppCompatActivity {
        // Toast.makeText(ProductDetailActivity.this,Prevelent.currentUser.getId(),Toast.LENGTH_SHORT).show();
 
         boolean isInserted=db.User_insert_cart_details(cart);
+        boolean isAdd=db.insert_user_notification_details(Prevelent.currentUser.getId());
 
-        if(isInserted){
+        if(isInserted && isAdd){
              Toast.makeText(ProductDetailActivity.this,"sucessfully inserted",Toast.LENGTH_SHORT).show();
              Intent intent=new Intent(ProductDetailActivity.this,AppHomeActivity.class);
              startActivity(intent);
+
         }
         else{
             Toast.makeText(ProductDetailActivity.this,"Error cannot insert!!",Toast.LENGTH_SHORT).show();

@@ -31,7 +31,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private String dname="Notdelivered";
     public static final String DATABASE_NAME="OnlineShop.db";
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, 9);
+        super(context, DATABASE_NAME, null, 10);
         myLogo = BitmapFactory.decodeResource(context.getResources(), R.drawable.profile);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         myLogo.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -116,6 +116,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 "("+CustomerMaster.Customers.COLUMN_NAME_ID+ ") ON DELETE CASCADE ON UPDATE CASCADE)";
 
 
+        String USER_CART_NOTIFICATION_ENTRIES="CREATE TABLE "+CustomerMaster.User_cart_notification.TABLE_NAME + "("+
+                CustomerMaster.User_cart_notification.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                CustomerMaster.User_cart_notification.COLUMN_CUS_ID + " INTEGER,"+
+                " FOREIGN KEY (" + CustomerMaster.User_cart_notification.COLUMN_CUS_ID +") REFERENCES " + CustomerMaster.Customers.TABLE_NAME+
+                "("+CustomerMaster.Customers.COLUMN_NAME_ID+ ") ON DELETE CASCADE ON UPDATE CASCADE)";
+
+
 
         sqLiteDatabase.execSQL(CUSTOMER_CREATE_ENTRIES);
         sqLiteDatabase.execSQL(CUSTOMER_PROFILE_CREATES_ENTRIES);
@@ -124,6 +131,7 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(CUSTOMER_CART_CREATES_ENTRIES);
         sqLiteDatabase.execSQL(ORDER_DETAILS_ENTRIES);
         sqLiteDatabase.execSQL(PAYMENT_DETAILS_ENTRIES);
+        sqLiteDatabase.execSQL(USER_CART_NOTIFICATION_ENTRIES);
 
 
 
@@ -131,6 +139,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+CustomerMaster.User_cart_notification.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+CustomerMaster.PaymentDetails.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+CustomerMaster.Cus_Order.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ CustomerMaster.UserCart.TABLE_NAME);
@@ -143,7 +152,17 @@ public class DBHelper extends SQLiteOpenHelper {
 
             onCreate(sqLiteDatabase);
     }
+    public boolean insert_user_notification_details(String cus_id){
+        SQLiteDatabase db=getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put(CustomerMaster.User_cart_notification.COLUMN_CUS_ID,cus_id);
+        long rowId=db.insert(CustomerMaster.User_cart_notification.TABLE_NAME,null,values);
+        if(rowId  == -1){
+            return false;
+        }
 
+        return true;
+    }
     public boolean User_insert_cart_details(Cart cart){
         SQLiteDatabase db=getWritableDatabase();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -229,8 +248,39 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    public String retrive_cus_noti_count_number(String cuid){
+        SQLiteDatabase db=getReadableDatabase();
+        String sql="SELECT * FROM "+CustomerMaster.User_cart_notification.TABLE_NAME + " WHERE "+
+                CustomerMaster.User_cart_notification.COLUMN_CUS_ID + " = ?";
+        String selectionArgs[]={cuid};
+
+
+        Cursor cursor=db.rawQuery(sql,selectionArgs);
+        int count=0;
+        while (cursor.moveToNext()){
+            count ++;
+        }
+        return String.valueOf(count);
+    }
+
+    public String retrive_cus_notification_id_count_number(String cuid){
+        SQLiteDatabase db=getReadableDatabase();
+        String sql="SELECT * FROM "+CustomerMaster.User_cart_notification.TABLE_NAME + " WHERE "+
+                CustomerMaster.User_cart_notification.COLUMN_CUS_ID + " = ?";
+        String selectionArgs[]={cuid};
+
+
+        Cursor cursor=db.rawQuery(sql,selectionArgs);
+        String count="0";
+        while (cursor.moveToNext()){
+            count= cursor.getString(0);
+        }
+        return count;
+    }
+
     public ArrayList<payments> retrive_admin_notification_details(){
-        ArrayList<payments>  list=new ArrayList<>();        SQLiteDatabase db=getReadableDatabase();
+        ArrayList<payments>  list=new ArrayList<>();
+        SQLiteDatabase db=getReadableDatabase();
         String sql="SELECT * FROM "+CustomerMaster.PaymentDetails.TABLE_NAME;
         Cursor cursor=db.rawQuery(sql,null);
 
@@ -491,6 +541,29 @@ public class DBHelper extends SQLiteOpenHelper {
             return false;
 
     }
+
+    public boolean Delete_admin_notification_counts(String cus_id){
+        SQLiteDatabase db=getReadableDatabase();
+        String selection=CustomerMaster.User_cart_notification.COLUMN_CUS_ID + " = ?";
+        String selectionArgs[]={cus_id};
+        int rowsAffected=db.delete(CustomerMaster.User_cart_notification.TABLE_NAME,selection,selectionArgs);
+        if(rowsAffected > 0) {
+            return true;
+        }
+        return false;
+    }
+    public boolean Delete_admin_one_notification_counts(String cus_id,String no_id){
+        SQLiteDatabase db=getReadableDatabase();
+        String selection=CustomerMaster.User_cart_notification.COLUMN_CUS_ID + " = ? and "+
+                CustomerMaster.User_cart_notification.COLUMN_ID + " = ?";
+        String selectionArgs[]={cus_id,no_id};
+        int rowsAffected=db.delete(CustomerMaster.User_cart_notification.TABLE_NAME,selection,selectionArgs);
+        if(rowsAffected > 0) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean Admin_delete_current_product(String id){
         try{
             SQLiteDatabase db=getReadableDatabase();

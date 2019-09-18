@@ -7,6 +7,7 @@
     tools:context=".AppHomeActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -17,25 +18,53 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" >
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/admin_cart_icons"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/user_cart_icon"
-                android:textSize="16sp"
-                android:textColor="@android:color/darker_gray"
-                android:layout_marginStart="140dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="39dp"
+                android:layout_marginBottom="14dp"
+                android:clickable="true"
+                android:focusable="true"
 
-                />
+                android:focusableInTouchMode="false"
+                android:src="@drawable/user_cart_icon"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/cart_count_notification"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="3dp"
+
+                android:layout_marginEnd="-29dp"
+                android:layout_marginBottom="31dp"
+                android:layout_toStartOf="@+id/admin_cart_icons"
+                android:background="@drawable/round_text_view_file"
+                android:gravity="center"
+                android:text="@string/zero0"
+                android:textColor="@android:color/white" />
+        </RelativeLayout>
+
 
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_app_home" />
-    <include layout="@layout/list_layout_view" />
 
+    <include layout="@layout/list_layout_view" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
