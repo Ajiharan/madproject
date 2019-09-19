@@ -70,6 +70,7 @@ public class User_payment_Activity extends AppCompatActivity {
             }
             else {
                 boolean isUpdated = db.update_carts_details(Prevelent.currentUser.getId());
+                boolean isAdded = db.Customer_insert_order_details(payment_view.getText().toString(), Prevelent.currentUser.getId());
                 payments mypay = new payments();
                 mypay.setName(cus_name.getText().toString());
                 mypay.setEmail_id(cus_email.getText().toString());
@@ -77,10 +78,12 @@ public class User_payment_Activity extends AppCompatActivity {
                 mypay.setCardNo(cus_card.getText().toString());
                 mypay.setCity(cus_city.getText().toString());
                 mypay.setTotal(payment_view.getText().toString());
+                mypay.setOrder_id(db.get_order_id());
 
                 boolean isPaid=db.Customer_insert_payment_details(mypay);
-                boolean isAdded = db.Customer_insert_order_details(payment_view.getText().toString(), Prevelent.currentUser.getId());
-                if (isUpdated && isAdded && isPaid) {
+                boolean isNotified=db.insert_user_order_notification_details(Prevelent.currentUser.getId());
+
+                if (isUpdated && isAdded && isPaid && isNotified) {
                     boolean isDeleted= db.Delete_admin_notification_counts(Prevelent.currentUser.getId());
                     Toast.makeText(this, "Paid Sucessfully", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(User_payment_Activity.this, AppHomeActivity.class);

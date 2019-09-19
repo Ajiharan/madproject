@@ -46,7 +46,7 @@ public class AdminHomeActivity extends AppCompatActivity
         private   ImageView admin_edit_current_product;
         private CircleImageView admin_profile;
         private DBHelper db;
-
+        private TextView notification_count;
         private boolean isSearchAvailable=false;
        // private String AdminName;
         //private String AdminId;
@@ -71,7 +71,7 @@ public class AdminHomeActivity extends AppCompatActivity
         //AdminId=intent.getStringExtra(Prevelent.INTENT_USER_ID);
         //Toast.makeText(this,Prevelent.currentUser.getId(),Toast.LENGTH_SHORT).show();
         admin_search_products=findViewById(R.id.admin_search_product_name);
-
+        notification_count=findViewById(R.id.admin_count_notification);
 
         admin_search_products.addTextChangedListener(new TextWatcher() {
             @Override
@@ -122,9 +122,17 @@ public class AdminHomeActivity extends AppCompatActivity
         });
 
         set_profile();
-
+        check_notification();
         retrive_Admin_Products_Details();
 
+    }
+
+    private void check_notification() {
+
+        notification_count.setText(db.retrive_admin_noti_count_number());
+        if(notification_count.getText().toString().equals("0")){
+            notification_count.setVisibility(View.GONE);
+        }
     }
 
     private void search_current_products() {

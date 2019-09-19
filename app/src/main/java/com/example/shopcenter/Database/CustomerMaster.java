@@ -49,6 +49,7 @@ public final class CustomerMaster {
         public static final String COLUMN_NAME_CITY="city";
         public static final String COLUMN_NAME_CUS_ID="cus_id";
         public static final String COLUMN_NAME_AMOUNT="amount";
+        public static final String COLUMN_NAME_ORDER="or_id";
     }
 
     public static class Cus_Order implements  BaseColumns{
@@ -75,6 +76,13 @@ public final class CustomerMaster {
 
     public static class User_cart_notification implements  BaseColumns{
         public static final String TABLE_NAME="cart_count";
+        public static final String COLUMN_ID="id";
+        public static final String COLUMN_COUNT="count";
+        public static final String COLUMN_CUS_ID="cus_id";
+    }
+
+    public static class User_order_notification implements  BaseColumns{
+        public static final String TABLE_NAME="orders_count";
         public static final String COLUMN_ID="id";
         public static final String COLUMN_COUNT="count";
         public static final String COLUMN_CUS_ID="cus_id";

@@ -31,7 +31,9 @@ public class DBHelper extends SQLiteOpenHelper {
     private String dname="Notdelivered";
     public static final String DATABASE_NAME="OnlineShop.db";
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, 10);
+
+        super(context, DATABASE_NAME, null, 12);
+
         myLogo = BitmapFactory.decodeResource(context.getResources(), R.drawable.profile);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         myLogo.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -112,14 +114,25 @@ public class DBHelper extends SQLiteOpenHelper {
                 CustomerMaster.PaymentDetails.COLUMN_NAME_ZIP +  " TEXT,"+
                 CustomerMaster.PaymentDetails.COLUMN_NAME_AMOUNT+ " TEXT,"+
                 CustomerMaster.PaymentDetails.COLUMN_NAME_CUS_ID + " INTEGER,"+
+                CustomerMaster.PaymentDetails.COLUMN_NAME_ORDER + " INTEGER,"+
+
                 " FOREIGN KEY ("+CustomerMaster.PaymentDetails.COLUMN_NAME_CUS_ID +") REFERENCES " + CustomerMaster.Customers.TABLE_NAME+
-                "("+CustomerMaster.Customers.COLUMN_NAME_ID+ ") ON DELETE CASCADE ON UPDATE CASCADE)";
+                "("+CustomerMaster.Customers.COLUMN_NAME_ID+ ") ON DELETE CASCADE ON UPDATE CASCADE, "+
+
+                " FOREIGN KEY ("+CustomerMaster.PaymentDetails.COLUMN_NAME_ORDER +") REFERENCES " + CustomerMaster.Cus_Order.TABLE_NAME+
+                "("+CustomerMaster.Cus_Order.COLUMN_NAME_ID+ ") ON DELETE CASCADE ON UPDATE CASCADE)";
 
 
         String USER_CART_NOTIFICATION_ENTRIES="CREATE TABLE "+CustomerMaster.User_cart_notification.TABLE_NAME + "("+
                 CustomerMaster.User_cart_notification.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 CustomerMaster.User_cart_notification.COLUMN_CUS_ID + " INTEGER,"+
                 " FOREIGN KEY (" + CustomerMaster.User_cart_notification.COLUMN_CUS_ID +") REFERENCES " + CustomerMaster.Customers.TABLE_NAME+
+                "("+CustomerMaster.Customers.COLUMN_NAME_ID+ ") ON DELETE CASCADE ON UPDATE CASCADE)";
+
+        String USER_ORDER_NOTIFICATION_ENTRIES="CREATE TABLE "+CustomerMaster.User_order_notification.TABLE_NAME + "("+
+                CustomerMaster.User_order_notification.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                CustomerMaster.User_order_notification.COLUMN_CUS_ID + " INTEGER,"+
+                " FOREIGN KEY (" + CustomerMaster.User_order_notification.COLUMN_CUS_ID +") REFERENCES " + CustomerMaster.Customers.TABLE_NAME+
                 "("+CustomerMaster.Customers.COLUMN_NAME_ID+ ") ON DELETE CASCADE ON UPDATE CASCADE)";
 
 
@@ -132,6 +145,7 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(ORDER_DETAILS_ENTRIES);
         sqLiteDatabase.execSQL(PAYMENT_DETAILS_ENTRIES);
         sqLiteDatabase.execSQL(USER_CART_NOTIFICATION_ENTRIES);
+        sqLiteDatabase.execSQL(USER_ORDER_NOTIFICATION_ENTRIES);
 
 
 
@@ -139,6 +153,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+CustomerMaster.User_order_notification.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+CustomerMaster.User_cart_notification.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+CustomerMaster.PaymentDetails.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+CustomerMaster.Cus_Order.TABLE_NAME);
@@ -150,13 +165,25 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
 
-            onCreate(sqLiteDatabase);
+        onCreate(sqLiteDatabase);
     }
     public boolean insert_user_notification_details(String cus_id){
         SQLiteDatabase db=getWritableDatabase();
         ContentValues values=new ContentValues();
         values.put(CustomerMaster.User_cart_notification.COLUMN_CUS_ID,cus_id);
         long rowId=db.insert(CustomerMaster.User_cart_notification.TABLE_NAME,null,values);
+        if(rowId  == -1){
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean insert_user_order_notification_details(String cus_id){
+        SQLiteDatabase db=getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put(CustomerMaster.User_order_notification.COLUMN_CUS_ID,cus_id);
+        long rowId=db.insert(CustomerMaster.User_order_notification.TABLE_NAME,null,values);
         if(rowId  == -1){
             return false;
         }
@@ -208,6 +235,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(CustomerMaster.PaymentDetails.COLUMN_NAME_ZIP,pay.getZipcode());
         values.put(CustomerMaster.PaymentDetails.COLUMN_NAME_AMOUNT,pay.getTotal());
         values.put(CustomerMaster.PaymentDetails.COLUMN_NAME_CUS_ID,pay.getCus_id());
+        values.put(CustomerMaster.PaymentDetails.COLUMN_NAME_ORDER,pay.getOrder_id());
         long rowId=db.insert(CustomerMaster.PaymentDetails.TABLE_NAME,null,values);
 
 
@@ -261,6 +289,33 @@ public class DBHelper extends SQLiteOpenHelper {
             count ++;
         }
         return String.valueOf(count);
+    }
+
+    public String retrive_admin_noti_count_number(){
+        SQLiteDatabase db=getReadableDatabase();
+        String sql="SELECT * FROM "+CustomerMaster.User_order_notification.TABLE_NAME;
+
+
+
+        Cursor cursor=db.rawQuery(sql,null);
+        int count=0;
+        while (cursor.moveToNext()){
+            count ++;
+        }
+        return String.valueOf(count);
+    }
+
+    public String get_order_id(){
+        SQLiteDatabase db=getReadableDatabase();
+        String sql="SELECT * FROM "+CustomerMaster.Cus_Order.TABLE_NAME;
+        Cursor cu=db.rawQuery(sql,null);
+        String id="0";
+        while(cu.moveToNext()){
+            id=cu.getString(0);
+        }
+        cu.close();
+
+        return id;
     }
 
     public String retrive_cus_notification_id_count_number(String cuid){
