@@ -9,19 +9,11 @@
             android:icon="@drawable/nav_cart"
             android:iconTint="@android:color/white"
             android:title="@string/carts" />
-        <item
-            android:id="@+id/nav_search"
-            android:icon="@drawable/orders"
-            android:iconTint="@android:color/white"
-            android:title="@string/search" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/category"
-            android:iconTint="@android:color/white"
-            android:title="@string/categories" />
+
+
         <item
             android:id="@+id/nav_admin_home"
-            android:icon="@drawable/category"
+            android:icon="@drawable/home_icon3"
             android:iconTint="@android:color/white"
             android:title="@string/admin_page1" />
         <item
@@ -33,7 +25,7 @@
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_menu_manage"
             android:iconTint="@android:color/white"
-            android:title="@string/settings" />
+            android:title="@string/profile1" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/logout"

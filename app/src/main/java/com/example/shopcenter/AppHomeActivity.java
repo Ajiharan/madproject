@@ -1,5 +1,6 @@
 package com.example.shopcenter;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -50,6 +51,7 @@ public class AppHomeActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private UserProductsAdapter itemAdapter;
     private TextView admin_name;
+
     private ImageView admin_cart_view;
     private ArrayList<Products> productLists;
     private ArrayList<Cart> carttLists;
@@ -80,8 +82,12 @@ public class AppHomeActivity extends AppCompatActivity
         admin_cart_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(AppHomeActivity.this,User_cart_Activity.class);
-                startActivity(intent);
+                if(carttLists.size()==0){
+                    Toast.makeText(AppHomeActivity.this,"Cart is empty",Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent = new Intent(AppHomeActivity.this, User_cart_Activity.class);
+                    startActivity(intent);
+                }
             }
         });
 //        fab_btn =(FloatingActionButton) findViewById(R.id.fab);
@@ -103,6 +109,7 @@ public class AppHomeActivity extends AppCompatActivity
         user_name=headerView.findViewById(R.id.user_profile_name);
         user_name.setText(Prevelent.currentOnlineUser.getName());
         user_profile_img=headerView.findViewById(R.id.user_profile_images);
+
         if(db.getImage(Prevelent.currentOnlineUser.getId()) !=null){
             user_profile_img.setImageBitmap(db.getImage(Prevelent.currentOnlineUser.getId()));
         }
@@ -196,13 +203,9 @@ public class AppHomeActivity extends AppCompatActivity
 
         int id = item.getItemId();
         if (id == R.id.nav_carts) {
-
-        } else if (id == R.id.nav_search) {
-            Intent intent=new Intent(AppHomeActivity.this,User_search_products.class);
+            Intent intent=new Intent(AppHomeActivity.this,User_cart_Activity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_settings) {
+        }else if (id == R.id.nav_settings) {
             Intent intent=new Intent(AppHomeActivity.this,User_settings_Activity.class);
             startActivity(intent);
         }
