@@ -74,7 +74,8 @@ public class Admin_notification_Activity extends AppCompatActivity {
                 switch (index) {
                     case 0:
                         Toast.makeText(Admin_notification_Activity.this,"Sucessfully deleted",Toast.LENGTH_SHORT).show();
-                        //delete_cur_customer(position);
+                        boolean isDeleted=db.delete_notification(dataArrayList.get(position).getId());
+
                         dataArrayList.remove(position);
                         listAdapter.notifyDataSetChanged();
                         break;

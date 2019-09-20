@@ -318,6 +318,19 @@ public class DBHelper extends SQLiteOpenHelper {
         return id;
     }
 
+    public boolean delete_notification(String id){
+        SQLiteDatabase db=getReadableDatabase();
+        String selection = CustomerMaster.PaymentDetails.COLUMN_NAME_ID + " = ?";
+        String selectionArgs[] = {id};
+        int rowsAffected= db.delete(CustomerMaster.PaymentDetails.TABLE_NAME,selection,selectionArgs);
+        if(rowsAffected > 0){
+            return true;
+        }
+        return false;
+
+
+    }
+
     public String retrive_cus_notification_id_count_number(String cuid){
         SQLiteDatabase db=getReadableDatabase();
         String sql="SELECT * FROM "+CustomerMaster.User_cart_notification.TABLE_NAME + " WHERE "+
@@ -339,6 +352,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String sql="SELECT * FROM "+CustomerMaster.PaymentDetails.TABLE_NAME;
         Cursor cursor=db.rawQuery(sql,null);
 
+        String id;
         String name;
         String zip;
         String email;
@@ -347,6 +361,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String amount;
 
         while(cursor.moveToNext()){
+            id=cursor.getString(0);
             name= cursor.getString(1);
             card=cursor.getString(2);
             address=cursor.getString(3);
@@ -361,9 +376,11 @@ public class DBHelper extends SQLiteOpenHelper {
             pay1.setEmail_id(email);
             pay1.setZipcode(zip);
             pay1.setTotal(amount);
+            pay1.setId(id);
             list.add(pay1);
 
         }
+
         cursor.close();
         return list;
     }

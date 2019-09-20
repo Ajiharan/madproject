@@ -35,7 +35,7 @@
                     android:focusable="true"
 
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/admin_icon"
+                    android:src="@drawable/admin_message_icon2"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="16sp" />
 

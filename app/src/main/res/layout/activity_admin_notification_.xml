@@ -33,7 +33,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:gravity="center"
-            android:text="Notification"
+            android:text="Message"
             android:textColor="@color/colorAccent"
             android:textSize="18sp"
             android:textStyle="bold"
