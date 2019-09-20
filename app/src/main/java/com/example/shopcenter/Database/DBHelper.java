@@ -359,6 +359,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String card;
         String address;
         String amount;
+        String or_id;
 
         while(cursor.moveToNext()){
             id=cursor.getString(0);
@@ -368,7 +369,7 @@ public class DBHelper extends SQLiteOpenHelper {
             email=cursor.getString(4);
             zip=cursor.getString(5);
             amount=cursor.getString(6);
-
+            or_id=cursor.getString(8);
             payments pay1=new payments();
             pay1.setName(name);
             pay1.setCardNo(card);
@@ -377,6 +378,7 @@ public class DBHelper extends SQLiteOpenHelper {
             pay1.setZipcode(zip);
             pay1.setTotal(amount);
             pay1.setId(id);
+            pay1.setId(or_id);
             list.add(pay1);
 
         }
@@ -741,6 +743,20 @@ public class DBHelper extends SQLiteOpenHelper {
         String selection=CustomerMaster.UserCart.COLUMN_FOREIGN + " = ?";
         String selectionArgs[]={num};
         int counts =db.update(CustomerMaster.UserCart.TABLE_NAME,values,selection,selectionArgs);
+        if (counts > 0) {
+            return true;
+        }
+        return false;
+
+    }
+
+    public boolean update_cus_orders(String id){
+        SQLiteDatabase db=getReadableDatabase();
+        ContentValues values=new ContentValues();
+        values.put(CustomerMaster.Cus_Order.COLUMN_NAME_DELIVERY,"1");
+        String selection=CustomerMaster.Cus_Order.COLUMN_NAME_ID + " =?";
+        String selectionArgs[]={id};
+        int counts=db.update(CustomerMaster.Cus_Order.TABLE_NAME,values,selection,selectionArgs);
         if (counts > 0) {
             return true;
         }
