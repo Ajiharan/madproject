@@ -73,12 +73,15 @@ public class Admin_notification_Activity extends AppCompatActivity {
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 switch (index) {
                     case 0:
-                        Toast.makeText(Admin_notification_Activity.this,"Sucessfully deleted",Toast.LENGTH_SHORT).show();
+
                         boolean isDeleted=db.delete_notification(dataArrayList.get(position).getId());
                         boolean isUpdated=db.update_cus_orders(dataArrayList.get(position).getOrder_id());
 
                         dataArrayList.remove(position);
                         listAdapter.notifyDataSetChanged();
+                        if(isUpdated && isDeleted) {
+                            Toast.makeText(Admin_notification_Activity.this, "Sucessfully deleted", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     case 1:
                         break;

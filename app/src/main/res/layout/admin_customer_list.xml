@@ -26,6 +26,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/customer_profile_views"
                 android:layout_width="95dp"
+                android:transitionName="imageTransition"
                 android:layout_height="69dp"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/profile" />

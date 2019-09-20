@@ -378,7 +378,7 @@ public class DBHelper extends SQLiteOpenHelper {
             pay1.setZipcode(zip);
             pay1.setTotal(amount);
             pay1.setId(id);
-            pay1.setId(or_id);
+            pay1.setOrder_id(or_id);
             list.add(pay1);
 
         }

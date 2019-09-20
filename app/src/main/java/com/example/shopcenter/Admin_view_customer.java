@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ActivityOptions;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -80,6 +82,7 @@ public class Admin_view_customer extends AppCompatActivity {
 
                 User curr_user=dataArrayList.get(i);
                 intent.putExtra("customer_id",curr_user.getId());
+
                 //Prevelent.currentUser=curr_user;
                 startActivity(intent);
             }

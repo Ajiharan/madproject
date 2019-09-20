@@ -6,6 +6,7 @@
         <item name="colorPrimary">#BF007A</item>
         <item name="colorPrimaryDark">#BF007A</item>
         <item name="colorAccent">#FF4081</item>
+        <item name="android:windowActivityTransitions">true</item>
     </style>
 
     <style name="Custom" parent="android:Theme.DeviceDefault.Dialog">
