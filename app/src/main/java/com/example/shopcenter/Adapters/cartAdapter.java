@@ -1,4 +1,4 @@
-package com.example.shopcenter.model;
+package com.example.shopcenter.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shopcenter.R;
+import com.example.shopcenter.model.Cart;
 
 import java.util.ArrayList;
 

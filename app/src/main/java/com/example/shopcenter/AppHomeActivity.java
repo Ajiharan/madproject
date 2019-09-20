@@ -8,10 +8,8 @@ import com.example.shopcenter.Prevelent.Prevelent;
 import com.example.shopcenter.model.Cart;
 import com.example.shopcenter.model.Products;
 
-import com.example.shopcenter.model.ProductsAdapter;
-import com.example.shopcenter.model.UserProductsAdapter;
+import com.example.shopcenter.Adapters.UserProductsAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import android.view.View;
 

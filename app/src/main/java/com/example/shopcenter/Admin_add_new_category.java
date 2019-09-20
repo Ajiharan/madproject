@@ -13,8 +13,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.media.RatingCompat;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,16 +23,10 @@ import android.widget.Toast;
 import com.example.shopcenter.Database.DBHelper;
 import com.example.shopcenter.Prevelent.Prevelent;
 import com.example.shopcenter.model.CategoryItems;
-import com.example.shopcenter.model.CategoryItemsAdapter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.shopcenter.Adapters.CategoryItemsAdapter;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.zip.Inflater;
-
-import dmax.dialog.SpotsDialog;
-
-import static com.example.shopcenter.Prevelent.Prevelent.Currentcategories;
 
 public class Admin_add_new_category extends AppCompatActivity {
 

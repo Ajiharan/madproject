@@ -20,10 +20,8 @@ import android.widget.Toast;
 
 import com.example.shopcenter.Database.DBHelper;
 import com.example.shopcenter.Prevelent.Prevelent;
-import com.example.shopcenter.model.CategoryItems;
-import com.example.shopcenter.model.CategoryItemsAdapter;
 import com.example.shopcenter.model.Products;
-import com.example.shopcenter.model.ProductsAdapter;
+import com.example.shopcenter.Adapters.ProductsAdapter;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;

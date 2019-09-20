@@ -670,6 +670,11 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void delete_admin_notification(){
+        SQLiteDatabase db=getReadableDatabase();
+        int rowDeleted=db.delete(CustomerMaster.User_order_notification.TABLE_NAME,null,null);
+
+    }
     public boolean user_delete_cart(String id){
         SQLiteDatabase db=getReadableDatabase();
         String selection=CustomerMaster.UserCart.COLUMN_ID + " = ?";

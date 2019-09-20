@@ -16,9 +16,7 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.shopcenter.Database.DBHelper;
-import com.example.shopcenter.model.NotificationAdapter;
-import com.example.shopcenter.model.User;
-import com.example.shopcenter.model.cuslistAdapter;
+import com.example.shopcenter.Adapters.NotificationAdapter;
 import com.example.shopcenter.model.payments;
 
 import java.util.ArrayList;
@@ -55,6 +53,7 @@ public class Admin_notification_Activity extends AppCompatActivity {
     }
 
     private void retrive_customer_details() {
+        db.delete_admin_notification();
 
         dataArrayList=db.retrive_admin_notification_details();
         listAdapter = new NotificationAdapter(this, dataArrayList);

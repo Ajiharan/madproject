@@ -1,8 +1,6 @@
 package com.example.shopcenter;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,7 +14,7 @@ import android.widget.Toast;
 import com.example.shopcenter.Database.DBHelper;
 import com.example.shopcenter.Prevelent.Prevelent;
 import com.example.shopcenter.model.Cart;
-import com.example.shopcenter.model.cartAdapter;
+import com.example.shopcenter.Adapters.cartAdapter;
 import com.example.shopcenter.model.payments;
 
 import java.util.ArrayList;

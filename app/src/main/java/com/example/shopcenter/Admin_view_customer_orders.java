@@ -7,12 +7,10 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.shopcenter.Prevelent.Prevelent;
-import com.example.shopcenter.model.cus_order_lis_Adapter;
+import com.example.shopcenter.Adapters.cus_order_lis_Adapter;
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;

@@ -1,9 +1,6 @@
-package com.example.shopcenter.model;
+package com.example.shopcenter.Adapters;
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.shopcenter.R;
+import com.example.shopcenter.model.User;
 
 import java.util.ArrayList;
 import java.util.List;

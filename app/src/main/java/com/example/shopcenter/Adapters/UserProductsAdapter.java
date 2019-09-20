@@ -1,4 +1,4 @@
-package com.example.shopcenter.model;
+package com.example.shopcenter.Adapters;
 
 
 
@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shopcenter.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.shopcenter.model.Products;
 
 import java.util.ArrayList;
 

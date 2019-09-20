@@ -1,17 +1,11 @@
 package com.example.shopcenter;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.ActivityOptions;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -22,14 +16,10 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.shopcenter.Database.DBHelper;
-import com.example.shopcenter.Prevelent.Prevelent;
-import com.example.shopcenter.model.cus_orders;
 import com.example.shopcenter.model.User;
-import com.example.shopcenter.model.cuslistAdapter;
+import com.example.shopcenter.Adapters.cuslistAdapter;
 
 import java.util.ArrayList;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Admin_view_customer extends AppCompatActivity {
 
