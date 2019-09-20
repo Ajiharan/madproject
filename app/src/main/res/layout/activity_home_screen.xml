@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    tools:context=".HomeScreen">
+
+
+    <TextView
+        android:id="@+id/homeScreen_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="e-shop"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:textStyle="italic|bold"
+        android:textSize="30sp"
+        android:layout_marginTop="280dp"
+
+        />
+    <TextView
+        android:layout_below="@+id/homeScreen_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="@string/the_way_of_shopping"
+
+        />
+</RelativeLayout>
