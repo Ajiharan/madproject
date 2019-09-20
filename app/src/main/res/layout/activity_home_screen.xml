@@ -12,7 +12,7 @@
         android:id="@+id/homeScreen_heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="e-shop"
+        android:text="@string/e_shop"
         android:textColor="@android:color/white"
         android:gravity="center"
         android:textStyle="italic|bold"
