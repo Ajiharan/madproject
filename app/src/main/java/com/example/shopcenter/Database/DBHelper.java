@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.example.shopcenter.R;
+
 import com.example.shopcenter.model.Cart;
 import com.example.shopcenter.model.CategoryItems;
 import com.example.shopcenter.model.Products;
@@ -26,18 +26,15 @@ import io.paperdb.Paper;
 public class DBHelper extends SQLiteOpenHelper {
 
     private String num="0";
-    private Bitmap myLogo;
-    private  byte[] photo1;
-    private String dname="Notdelivered";
+
+
+
     public static final String DATABASE_NAME="OnlineShop.db";
     public DBHelper(Context context) {
 
         super(context, DATABASE_NAME, null, 12);
 
-        myLogo = BitmapFactory.decodeResource(context.getResources(), R.drawable.profile);
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        myLogo.compress(Bitmap.CompressFormat.PNG, 100, stream);
-         photo1 = stream.toByteArray();
+
     }
 
     @Override
@@ -172,11 +169,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues values=new ContentValues();
         values.put(CustomerMaster.User_cart_notification.COLUMN_CUS_ID,cus_id);
         long rowId=db.insert(CustomerMaster.User_cart_notification.TABLE_NAME,null,values);
-        if(rowId  == -1){
-            return false;
-        }
-
-        return true;
+        return rowId != -1;
     }
 
     public boolean insert_user_order_notification_details(String cus_id){
@@ -184,11 +177,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues values=new ContentValues();
         values.put(CustomerMaster.User_order_notification.COLUMN_CUS_ID,cus_id);
         long rowId=db.insert(CustomerMaster.User_order_notification.TABLE_NAME,null,values);
-        if(rowId  == -1){
-            return false;
-        }
-
-        return true;
+        return rowId != -1;
     }
     public boolean User_insert_cart_details(Cart cart){
         SQLiteDatabase db=getWritableDatabase();
@@ -208,11 +197,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(CustomerMaster.UserCart.COLUMN_FOREIGN,cart.getFid());
 
         long rowId=db.insert(CustomerMaster.UserCart.TABLE_NAME,null,values);
-        if(rowId  == -1){
-            return false;
-        }
-
-        return true;
+        return rowId != -1;
     }
     public boolean Customer_insert_order_details(String amount,String cus_id){
         SQLiteDatabase db=getWritableDatabase();
@@ -239,11 +224,7 @@ public class DBHelper extends SQLiteOpenHelper {
         long rowId=db.insert(CustomerMaster.PaymentDetails.TABLE_NAME,null,values);
 
 
-        if(rowId  == -1){
-            return false;
-        }
-
-        return true;
+        return rowId != -1;
     }
 
     public boolean Customer_insert_data(String name,String emailid,String password){
@@ -256,11 +237,7 @@ public class DBHelper extends SQLiteOpenHelper {
         long rowId=db.insert(CustomerMaster.Customers.TABLE_NAME,null,values);
 
 
-        if(rowId  == -1){
-            return false;
-        }
-
-        return true;
+        return rowId != -1;
 
     }
 
@@ -280,7 +257,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db=getReadableDatabase();
         String sql="SELECT * FROM "+CustomerMaster.User_cart_notification.TABLE_NAME + " WHERE "+
                 CustomerMaster.User_cart_notification.COLUMN_CUS_ID + " = ?";
-        String selectionArgs[]={cuid};
+        String[] selectionArgs = {cuid};
 
 
         Cursor cursor=db.rawQuery(sql,selectionArgs);
@@ -288,6 +265,7 @@ public class DBHelper extends SQLiteOpenHelper {
         while (cursor.moveToNext()){
             count ++;
         }
+        cursor.close();
         return String.valueOf(count);
     }
 
@@ -302,6 +280,7 @@ public class DBHelper extends SQLiteOpenHelper {
         while (cursor.moveToNext()){
             count ++;
         }
+        cursor.close();
         return String.valueOf(count);
     }
 
@@ -321,12 +300,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean delete_notification(String id){
         SQLiteDatabase db=getReadableDatabase();
         String selection = CustomerMaster.PaymentDetails.COLUMN_NAME_ID + " = ?";
-        String selectionArgs[] = {id};
+        String[] selectionArgs = {id};
         int rowsAffected= db.delete(CustomerMaster.PaymentDetails.TABLE_NAME,selection,selectionArgs);
-        if(rowsAffected > 0){
-            return true;
-        }
-        return false;
+        return rowsAffected > 0;
 
 
     }
@@ -335,7 +311,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db=getReadableDatabase();
         String sql="SELECT * FROM "+CustomerMaster.User_cart_notification.TABLE_NAME + " WHERE "+
                 CustomerMaster.User_cart_notification.COLUMN_CUS_ID + " = ?";
-        String selectionArgs[]={cuid};
+        String[] selectionArgs = {cuid};
 
 
         Cursor cursor=db.rawQuery(sql,selectionArgs);
@@ -343,6 +319,7 @@ public class DBHelper extends SQLiteOpenHelper {
         while (cursor.moveToNext()){
             count= cursor.getString(0);
         }
+        cursor.close();
         return count;
     }
 
@@ -392,7 +369,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String sql="SELECT * FROM "+ CustomerMaster.Cus_Order.TABLE_NAME + " WHERE "+
                 CustomerMaster.Cus_Order.COLUMN_NAME_CUS_ID + " = ?";
-        String selectionArgs[]={cuid};
+        String[] selectionArgs = {cuid};
 
         Cursor cu=db.rawQuery(sql,selectionArgs);
 
@@ -451,7 +428,7 @@ public class DBHelper extends SQLiteOpenHelper {
             image=cu.getBlob(6);
             ppid=cu.getString(7);
             fcuid=cu.getString(8);
-            Bitmap bitmap=null;
+            Bitmap bitmap;
 
             bitmap= BitmapFactory.decodeByteArray(image,0,image.length);
 
@@ -460,6 +437,7 @@ public class DBHelper extends SQLiteOpenHelper {
             list.add(cart);
 
         }
+        cu.close();
 
         return list;
     }
@@ -487,7 +465,7 @@ public class DBHelper extends SQLiteOpenHelper {
             price=cu.getString(4);
             image=cu.getBlob(5);
             fid=cu.getString(7);
-            Bitmap bitmap=null;
+            Bitmap bitmap;
 
             bitmap= BitmapFactory.decodeByteArray(image,0,image.length);
 
@@ -526,7 +504,7 @@ public class DBHelper extends SQLiteOpenHelper {
             price=cu.getString(4);
             image=cu.getBlob(5);
             fid=cu.getString(7);
-            Bitmap bitmap=null;
+            Bitmap bitmap;
 
             bitmap= BitmapFactory.decodeByteArray(image,0,image.length);
 
@@ -590,7 +568,7 @@ public class DBHelper extends SQLiteOpenHelper {
             String id=cu.getString(0);
             image=cu.getBlob(1);
             String name=cu.getString(2);
-            Bitmap bitmap=null;
+            Bitmap bitmap;
 
             bitmap= BitmapFactory.decodeByteArray(image,0,image.length);
             CategoryItems items=new CategoryItems(name,bitmap);
@@ -605,49 +583,36 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public boolean admin_delete_current_customer(String id){
 
-            SQLiteDatabase db = getReadableDatabase();
-            String selection = CustomerMaster.Customers.COLUMN_NAME_ID + " = ?";
-            String selectionArgs[] = {id};
-           int rowsAffected= db.delete(CustomerMaster.Customers.TABLE_NAME,selection,selectionArgs);
-           if(rowsAffected > 0){
-               return true;
-           }
-            return false;
+        SQLiteDatabase db = getReadableDatabase();
+        String selection = CustomerMaster.Customers.COLUMN_NAME_ID + " = ?";
+        String[] selectionArgs = {id};
+        int rowsAffected= db.delete(CustomerMaster.Customers.TABLE_NAME,selection,selectionArgs);
+        return rowsAffected > 0;
 
     }
 
     public boolean Delete_admin_notification_counts(String cus_id){
         SQLiteDatabase db=getReadableDatabase();
         String selection=CustomerMaster.User_cart_notification.COLUMN_CUS_ID + " = ?";
-        String selectionArgs[]={cus_id};
+        String[] selectionArgs = {cus_id};
         int rowsAffected=db.delete(CustomerMaster.User_cart_notification.TABLE_NAME,selection,selectionArgs);
-        if(rowsAffected > 0) {
-            return true;
-        }
-        return false;
+        return rowsAffected > 0;
     }
     public boolean Delete_admin_one_notification_counts(String cus_id,String no_id){
         SQLiteDatabase db=getReadableDatabase();
-        String selection=CustomerMaster.User_cart_notification.COLUMN_CUS_ID + " = ? and "+
-                CustomerMaster.User_cart_notification.COLUMN_ID + " = ?";
-        String selectionArgs[]={cus_id,no_id};
+        String selection=CustomerMaster.User_cart_notification.COLUMN_CUS_ID + " = ? and "+ CustomerMaster.User_cart_notification.COLUMN_ID + " = ?";
+        String[] selectionArgs = {cus_id, no_id};
         int rowsAffected=db.delete(CustomerMaster.User_cart_notification.TABLE_NAME,selection,selectionArgs);
-        if(rowsAffected > 0) {
-            return true;
-        }
-        return false;
+        return rowsAffected > 0;
     }
 
     public boolean Admin_delete_current_product(String id){
         try{
             SQLiteDatabase db=getReadableDatabase();
             String selection=CustomerMaster.ProductItems.COLUMN_NAME_ID + " = ?";
-            String selectionArgs[]={id};
+            String[] selectionArgs = {id};
              int rowsAffected=db.delete(CustomerMaster.ProductItems.TABLE_NAME,selection,selectionArgs);
-             if(rowsAffected > 0) {
-                 return true;
-             }
-             return false;
+            return rowsAffected > 0;
         }
         catch (Exception e){
             e.printStackTrace();
@@ -660,7 +625,7 @@ public class DBHelper extends SQLiteOpenHelper {
         try{
             SQLiteDatabase db=getReadableDatabase();
             String selection=CustomerMaster.ProductCategory.COLUMN_NAME_ID + " = ?";
-            String selectionArgs[]={id};
+            String[] selectionArgs = {id};
             db.delete(CustomerMaster.ProductCategory.TABLE_NAME,selection,selectionArgs);
             return true;
         }
@@ -672,18 +637,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void delete_admin_notification(){
         SQLiteDatabase db=getReadableDatabase();
-        int rowDeleted=db.delete(CustomerMaster.User_order_notification.TABLE_NAME,null,null);
+        db.delete(CustomerMaster.User_order_notification.TABLE_NAME,null,null);
 
     }
     public boolean user_delete_cart(String id){
         SQLiteDatabase db=getReadableDatabase();
         String selection=CustomerMaster.UserCart.COLUMN_ID + " = ?";
-        String selectionArgs[]={id};
+        String[] selectionArgs = {id};
         int rowDeleted=db.delete(CustomerMaster.UserCart.TABLE_NAME,selection,selectionArgs);
-        if(rowDeleted > 0){
-            return true;
-        }
-        return false;
+        return rowDeleted > 0;
     }
     public boolean Admin_add_Category_Details(byte[] image,String name){
         SQLiteDatabase db=getWritableDatabase();
@@ -691,11 +653,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(CustomerMaster.ProductCategory.COLUMN_NAME_IMAGE,image);
         values.put(CustomerMaster.ProductCategory.COLIMN_NAME_CATEGORY_NAME,name);
         long rowId=db.insert(CustomerMaster.ProductCategory.TABLE_NAME,null,values);
-        if(rowId  == -1){
-            return false;
-        }
-
-        return true;
+        return rowId != -1;
 
     }
     public boolean Admin_add_product_Details(String name,String desc,String price,String count,byte[] image,String fid,String cname){
@@ -712,11 +670,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         long rowId=db.insert(CustomerMaster.ProductItems.TABLE_NAME,null,values);
 
-        if(rowId  == -1){
-            return false;
-        }
-
-        return true;
+        return rowId != -1;
     }
     public boolean Admin_update_category_Info(String id,String name,byte[]image){
         SQLiteDatabase db=getReadableDatabase();
@@ -724,20 +678,17 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(CustomerMaster.ProductCategory.COLUMN_NAME_IMAGE,image);
         values.put(CustomerMaster.ProductCategory.COLIMN_NAME_CATEGORY_NAME,name);
         String selection= CustomerMaster.ProductCategory.COLUMN_NAME_ID +" = ?";
-        String selectionArgs[]={id};
+        String[] selectionArgs = {id};
         int count=db.update(CustomerMaster.ProductCategory.TABLE_NAME,values,selection,selectionArgs);
 
         ContentValues values1 =new ContentValues();
         values1.put(CustomerMaster.ProductItems.COLUMN_NAME_CATEGORY_NAME,name);
         String selection1=CustomerMaster.ProductItems.COLUMN_NAME_FOREIGNKEY + " = ?";
-        String selectionArgs1[]={id};
-        int count1=db.update(CustomerMaster.ProductItems.TABLE_NAME,values1,selection1,selectionArgs1);
+        String[] selectionArgs1 = {id};
+        db.update(CustomerMaster.ProductItems.TABLE_NAME,values1,selection1,selectionArgs1);
 
 
-        if(count > 0){
-            return true;
-        }
-        return false;
+        return count > 0;
 
     }
     public boolean update_carts_details(String num){
@@ -746,12 +697,9 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues values=new ContentValues();
         values.put(CustomerMaster.UserCart.COLUMN_DEFAULT_CHECK,"1");
         String selection=CustomerMaster.UserCart.COLUMN_FOREIGN + " = ?";
-        String selectionArgs[]={num};
+        String[] selectionArgs = {num};
         int counts =db.update(CustomerMaster.UserCart.TABLE_NAME,values,selection,selectionArgs);
-        if (counts > 0) {
-            return true;
-        }
-        return false;
+        return counts > 0;
 
     }
 
@@ -760,12 +708,9 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues values=new ContentValues();
         values.put(CustomerMaster.Cus_Order.COLUMN_NAME_DELIVERY,"1");
         String selection=CustomerMaster.Cus_Order.COLUMN_NAME_ID + " =?";
-        String selectionArgs[]={id};
+        String[] selectionArgs = {id};
         int counts=db.update(CustomerMaster.Cus_Order.TABLE_NAME,values,selection,selectionArgs);
-        if (counts > 0) {
-            return true;
-        }
-        return false;
+        return counts > 0;
 
     }
     public boolean Admin_update_product_info(String id,String name,String des,String price,byte[]image,String count){
@@ -778,13 +723,10 @@ public class DBHelper extends SQLiteOpenHelper {
             values.put(CustomerMaster.ProductItems.COLUMN_NAME_PRICE, price);
             values.put(CustomerMaster.ProductItems.COLUMN_NAME_PRODUCTIMAGE, image);
             String selection = CustomerMaster.ProductItems.COLUMN_NAME_ID + " = ?";
-            String selectionArgs[] = {id};
+            String[] selectionArgs = {id};
 
             int counts = db.update(CustomerMaster.ProductItems.TABLE_NAME, values, selection, selectionArgs);
-            if (counts > 0) {
-                return true;
-            }
-            return false;
+            return counts > 0;
         }
         catch (SQLException ex){
             ex.printStackTrace();
@@ -794,30 +736,27 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Cursor  Customer_mail_check(String emailid){
         SQLiteDatabase db=getReadableDatabase();
-        String projection[]={CustomerMaster.Customers.COLUMN_NAME_ID, CustomerMaster.Customers.COLUMN_NAME_NAME, CustomerMaster.Customers.COLUMN_NAME_EMAIL,
+        String[] projection = {CustomerMaster.Customers.COLUMN_NAME_ID, CustomerMaster.Customers.COLUMN_NAME_NAME, CustomerMaster.Customers.COLUMN_NAME_EMAIL,
                 CustomerMaster.Customers.COLUMN_NAME_PASSWORD};
 
-        Cursor cursor=db.query(CustomerMaster.Customers.TABLE_NAME,projection, null,null,null,null,null);
-        return  cursor;
+        return db.query(CustomerMaster.Customers.TABLE_NAME,projection, null,null,null,null,null);
 
     }
 
     public Cursor Admin_product_name_check(){
         SQLiteDatabase db=getReadableDatabase();
-        String projection[]={CustomerMaster.ProductCategory.COLUMN_NAME_ID, CustomerMaster.ProductCategory.COLUMN_NAME_IMAGE, CustomerMaster.ProductCategory.COLIMN_NAME_CATEGORY_NAME};
+        String[] projection = {CustomerMaster.ProductCategory.COLUMN_NAME_ID, CustomerMaster.ProductCategory.COLUMN_NAME_IMAGE, CustomerMaster.ProductCategory.COLIMN_NAME_CATEGORY_NAME};
 
-        Cursor cu=db.query(CustomerMaster.ProductCategory.TABLE_NAME,projection,null,null,null,null,null);
-        return cu;
+        return db.query(CustomerMaster.ProductCategory.TABLE_NAME,projection,null,null,null,null,null);
     }
 
     public Cursor Admin_Item_name_check(){
         SQLiteDatabase db=getReadableDatabase();
-        String projection[]={CustomerMaster.ProductItems.COLUMN_NAME_ID, CustomerMaster.ProductItems.COLUMN_NAME_PRODUCT_NAME,
+        String[] projection = {CustomerMaster.ProductItems.COLUMN_NAME_ID, CustomerMaster.ProductItems.COLUMN_NAME_PRODUCT_NAME,
                 CustomerMaster.ProductItems.COLUMN_NAME_COUNT, CustomerMaster.ProductItems.COLUMN_NAME_DESCRIPTION, CustomerMaster.ProductItems.COLUMN_NAME_PRICE,
                 CustomerMaster.ProductItems.COLUMN_NAME_PRODUCTIMAGE, CustomerMaster.ProductItems.COLUMN_NAME_FOREIGNKEY};
 
-        Cursor cu=db.query(CustomerMaster.ProductItems.TABLE_NAME,projection,null,null,null,null,null);
-        return cu;
+        return db.query(CustomerMaster.ProductItems.TABLE_NAME,projection,null,null,null,null,null);
     }
 
     public Bitmap getImage(String user_id){
@@ -828,7 +767,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String sql="SELECT * FROM "+ CustomerMaster.Profile.TABLE_NAME+" WHERE "+ CustomerMaster.Profile.COLUMN_FOREIGNKEY_CUS_ID +"=?";
         Cursor cu=db.rawQuery(sql,new String[]{user_id});
         // System.out.println("Cus :"+user_id);
-        byte[] image=null;
+        byte[] image;
         int t=-1;
         while(cu.moveToNext()){
             image=cu.getBlob(1);

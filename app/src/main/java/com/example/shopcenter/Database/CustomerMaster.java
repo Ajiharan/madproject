@@ -2,7 +2,7 @@ package com.example.shopcenter.Database;
 
 import android.provider.BaseColumns;
 
-import com.example.shopcenter.Prevelent.Prevelent;
+
 
 public final class CustomerMaster {
     private CustomerMaster(){}
