@@ -176,7 +176,7 @@ public class Admin_edit_categories extends AppCompatActivity {
 
 
     private void setDetails() {
-        Toast.makeText(Admin_edit_categories.this,Prevelent.Currentcategories.getId(),Toast.LENGTH_LONG).show();
+        //Toast.makeText(Admin_edit_categories.this,Prevelent.Currentcategories.getId(),Toast.LENGTH_LONG).show();
         admin_category_edit_image.setImageBitmap(Prevelent.Currentcategories.getBitmap());
         admin_edit_category_product_names.setText(Prevelent.Currentcategories.getName());
     }

@@ -117,9 +117,9 @@ public class Admin_view_customer extends AppCompatActivity {
             deleteItem.setBackground(new ColorDrawable(Color.parseColor("#F45557")));
             // set item width
             deleteItem.setWidth(150);
-            deleteItem.setTitle("x");
+            deleteItem.setIcon(R.drawable.user_admin_delete_icon);
             deleteItem.setTitleColor(Color.WHITE);
-            deleteItem.setTitleSize(15);
+
             // add to menu
             menu.addMenuItem(deleteItem);
         }

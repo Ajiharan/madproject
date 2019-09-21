@@ -20,6 +20,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
             android:padding="16dp"
             >
 
@@ -35,8 +36,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/customer_name_view"
+                android:text="@string/name221"
                 android:textStyle="bold|italic"
-                android:textColor="@color/colorAccent"
+                android:textColor="@android:color/white"
                 android:layout_toRightOf="@+id/customer_profile_views"
                 android:layout_alignParentTop="true"
                 android:textSize="20sp"
@@ -46,6 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/view_details1"
+                android:textColor="@android:color/white"
                 android:layout_toRightOf="@+id/customer_profile_views"
                 android:layout_below="@+id/customer_name_view"
                 />

@@ -57,7 +57,7 @@ public class Admin_view_customer_orders extends AppCompatActivity {
 
 
         dataArrayList = db.retrive_user_order_details(cus_id1);
-        Toast.makeText(this,String.valueOf(dataArrayList.size()),Toast.LENGTH_SHORT).show();
+
 
         if(dataArrayList.size() > 0) {
             listAdapter = new cus_order_lis_Adapter(this, dataArrayList);
