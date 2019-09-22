@@ -1,9 +1,11 @@
 package com.example.shopcenter;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -38,6 +40,8 @@ public class User_cart_Activity extends AppCompatActivity {
         recyclerView=findViewById(R.id.user_cart_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         view_total=findViewById(R.id.total_amount_display);
+
+
 
         user_placeOrder_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,18 +89,31 @@ public class User_cart_Activity extends AppCompatActivity {
 
         itemAdapter.setOnItemClickListener(new cartAdapter.ClickListener() {
             @Override
-            public void onItemClick(int position, View v) {
-                boolean isDeleted=db.user_delete_cart(carttLists.get(position).getId());
-                if(isDeleted){
-                   String nid= db.retrive_cus_notification_id_count_number(Prevelent.currentUser.getId());
-                   db.Delete_admin_one_notification_counts(Prevelent.currentUser.getId(),nid);
-                    Toast.makeText(User_cart_Activity.this,"item removed",Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(User_cart_Activity.this,User_cart_Activity.class);
-                    startActivity(intent);
-                }
-                else{
-                    Toast.makeText(User_cart_Activity.this,"Error cannot remove",Toast.LENGTH_SHORT).show();
-                }
+            public void onItemClick(final int position, View v) {
+
+                AlertDialog.Builder builder=new AlertDialog.Builder(User_cart_Activity.this);
+                builder.setTitle("Delete Item").setMessage("do you want to delete this item?").setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        boolean isDeleted=db.user_delete_cart(carttLists.get(position).getId());
+                        if(isDeleted){
+                            String nid= db.retrive_cus_notification_id_count_number(Prevelent.currentUser.getId());
+                            db.Delete_admin_one_notification_counts(Prevelent.currentUser.getId(),nid);
+                            Toast.makeText(User_cart_Activity.this,"item removed",Toast.LENGTH_SHORT).show();
+                            Intent intent=new Intent(User_cart_Activity.this,User_cart_Activity.class);
+                            startActivity(intent);
+                        }
+                        else{
+                            Toast.makeText(User_cart_Activity.this,"Error cannot remove",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                }).setCancelable(false).show();
+
             }
 
             @Override

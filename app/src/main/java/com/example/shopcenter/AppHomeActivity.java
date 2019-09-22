@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.shopcenter.Adapters.ProductsAdapter;
 import com.example.shopcenter.Database.DBHelper;
 import com.example.shopcenter.Prevelent.Prevelent;
 import com.example.shopcenter.model.Cart;
@@ -12,6 +13,8 @@ import com.example.shopcenter.model.Products;
 import com.example.shopcenter.Adapters.UserProductsAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 
 import androidx.core.view.GravityCompat;
@@ -29,6 +32,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,8 +50,10 @@ public class AppHomeActivity extends AppCompatActivity
     private String UserName;
     private CircleImageView user_profile_img;
     private TextView user_name;
+    private boolean isSearchAvailable=false;
     private DBHelper db;
     private TextView cart_number;
+    private EditText search_result;
     private RecyclerView recyclerView;
     private UserProductsAdapter itemAdapter;
     private TextView admin_name;
@@ -64,6 +70,23 @@ public class AppHomeActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         Intent intent=getIntent();
         UserName=intent.getStringExtra(Prevelent.INTENT_USER_NAME);
+        search_result=findViewById(R.id.user_search_products);
+        search_result.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                search_current_products();
+            }
+        });
         setSupportActionBar(toolbar);
         imgBanner=findViewById(R.id.img_banner);
         int sliders[]={R.drawable.amin_home_5,R.drawable.admin_lap_2,R.drawable.cam1};
@@ -119,6 +142,33 @@ public class AppHomeActivity extends AppCompatActivity
 
     }
 
+    private void search_current_products() {
+        productLists=db.Retrive_admin_search_product_details(search_result.getText().toString());
+        if(productLists.size() != 0) {
+            isSearchAvailable=true;
+            itemAdapter = new UserProductsAdapter(this, productLists);
+            recyclerView.setAdapter(itemAdapter);
+
+            itemAdapter.setOnItemClickListener(new UserProductsAdapter.ClickListener() {
+                @Override
+                public void onItemClick(int position, View v) {
+                    Prevelent.current_user_products=productLists.get(position);
+                    Intent intent=new Intent(AppHomeActivity.this,ProductDetailActivity.class);
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onItemLongClick(int position, View v) {
+                    //Toast.makeText(AdminHomeActivity.this,"Check long pressed",Toast.LENGTH_LONG).show();
+                }
+            });
+
+        }
+        else{
+            isSearchAvailable=false;
+        }
+    }
+
     private void check_notification() {
         carttLists = db.retrive_user_cart_details(Prevelent.currentUser.getId());
         if(carttLists.size()==0){
@@ -145,23 +195,25 @@ public class AppHomeActivity extends AppCompatActivity
         imgBanner.setOutAnimation(this,android.R.anim.fade_out);
      }
     private void retrive_Admin_Products_Details(){
-        productLists=db.Retrive_admin_product_details();
-        itemAdapter =new UserProductsAdapter(this,productLists);
-        recyclerView.setAdapter(itemAdapter);
+        if(!isSearchAvailable) {
+            productLists = db.Retrive_admin_product_details();
+            itemAdapter = new UserProductsAdapter(this, productLists);
+            recyclerView.setAdapter(itemAdapter);
 
-        itemAdapter.setOnItemClickListener(new UserProductsAdapter.ClickListener() {
-            @Override
-            public void onItemClick(int position, View v) {
-                Prevelent.current_user_products=productLists.get(position);
-                Intent intent=new Intent(AppHomeActivity.this,ProductDetailActivity.class);
-                startActivity(intent);
-            }
+            itemAdapter.setOnItemClickListener(new UserProductsAdapter.ClickListener() {
+                @Override
+                public void onItemClick(int position, View v) {
+                    Prevelent.current_user_products = productLists.get(position);
+                    Intent intent = new Intent(AppHomeActivity.this, ProductDetailActivity.class);
+                    startActivity(intent);
+                }
 
-            @Override
-            public void onItemLongClick(int position, View v) {
+                @Override
+                public void onItemLongClick(int position, View v) {
 
-            }
-        });
+                }
+            });
+        }
 
     }
     @Override
