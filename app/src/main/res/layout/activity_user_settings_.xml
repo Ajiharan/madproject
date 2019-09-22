@@ -141,7 +141,7 @@ android:layout_height="wrap_content">
         android:textColor="@android:color/white"
         android:layout_marginTop="40dp"
         android:textStyle="bold"
-        android:text="deleteaccount"
+        android:text="deleteacchount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
