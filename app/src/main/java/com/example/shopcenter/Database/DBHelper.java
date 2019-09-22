@@ -29,7 +29,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
 
-    public static final String DATABASE_NAME="OnlineShop.db";
+    public static final String          DATABASE_NAME="OnlineShop.db";
     public DBHelper(Context context) {
 
         super(context, DATABASE_NAME, null, 12);
@@ -434,6 +434,14 @@ public class DBHelper extends SQLiteOpenHelper {
         return rowsAffected > 0;
 
 
+    }
+
+    public Cursor retrive_seller_details(){
+        SQLiteDatabase db=getReadableDatabase();
+        String sql="SELECT * FROM "+CustomerMaster.ProductCategory.TABLE_NAME;
+
+        Cursor cursor=db.rawQuery(sql,null);
+        return cursor;
     }
 
     public String retrive_cus_notification_id_count_number(String cuid){

@@ -234,7 +234,7 @@ public class Admin_edit_categories extends AppCompatActivity {
                 }).setCancelable(false).show();
             }
 
-            /* */
+
         }
 
     }

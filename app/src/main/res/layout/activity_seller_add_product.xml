@@ -37,15 +37,15 @@
 
             />
     </RelativeLayout>
+
     <ImageView
-        android:layout_below="@+id/seller_edit_product_relative_layout_top"
         android:id="@+id/S_select_product_image"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="226dp"
+        android:layout_below="@+id/seller_edit_product_relative_layout_top"
 
-        android:layout_marginTop="10dp"
-        android:src="@drawable/mylap2"
-        />
+        android:layout_marginTop="-1dp"
+        android:src="@drawable/mylap2" />
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input_layer1"
         android:layout_width="match_parent"
@@ -127,24 +127,31 @@
             android:textColor="@color/colorPrimaryDark"
 
             android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
 
+    </com.google.android.material.textfield.TextInputLayout>
+    <Spinner
+        android:id="@+id/seller_select_category"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginRight="55dp"
+        android:layout_below="@+id/input_layer4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <Button
+        android:id="@+id/seller_add_new_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/seller_add_new_product"
-        android:padding="4dp"
-        android:textSize="18dp"
-        android:text="@string/add_product"
-        android:background="@drawable/admin_input_design"
-
-        android:textColor="@color/colorAccent"
-        android:layout_marginTop="20dp"
+        android:layout_below="@+id/seller_select_category"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_below="@+id/input_layer4"
-        />
+        android:layout_marginTop="24dp"
 
+        android:layout_marginRight="50dp"
+        android:background="@drawable/admin_input_design"
+        android:padding="4dp"
+        android:text="@string/add_product"
+        android:textColor="@color/colorAccent"
+        android:textSize="18dp" />
 
 
 </RelativeLayout>

@@ -43,7 +43,7 @@ public class SellerRegisterActivity extends AppCompatActivity {
                         if (insert) {
                             Toast.makeText(getApplicationContext(), "Registered successfully", Toast.LENGTH_SHORT).show();
                             clearText();
-                            Intent intent = new Intent(SellerRegisterActivity.this, SellerHomeActivity.class);
+                            Intent intent = new Intent(SellerRegisterActivity.this, SellerAddProductActivity.class);
                             startActivity(intent);
                         } else {
                             Toast.makeText(getApplicationContext(), "Failed to register. Please try again", Toast.LENGTH_SHORT).show();
@@ -65,7 +65,7 @@ public class SellerRegisterActivity extends AppCompatActivity {
 
         if(isRegistered){
             Toast.makeText(getApplicationContext(), "You are already registered..", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(SellerRegisterActivity.this, SellerHomeActivity.class);
+            Intent intent = new Intent(SellerRegisterActivity.this, SellerAddProductActivity.class);
             startActivity(intent);
         }
     }
