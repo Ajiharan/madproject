@@ -87,4 +87,25 @@ public final class CustomerMaster {
         public static final String COLUMN_COUNT="count";
         public static final String COLUMN_CUS_ID="cus_id";
     }
+
+
+    public static class SellerProductItems implements BaseColumns{
+        public static final String TABLE_NAME="seller_products";
+        public static final String COLUMN_NAME_ID="id";
+        public static final String COLUMN_NAME_PRODUCT_NAME="name";
+        public static final String COLUMN_NAME_COUNT="count";
+        public static final String  COLUMN_NAME_PRICE="price";
+        public static final String COLUMN_NAME_DESCRIPTION="description";
+        public static final String COLUMN_NAME_PRODUCTIMAGE="image";
+    }
+
+    public static class Seller implements BaseColumns{
+        public static final String COLUMN_NAME_ID="id";
+        public static final String TABLE_NAME="seller";
+        public static final String COLUMN_NAME_USER_NAME="user_name";
+        public static final String COLUMN_NAME_EMAIL="mail";
+        public static final String COLUMN_NAME_PASSWORD="password";
+        public static final String COLUMN_NAME_CUSTOMER="cus_id";
+        public static final String COLUMN_NAME_CHECK_CUSTOMER="chk";
+    }
 }

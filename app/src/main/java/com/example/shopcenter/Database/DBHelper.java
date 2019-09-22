@@ -134,6 +134,27 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
 
+        //      String SELLER_PRODUCT_DETAILS_ENTRIES="CREATE TABLE "+ CustomerMaster.SellerProductItems.TABLE_NAME +"("+
+//                CustomerMaster.SellerProductItems.COLUMN_NAME_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+
+//                CustomerMaster.SellerProductItems.COLUMN_NAME_PRODUCT_NAME + " TEXT,"+
+//                CustomerMaster.SellerProductItems.COLUMN_NAME_COUNT +" INTEGER,"+
+//                CustomerMaster.SellerProductItems.COLUMN_NAME_DESCRIPTION +" TEXT,"+
+//                CustomerMaster.SellerProductItems.COLUMN_NAME_PRICE + " TEXT,"+
+//                CustomerMaster.SellerProductItems.COLUMN_NAME_PRODUCTIMAGE + " LONGBLOB)";
+
+        String SELLER_DETAILS_ENTRIES="CREATE TABLE "+ CustomerMaster.Seller.TABLE_NAME +"("+
+                CustomerMaster.Seller.COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                CustomerMaster.Seller.COLUMN_NAME_USER_NAME+" TEXT,"+
+                CustomerMaster.Seller.COLUMN_NAME_EMAIL + " TEXT,"+
+                CustomerMaster.Seller.COLUMN_NAME_PASSWORD + " TEXT," +
+
+                CustomerMaster.Seller.COLUMN_NAME_CHECK_CUSTOMER + " TEXT DEFAULT "+num+","+
+                CustomerMaster.Seller.COLUMN_NAME_CUSTOMER + " INTEGER,"+
+                " FOREIGN KEY (" + CustomerMaster.Seller.COLUMN_NAME_CUSTOMER +") REFERENCES " + CustomerMaster.Customers.TABLE_NAME+
+                "("+CustomerMaster.Customers.COLUMN_NAME_ID+ ") ON DELETE CASCADE ON UPDATE CASCADE)";
+
+
+
         sqLiteDatabase.execSQL(CUSTOMER_CREATE_ENTRIES);
         sqLiteDatabase.execSQL(CUSTOMER_PROFILE_CREATES_ENTRIES);
         sqLiteDatabase.execSQL(ADMIN_CATEGORY_DETAILS_ENTRIES);
@@ -143,6 +164,7 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(PAYMENT_DETAILS_ENTRIES);
         sqLiteDatabase.execSQL(USER_CART_NOTIFICATION_ENTRIES);
         sqLiteDatabase.execSQL(USER_ORDER_NOTIFICATION_ENTRIES);
+        sqLiteDatabase.execSQL(SELLER_DETAILS_ENTRIES);
 
 
 
@@ -163,6 +185,85 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
         onCreate(sqLiteDatabase);
+    }
+
+
+    public boolean insert_Seller(String username,String mail,String passw,String id){
+        SQLiteDatabase db=getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put(CustomerMaster.Seller.COLUMN_NAME_USER_NAME,username);
+        values.put(CustomerMaster.Seller.COLUMN_NAME_EMAIL,mail);
+        values.put(CustomerMaster.Seller.COLUMN_NAME_PASSWORD,passw);
+        values.put(CustomerMaster.Seller.COLUMN_NAME_CUSTOMER,id);
+
+
+        long rowId=db.insert(CustomerMaster.Seller.TABLE_NAME,null,values);
+        return rowId != -1;
+
+    }
+
+    public boolean check_insert_Seller(String username,String mail){
+        SQLiteDatabase db = getReadableDatabase();
+        String sql = "select * from "+CustomerMaster.Seller.TABLE_NAME+" WHERE "+CustomerMaster.Seller.COLUMN_NAME_USER_NAME + "= ? AND " +CustomerMaster.Seller.COLUMN_NAME_EMAIL + " = ?";
+        String []selectionArgs={username,mail};
+        Cursor cursor = db.rawQuery(sql,selectionArgs);
+        if(cursor.getCount()==0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean Seller_insert_product(String prodname,String proddesc,String prodprice,Integer prodcounts){
+        SQLiteDatabase db=getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put(CustomerMaster.SellerProductItems.COLUMN_NAME_PRODUCT_NAME,prodname);
+        values.put(CustomerMaster.SellerProductItems.COLUMN_NAME_DESCRIPTION,proddesc);
+        values.put(CustomerMaster.SellerProductItems.COLUMN_NAME_PRICE,prodprice);
+        values.put(CustomerMaster.SellerProductItems.COLUMN_NAME_COUNT,prodcounts);
+
+        long rowId=db.insert(CustomerMaster.SellerProductItems.TABLE_NAME,null,values);
+        return rowId != -1;
+
+    }
+
+    public Cursor Seller_view_product(){
+        SQLiteDatabase db = getReadableDatabase();
+        String sql = "select * from "+CustomerMaster.SellerProductItems.TABLE_NAME ;
+        Cursor cursor = db.rawQuery(sql,null);
+        return cursor;
+    }
+
+    public boolean Seller_update_product(String prodname,String proddesc,String prodprice,Integer prodcounts,Integer prodid){
+        SQLiteDatabase db=getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put(CustomerMaster.SellerProductItems.COLUMN_NAME_PRODUCT_NAME,prodname);
+        values.put(CustomerMaster.SellerProductItems.COLUMN_NAME_DESCRIPTION,proddesc);
+        values.put(CustomerMaster.SellerProductItems.COLUMN_NAME_PRICE,prodprice);
+        values.put(CustomerMaster.SellerProductItems.COLUMN_NAME_COUNT,prodcounts);
+        values.put(CustomerMaster.SellerProductItems.COLUMN_NAME_ID,prodid);
+
+        long rowId=db.update(CustomerMaster.SellerProductItems.TABLE_NAME, values,  CustomerMaster.SellerProductItems.COLUMN_NAME_ID+"=?",new String[]{String.valueOf(prodid)});
+        if(rowId==-1){
+            return false;
+        }else {
+            return  true;
+        }
+    }
+
+
+
+    public boolean retrive_seller_info(String id){
+        SQLiteDatabase db=getReadableDatabase();
+        String sql="SELECT * FROM "+CustomerMaster.Seller.TABLE_NAME + " WHERE "+
+                CustomerMaster.Seller.COLUMN_NAME_CUSTOMER + " = ?";
+        String []selectionArgs={id};
+        Cursor cu=db.rawQuery(sql,selectionArgs);
+
+        while(cu.moveToNext()){
+            return true;
+        }
+        return false;
     }
 
     public Boolean deleteData(String mail){

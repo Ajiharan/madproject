@@ -30,7 +30,7 @@
         <EditText
             android:textColor="@color/colorAccent"
             android:hint="UserName"
-
+            android:id="@+id/seller_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -46,6 +46,7 @@
         <EditText
             android:textColor="@color/colorAccent"
             android:hint="Email Id"
+            android:id="@+id/seller_email"
             android:layout_marginRight="50dp"
             android:layout_marginLeft="50dp"
             android:layout_width="match_parent"
@@ -62,6 +63,7 @@
         <EditText
             android:textColor="@color/colorAccent"
             android:hint="Password"
+            android:id="@+id/seller_password"
             android:layout_marginRight="50dp"
             android:layout_marginLeft="50dp"
             android:layout_width="match_parent"
@@ -74,6 +76,7 @@
         android:layout_marginTop="45dp"
         android:layout_marginLeft="50dp"
         android:text="@string/register"
+        android:id="@+id/seller_register"
         android:textColor="@color/colorPrimaryDark"
         android:background="@drawable/input_design"
         android:layout_marginRight="50dp"
