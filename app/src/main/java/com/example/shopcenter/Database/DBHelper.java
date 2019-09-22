@@ -164,6 +164,34 @@ public class DBHelper extends SQLiteOpenHelper {
 
         onCreate(sqLiteDatabase);
     }
+
+    public Boolean deleteData(String mail){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(CustomerMaster.Customers.TABLE_NAME,CustomerMaster.Customers.COLUMN_NAME_EMAIL+"=?",new String[]{mail});
+        if(result==-1){
+            return false;
+        }else {
+            return  true;
+        }
+    }
+
+    public boolean updateUser(String id,String fullna){
+        SQLiteDatabase db = getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(CustomerMaster.Customers.COLUMN_NAME_NAME,fullna);
+
+        String selection = CustomerMaster.Customers.COLUMN_NAME_ID + " = ?";
+        String[] selectionArgs = {id};
+
+
+        long result = db.update(CustomerMaster.Customers.TABLE_NAME,contentValues,selection,selectionArgs);
+        return(result > 0);
+    }
+
+
+
+
+
     public boolean insert_user_notification_details(String cus_id){
         SQLiteDatabase db=getWritableDatabase();
         ContentValues values=new ContentValues();

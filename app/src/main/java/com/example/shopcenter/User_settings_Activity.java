@@ -19,6 +19,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,9 +41,10 @@ public class User_settings_Activity extends AppCompatActivity {
     boolean ExceptionFound=false;
     FloatingActionButton get_image_gallery;
     private CircleImageView current_user_image;
-    private TextView change_profile;
+    private TextView change_profile,closebtn;
     private byte[] photo=null;
     private EditText user_mail,user_name,user_password;
+    Button deactivaBTN,UpdateDetails;
     DBHelper db;
 
     private Bitmap bp=null;
@@ -56,27 +58,86 @@ public class User_settings_Activity extends AppCompatActivity {
         current_user_image=findViewById(R.id.settings_profile_image);
 
         get_image_gallery=findViewById(R.id.user_profile_chane_btn);
-
+        closebtn=findViewById(R.id.close_settings_button);
         change_profile=findViewById(R.id.profile_image_change_btn);
         user_mail=findViewById(R.id.settings_mail_id);
         user_name=findViewById(R.id.settings_name);
         user_password=findViewById(R.id.settings_password);
 
+        UpdateDetails=findViewById(R.id.update_account);
+        deactivaBTN=findViewById(R.id.delete_account);
+
+
+
+
+
+
         user_mail.setText(Prevelent.currentOnlineUser.getMail());
         user_mail.setKeyListener(null);
+
 
         user_password.setText(Prevelent.currentOnlineUser.getPassword());
         user_password.setKeyListener(null);
 
+
         user_name.setText(Prevelent.currentOnlineUser.getName());
-        user_name.setKeyListener(null);
+        //user_name.setKeyListener(null);
+
+
+
+
+
+        UpdateDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean update = db.updateUser(Prevelent.currentOnlineUser.getId(), user_name.getText().toString());
+                if(update){
+                    Prevelent.currentOnlineUser.setName(user_name.getText().toString());
+                    Intent intent=new Intent(User_settings_Activity.this,AppHomeActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "Username Update success full", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Username Update Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        deactivaBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Boolean delData = db.deleteData(user_mail.getText().toString());
+                if(delData){
+                    Intent intent=new Intent(User_settings_Activity.this,LoginActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "Deactivate Success full", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Deactivate Fail", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
+
+
+
+
+        closebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(User_settings_Activity.this,AppHomeActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         change_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // change_profile.setPaintFlags(change_profile.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-              //  Add_user_profilr_image();
+                // change_profile.setPaintFlags(change_profile.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                //  Add_user_profilr_image();
                 Add_user_profilr_image();
             }
         });
@@ -85,10 +146,10 @@ public class User_settings_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 selectImage();
-               //ActivityCompat.requestPermissions(User_settings_Activity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},REQUEST_CODE_GALLERY);
+                //ActivityCompat.requestPermissions(User_settings_Activity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},REQUEST_CODE_GALLERY);
 
-              // byte[] NewEntryImg=ImageViewTobyte(current_user_image);
-            //  newEntryImages=NewEntryImg;
+                // byte[] NewEntryImg=ImageViewTobyte(current_user_image);
+                //  newEntryImages=NewEntryImg;
             }
         });
 
@@ -255,8 +316,10 @@ public class User_settings_Activity extends AppCompatActivity {
                 }
             }).setCancelable(false).show();
 
-           /* */
+            /* */
         }
 
     }
 }
+
+
