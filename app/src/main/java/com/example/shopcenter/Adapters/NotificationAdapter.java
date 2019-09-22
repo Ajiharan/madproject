@@ -58,6 +58,7 @@ public class NotificationAdapter extends ArrayAdapter<payments> {
             holder.amount=convertView.findViewById(R.id.admin_cus_notification_amount);
             convertView.setTag(holder);
 
+
         } else {
             holder = (NotificationAdapter.ViewHolder) convertView.getTag();
         }
