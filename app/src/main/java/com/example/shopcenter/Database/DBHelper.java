@@ -826,6 +826,24 @@ public class DBHelper extends SQLiteOpenHelper {
         int rowDeleted=db.delete(CustomerMaster.UserCart.TABLE_NAME,selection,selectionArgs);
         return rowDeleted > 0;
     }
+
+    public boolean admin_delete_seller(String id){
+        SQLiteDatabase db=getReadableDatabase();
+        String selection=CustomerMaster.Seller.COLUMN_NAME_ID+ " = ?";
+        String[] selectionArgs = {id};
+        int rowDeleted=db.delete(CustomerMaster.Seller.TABLE_NAME,selection,selectionArgs);
+        return rowDeleted > 0;
+    }
+    public boolean update_seller_approval(String id){
+        SQLiteDatabase db=getReadableDatabase();
+        ContentValues values=new ContentValues();
+        values.put(CustomerMaster.Seller.COLUMN_NAME_CHECK_CUSTOMER,"1");
+
+        String selection= CustomerMaster.Seller.COLUMN_NAME_ID +" = ?";
+        String[] selectionArgs = {id};
+        int count=db.update(CustomerMaster.Seller.TABLE_NAME,values,selection,selectionArgs);
+        return (count > 0);
+    }
     public boolean Admin_add_Category_Details(byte[] image,String name){
         SQLiteDatabase db=getWritableDatabase();
         ContentValues values=new ContentValues();
@@ -928,6 +946,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return db.query(CustomerMaster.ProductCategory.TABLE_NAME,projection,null,null,null,null,null);
     }
+
 
     public Cursor Admin_Item_name_check(){
         SQLiteDatabase db=getReadableDatabase();
