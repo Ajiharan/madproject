@@ -1,7 +1,9 @@
 package com.example.shopcenter;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -61,12 +63,25 @@ public class SellerRegisterActivity extends AppCompatActivity {
 
     private void check_seller_register() {
 
-        boolean isRegistered=db.retrive_seller_info(Prevelent.currentUser.getId());
+        String isApproved=db.retrive_seller_info(Prevelent.currentUser.getId());
 
-        if(isRegistered){
-            Toast.makeText(getApplicationContext(), "You are already registered..", Toast.LENGTH_SHORT).show();
+        if(isApproved.equals("0")){
+
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setTitle("Notification").setMessage("Dear customer please wait for admin approval").setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(SellerRegisterActivity.this, AppHomeActivity.class);
+                    startActivity(intent);
+                }
+            }).setCancelable(false).show();
+
+
+        }
+        else if(isApproved.equals("1")){
             Intent intent = new Intent(SellerRegisterActivity.this, SellerAddProductActivity.class);
             startActivity(intent);
+            Toast.makeText(getApplicationContext(), "You are already registered ..", Toast.LENGTH_SHORT).show();
         }
     }
 

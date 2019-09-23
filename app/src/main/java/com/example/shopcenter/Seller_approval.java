@@ -8,73 +8,55 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
+import com.example.shopcenter.Adapters.cuslistAdapter;
+import com.example.shopcenter.Adapters.sellerAdapter;
 import com.example.shopcenter.Database.DBHelper;
 import com.example.shopcenter.model.User;
-import com.example.shopcenter.Adapters.cuslistAdapter;
+import com.example.shopcenter.model.sellers;
 
 import java.util.ArrayList;
 
-public class Admin_view_customer extends AppCompatActivity {
-
-
-
-    private Button back_button;
-
+public class Seller_approval extends AppCompatActivity {
     private DBHelper db;
 
     private SwipeMenuListView listViews;
-    private ArrayList<User> dataArrayList;
-    private cuslistAdapter listAdapter;
-    private User datas;
-
-
-
+    private ArrayList<sellers> dataArrayList;
+    private sellerAdapter listAdapter;
+    private sellers datas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_view_customer);
+        setContentView(R.layout.activity_seller_approval);
         db=new DBHelper(this);
-
-        listViews = (SwipeMenuListView) findViewById(R.id.admin_view_customer_details1);
+        listViews = (SwipeMenuListView) findViewById(R.id.R_admin_view_customer_details1);
         dataArrayList = new ArrayList<>();
 
-
-            back_button=findViewById(R.id.admin_view_customer_back_btn);
-            back_button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent=new Intent(Admin_view_customer.this,AdminHomeActivity.class);
-                    startActivity(intent);
-                }
-            });
         retrive_customer_details();
     }
 
-    private void retrive_customer_details(){
+    private void retrive_customer_details() {
 
-
-        dataArrayList=db.Retrive_customer_allDetails();
-        listAdapter = new cuslistAdapter(this, dataArrayList);
+        dataArrayList=db.Retrive_seller_allDetails();
+        listAdapter = new sellerAdapter(this, dataArrayList);
         listViews.setAdapter(listAdapter);
 
         listViews.setMenuCreator(creator);
 
         listViews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> av, View view, int i, long l) {
-                Intent intent=new Intent(Admin_view_customer.this,Admin_view_customer_orders.class);
-
-                User curr_user=dataArrayList.get(i);
-                intent.putExtra("customer_id",curr_user.getId());
-
-                //Prevelent.currentUser=curr_user;
-                startActivity(intent);
+//                Intent intent=new Intent(Admin_view_customer.this,Admin_view_customer_orders.class);
+//
+//                User curr_user=dataArrayList.get(i);
+//                intent.putExtra("customer_id",curr_user.getId());
+//
+//                //Prevelent.currentUser=curr_user;
+//                startActivity(intent);
             }
         });
 
@@ -83,8 +65,8 @@ public class Admin_view_customer extends AppCompatActivity {
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 switch (index) {
                     case 0:
-                        Toast.makeText(Admin_view_customer.this,"Sucessfully deleted",Toast.LENGTH_SHORT).show();
-                        delete_cur_customer(position);
+                        Toast.makeText(Seller_approval.this,"Sucessfully deleted",Toast.LENGTH_SHORT).show();
+                        //delete_cur_customer(position);
                         dataArrayList.remove(position);
                         listAdapter.notifyDataSetChanged();
                         break;
@@ -96,13 +78,6 @@ public class Admin_view_customer extends AppCompatActivity {
         });
 
 
-
-    }
-
-    private void delete_cur_customer(int position){
-        User user=new User();
-        user=dataArrayList.get(position);
-        db.admin_delete_current_customer(user.getId());
 
     }
 

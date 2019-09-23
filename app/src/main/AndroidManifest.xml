@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SellerViewProductActivity"></activity>
+        <activity android:name=".Seller_approval"></activity>
+        <activity android:name=".SellerViewProductActivity" />
         <activity android:name=".SellerAddProductActivity" />
         <activity android:name=".SellerHomeActivity" />
         <activity android:name=".HomeScreen">
@@ -45,10 +46,10 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" />
     </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>

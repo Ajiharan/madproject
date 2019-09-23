@@ -249,9 +249,10 @@ public class AdminHomeActivity extends AppCompatActivity
             Intent intent=new Intent(AdminHomeActivity.this,Admin_view_customer.class);
             startActivity(intent);
 
-        }/* else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.admin_nav_selle_Details) {
+            Intent intent=new Intent(AdminHomeActivity.this,Seller_approval.class);
+            startActivity(intent);
+        } /*else if (id == R.id.nav_send) {
 
         }*/
 

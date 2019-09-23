@@ -16,6 +16,7 @@ import com.example.shopcenter.model.Products;
 import com.example.shopcenter.model.User;
 import com.example.shopcenter.model.payments;
 import com.example.shopcenter.model.cus_orders;
+import com.example.shopcenter.model.sellers;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -253,17 +254,17 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
 
-    public boolean retrive_seller_info(String id){
+    public String  retrive_seller_info(String id){
         SQLiteDatabase db=getReadableDatabase();
         String sql="SELECT * FROM "+CustomerMaster.Seller.TABLE_NAME + " WHERE "+
                 CustomerMaster.Seller.COLUMN_NAME_CUSTOMER + " = ?";
         String []selectionArgs={id};
         Cursor cu=db.rawQuery(sql,selectionArgs);
-
+        String value="99";
         while(cu.moveToNext()){
-            return true;
+            value=cu.getString(4);
         }
-        return false;
+        return value;
     }
 
     public Boolean deleteData(String mail){
@@ -653,6 +654,47 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return list;
 
+    }
+    public  ArrayList Retrive_seller_allDetails(){
+        ArrayList<sellers> list=new ArrayList<>();
+        SQLiteDatabase db=getReadableDatabase();
+
+        String sql="SELECT * FROM "+CustomerMaster.Seller.TABLE_NAME+ " WHERE "+
+                CustomerMaster.Seller.COLUMN_NAME_CHECK_CUSTOMER + "= ?";
+        String []selectionArgs1={"0"};
+        Cursor cu=db.rawQuery(sql,selectionArgs1);
+        int i =0;
+        while (cu.moveToNext()){
+
+                String id = cu.getString(0);
+                String seller_name=cu.getString(1);
+                String check_value = cu.getString(4);
+                String cu_id = cu.getString(5);
+
+
+                String sql1 = "SELECT * FROM " + CustomerMaster.Profile.TABLE_NAME + " WHERE " + CustomerMaster.Profile.COLUMN_FOREIGNKEY_CUS_ID + " = "
+                        + cu_id;
+                SQLiteDatabase db1 = getReadableDatabase();
+                Cursor cu1 = db1.rawQuery(sql1, null);
+                byte[] image;
+                Bitmap bitmap = null;
+                while (cu1.moveToNext()) {
+                    System.out.println("cus:"+cu_id);
+                    image = cu1.getBlob(1);
+                    bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+                }
+                cu1.close();
+               sellers seller1=new sellers();
+                seller1.setId(id);
+                seller1.setName(seller_name);
+                seller1.setDvalue(check_value);
+                seller1.setBitmap( bitmap);
+
+                list.add(seller1);
+
+        }
+        cu.close();
+        return list;
     }
 
     public  ArrayList Retrive_customer_allDetails(){
