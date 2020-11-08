@@ -46,13 +46,13 @@
                 android:layout_height="32dp"
 
                 android:layout_alignParentBottom="true"
-                android:layout_marginEnd="-212dp"
-                android:layout_marginBottom="10dp"
-                android:layout_toStartOf="@+id/user_search_products"
+                android:layout_marginEnd="36dp"
 
 
+                android:layout_marginBottom="14dp"
+
+                android:layout_toStartOf="@+id/admin_cart_icons"
                 android:src="@drawable/ic_user_serch_icon1"
-
                 android:textSize="20sp" />
 
             <TextView
@@ -74,9 +74,9 @@
 
             <EditText
                 android:id="@+id/user_search_products"
-                android:layout_width="171dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="115dp"
+                android:layout_marginEnd="74dp"
                 android:layout_toStartOf="@+id/admin_cart_icons"
                 android:ems="10"
                 android:hint="Search Product"

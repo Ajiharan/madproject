@@ -22,13 +22,8 @@ import com.example.shopcenter.Adapters.cuslistAdapter;
 import java.util.ArrayList;
 
 public class Admin_view_customer extends AppCompatActivity {
-
-
-
     private Button back_button;
-
     private DBHelper db;
-
     private SwipeMenuListView listViews;
     private ArrayList<User> dataArrayList;
     private cuslistAdapter listAdapter;

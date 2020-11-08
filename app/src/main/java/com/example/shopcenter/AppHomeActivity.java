@@ -89,7 +89,7 @@ public class AppHomeActivity extends AppCompatActivity
         });
         setSupportActionBar(toolbar);
         imgBanner=findViewById(R.id.img_banner);
-        int sliders[]={R.drawable.slider2,R.drawable.slider3,R.drawable.slider,R.drawable.slider4, R.drawable.slider5};
+        int sliders[]={R.drawable.slider2,R.drawable.slider3,R.drawable.slider,R.drawable.slider2};
         for(int slide:sliders){
             bannerFlipper(slide);
         }

@@ -215,42 +215,10 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public boolean Seller_insert_product(String prodname,String proddesc,String prodprice,Integer prodcounts){
-        SQLiteDatabase db=getWritableDatabase();
-        ContentValues values=new ContentValues();
-        values.put(CustomerMaster.SellerProductItems.COLUMN_NAME_PRODUCT_NAME,prodname);
-        values.put(CustomerMaster.SellerProductItems.COLUMN_NAME_DESCRIPTION,proddesc);
-        values.put(CustomerMaster.SellerProductItems.COLUMN_NAME_PRICE,prodprice);
-        values.put(CustomerMaster.SellerProductItems.COLUMN_NAME_COUNT,prodcounts);
 
-        long rowId=db.insert(CustomerMaster.SellerProductItems.TABLE_NAME,null,values);
-        return rowId != -1;
 
-    }
 
-    public Cursor Seller_view_product(){
-        SQLiteDatabase db = getReadableDatabase();
-        String sql = "select * from "+CustomerMaster.SellerProductItems.TABLE_NAME ;
-        Cursor cursor = db.rawQuery(sql,null);
-        return cursor;
-    }
 
-    public boolean Seller_update_product(String prodname,String proddesc,String prodprice,Integer prodcounts,Integer prodid){
-        SQLiteDatabase db=getWritableDatabase();
-        ContentValues values=new ContentValues();
-        values.put(CustomerMaster.SellerProductItems.COLUMN_NAME_PRODUCT_NAME,prodname);
-        values.put(CustomerMaster.SellerProductItems.COLUMN_NAME_DESCRIPTION,proddesc);
-        values.put(CustomerMaster.SellerProductItems.COLUMN_NAME_PRICE,prodprice);
-        values.put(CustomerMaster.SellerProductItems.COLUMN_NAME_COUNT,prodcounts);
-        values.put(CustomerMaster.SellerProductItems.COLUMN_NAME_ID,prodid);
-
-        long rowId=db.update(CustomerMaster.SellerProductItems.TABLE_NAME, values,  CustomerMaster.SellerProductItems.COLUMN_NAME_ID+"=?",new String[]{String.valueOf(prodid)});
-        if(rowId==-1){
-            return false;
-        }else {
-            return  true;
-        }
-    }
 
 
 
@@ -593,6 +561,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String desc;
         String id;
         String fid;
+        String categoryName;
 
         while(cu.moveToNext()){
 
@@ -602,12 +571,13 @@ public class DBHelper extends SQLiteOpenHelper {
             desc=cu.getString(3);
             price=cu.getString(4);
             image=cu.getBlob(5);
+            categoryName=cu.getString(6);
             fid=cu.getString(7);
             Bitmap bitmap;
 
             bitmap= BitmapFactory.decodeByteArray(image,0,image.length);
 
-            Products products=new Products(id,name,bitmap,fid,count,desc,price);
+            Products products=new Products(categoryName,id,name,bitmap,fid,count,desc,price);
             list.add(products);
 
         }
@@ -632,6 +602,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String desc;
         String id;
         String fid;
+        String categoryName;
 
         while(cu.moveToNext()){
 
@@ -641,12 +612,13 @@ public class DBHelper extends SQLiteOpenHelper {
             desc=cu.getString(3);
             price=cu.getString(4);
             image=cu.getBlob(5);
+            categoryName=cu.getString(6);
             fid=cu.getString(7);
             Bitmap bitmap;
 
             bitmap= BitmapFactory.decodeByteArray(image,0,image.length);
 
-            Products products=new Products(id,name,bitmap,fid,count,desc,price);
+            Products products=new Products(categoryName,id,name,bitmap,fid,count,desc,price);
             list.add(products);
 
         }

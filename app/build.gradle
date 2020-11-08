@@ -42,5 +42,7 @@ dependencies {
     implementation 'com.github.d-max:spots-dialog:0.7@aar'
 
     implementation 'com.google.android.material:material:1.0.0-rc01'
+    implementation 'androidx.navigation:navigation-fragment:2.1.0'
+    implementation 'androidx.navigation:navigation-ui:2.1.0'
 
 }

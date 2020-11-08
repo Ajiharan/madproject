@@ -38,7 +38,14 @@
                         android:textColor="@android:color/white"
                         android:textSize="24sp" />
 
+                    <TextView
+                        android:id="@+id/admin_view_product_Catnames"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
 
+                        android:textColor="@android:color/white"
+                        android:textSize="24sp" />
                     <LinearLayout
                         android:layout_marginTop="4dp"
                         android:layout_width="wrap_content"

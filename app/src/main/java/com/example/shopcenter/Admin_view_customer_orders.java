@@ -62,6 +62,7 @@ public class Admin_view_customer_orders extends AppCompatActivity {
         if(dataArrayList.size() > 0) {
             listAdapter = new cus_order_lis_Adapter(this, dataArrayList);
             listViews.setAdapter(listAdapter);
+
         }
 
 //       // listViews.setMenuCreator(creator);

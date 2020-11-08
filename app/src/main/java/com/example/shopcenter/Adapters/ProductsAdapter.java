@@ -44,6 +44,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         holder.productPrice.setText("$"+product.getProduct_price());
         holder.ProductCount.setText(product.getCount());
         holder.availableProductCount.setText(product.getCount());
+        holder.categoryName.setText("package: "+product.getCategoryName());
 
 
     }
@@ -59,6 +60,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         TextView ProductCount;
         TextView productPrice;
         TextView availableProductCount;
+        TextView categoryName;
 
 
 
@@ -70,6 +72,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             productPrice=itemView.findViewById(R.id.admin_current_product_price);
             ProductCount=itemView.findViewById(R.id.admin_current_product_count);
             availableProductCount=itemView.findViewById(R.id.admin_avilable_product_count);
+            categoryName=itemView.findViewById(R.id.admin_view_product_Catnames);
             ProductImage.setOnClickListener(this);
         }
 

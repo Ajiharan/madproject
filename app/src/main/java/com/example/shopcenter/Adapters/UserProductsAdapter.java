@@ -42,7 +42,7 @@ public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsAdapte
         Products product=myitems.get(position);
         holder.ProductImage.setImageBitmap(product.getBitmap());
         holder.ProductName.setText(product.getProduct_name());
-        holder.ProductDesc.setText("Description\n"+product.getProduct_desc()+"\nPrice:"+product.getProduct_price()+"\nCount:"+product.getCount());
+        holder.ProductDesc.setText("package : "+product.getCategoryName()+"\nDescription : "+product.getProduct_desc()+"\nPrice:"+product.getProduct_price()+"\nCount:"+product.getCount());
 
 
     }
